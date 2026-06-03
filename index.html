@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>e___h12 | Cyber Security Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg: #030712; --surface: #0b1120; --surface2: #111827; --border: #1e293b;
+            --text: #e2e8f0; --text2: #94a3b8; --accent: #00d4ff; --accent2: #7c3aed;
+            --danger: #f43f5e; --success: #10b981; --warning: #f59e0b;
+            --gradient: linear-gradient(135deg, #00d4ff, #7c3aed);
+            --glow: 0 0 40px rgba(0,212,255,0.25); --radius: 16px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg); color: var(--text);
+            min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased;
+        }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--surface); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+        .login-screen {
+            position: fixed; inset: 0; display: flex; align-items: center;
+            justify-content: center; background: radial-gradient(circle at 30% 20%, #0f172a, #020617);
+            z-index: 1000;
+        }
+        .login-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 28px; padding: 48px 36px; width: 420px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8), var(--glow);
+            backdrop-filter: blur(20px); animation: slideUp 0.6s ease;
+        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        .logo { text-align: center; margin-bottom: 32px; }
+        .logo i { font-size: 52px; background: var(--gradient); -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 20px #00d4ff88); }
+        .logo h1 { font-size: 38px; font-weight: 800; background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .logo p { color: var(--text2); letter-spacing: 3px; font-size: 12px; margin-top: 6px; }
+        .input-group { margin-bottom: 24px; }
+        .input-group label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 2px; color: var(--accent); margin-bottom: 8px; }
+        .input-group input {
+            width: 100%; padding: 14px 18px; background: var(--surface2);
+            border: 2px solid var(--border); border-radius: 14px; color: var(--text);
+            font-size: 15px; outline: none; transition: var(--transition);
+        }
+        .input-group input:focus { border-color: var(--accent); box-shadow: 0 0 25px rgba(0,212,255,0.2); }
+        .btn {
+            width: 100%; padding: 16px; border: none; border-radius: 14px;
+            background: var(--gradient); color: #fff; font-size: 16px; font-weight: 700;
+            cursor: pointer; transition: var(--transition); letter-spacing: 1px;
+            text-transform: uppercase; box-shadow: 0 4px 20px rgba(0,212,255,0.3);
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0,212,255,0.4); }
+        .error { color: var(--danger); text-align: center; margin-bottom: 12px; display: none; font-size: 14px; }
+        .hint {
+            text-align: center; margin-top: 20px; color: var(--text2);
+            font-size: 13px; background: rgba(124,58,237,0.1); padding: 10px;
+            border-radius: 10px; border: 1px solid var(--border);
+        }
+        .app { display: none; }
+        .sidebar {
+            position: fixed; top: 0; left: 0; bottom: 0; width: 280px;
+            background: var(--surface); border-right: 1px solid var(--border);
+            display: flex; flex-direction: column; z-index: 100;
+            transition: transform 0.3s ease; overflow-y: auto;
+        }
+        .sidebar-header { padding: 28px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+        .sidebar-logo {
+            font-size: 24px; font-weight: 800; background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .sidebar-nav { flex: 1; padding: 16px 12px; }
+        .nav-item {
+            display: flex; align-items: center; gap: 14px; padding: 14px 20px;
+            border-radius: 12px; color: var(--text2); cursor: pointer;
+            margin-bottom: 6px; font-weight: 500; transition: all 0.2s;
+        }
+        .nav-item i { font-size: 18px; width: 24px; text-align: center; }
+        .nav-item:hover, .nav-item.active { background: rgba(0,212,255,0.08); color: var(--accent); }
+        .sidebar-footer { padding: 20px; border-top: 1px solid var(--border); }
+        .user-info { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .user-avatar {
+            width: 48px; height: 48px; border-radius: 50%; background: var(--gradient);
+            display: flex; align-items: center; justify-content: center;
+            background-size: cover; background-position: center;
+            font-size: 24px; color: #fff; font-weight: bold; overflow: hidden; flex-shrink: 0;
+        }
+        .top-avatar {
+            width: 36px; height: 36px; border-radius: 50%; background: var(--gradient);
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 16px; margin-right: 10px;
+        }
+        .logout-btn {
+            width: 100%; padding: 12px; background: transparent; border: 1px solid var(--danger);
+            color: var(--danger); border-radius: 10px; cursor: pointer; font-weight: 600; transition: 0.2s;
+        }
+        .logout-btn:hover { background: rgba(244,63,94,0.1); }
+        .main-area { margin-left: 280px; min-height: 100vh; display: flex; flex-direction: column; }
+        .topbar {
+            background: var(--surface); border-bottom: 1px solid var(--border);
+            padding: 0 32px; height: 72px; display: flex; align-items: center;
+            justify-content: space-between; position: sticky; top: 0; z-index: 50;
+        }
+        .page { display: none; padding: 32px; animation: fade 0.35s ease; flex: 1; }
+        .page.active { display: block; }
+        @keyframes fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 24px; margin-bottom: 36px; }
+        .stat-card {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+            padding: 24px; display: flex; align-items: center; gap: 20px;
+            transition: var(--transition); box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+        .stat-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: var(--glow); }
+        .stat-icon {
+            width: 56px; height: 56px; border-radius: 16px; display: flex;
+            align-items: center; justify-content: center; font-size: 26px;
+            background: rgba(0,212,255,0.1); color: var(--accent);
+        }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 24px; margin-bottom: 24px; }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 14px 16px; color: var(--text2); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--border); }
+        td { padding: 14px 16px; border-bottom: 1px solid rgba(30,41,59,0.6); font-size: 14px; }
+        .badge {
+            padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700;
+            text-transform: uppercase; display: inline-block;
+        }
+        .badge.safe { background: rgba(16,185,129,0.15); color: var(--success); }
+        .badge.medium { background: rgba(245,158,11,0.15); color: var(--warning); }
+        .badge.high { background: rgba(244,63,94,0.2); color: var(--danger); }
+        .badge.critical { background: rgba(244,63,94,0.4); color: #fff; border: 1px solid var(--danger); }
+        .scanner-input-wrap { display: flex; gap: 12px; margin-bottom: 24px; }
+        .scanner-input {
+            flex: 1; padding: 16px 20px; background: var(--surface2);
+            border: 2px solid var(--border); border-radius: 14px; color: var(--text);
+            font-size: 15px; outline: none; transition: var(--transition);
+        }
+        .scanner-input:focus { border-color: var(--accent); box-shadow: 0 0 20px rgba(0,212,255,0.15); }
+        .scan-btn {
+            padding: 16px 32px; background: var(--gradient); border: none;
+            border-radius: 14px; color: #fff; font-weight: 700; cursor: pointer;
+            transition: var(--transition); white-space: nowrap;
+        }
+        .scan-btn:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(0,212,255,0.4); }
+        .scan-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .live-scan-container { display: flex; gap: 24px; flex-wrap: wrap; }
+        .checklist-panel { flex: 1; min-width: 280px; }
+        .terminal-panel {
+            flex: 1; min-width: 280px; background: #0a0f1c; border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 18px; font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 13px; color: #b0bec5; max-height: 400px; overflow-y: auto;
+        }
+        .terminal-title { color: var(--text2); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 12px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .terminal-line { margin: 6px 0; opacity: 0; animation: fadeLine 0.5s forwards; }
+        @keyframes fadeLine { to { opacity: 1; } }
+        .check-item {
+            display: flex; align-items: center; gap: 14px; padding: 14px 18px;
+            background: var(--surface2); border-radius: 12px; margin-bottom: 10px;
+            border: 1px solid var(--border); transition: var(--transition);
+        }
+        .check-spinner {
+            width: 32px; height: 32px; border: 3px solid var(--border);
+            border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite;
+        }
+        .check-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .success-text { color: var(--success); }
+        .danger-text { color: var(--danger); }
+        .result-box {
+            margin-top: 24px; background: var(--surface); border: 1px solid var(--border);
+            border-radius: 20px; padding: 28px; box-shadow: var(--glow); animation: fade 0.4s;
+        }
+        .risk-display { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .risk-circle {
+            width: 100px; height: 100px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-size: 40px; font-weight: 800; border: 4px solid;
+        }
+        .profile-pic-section { display: flex; align-items: center; gap: 24px; margin-top: 16px; }
+        .profile-pic-large {
+            width: 100px; height: 100px; border-radius: 50%; background: var(--gradient);
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 48px; color: #fff; border: 3px solid var(--accent);
+            box-shadow: 0 0 20px rgba(0,212,255,0.3);
+        }
+        .upload-btn {
+            padding: 12px 24px; background: var(--surface2); border: 1px solid var(--border);
+            border-radius: 10px; color: var(--text); cursor: pointer; transition: 0.2s; font-weight: 500; margin-top: 8px;
+        }
+        .upload-btn:hover { border-color: var(--accent); background: rgba(0,212,255,0.1); }
+        #profilePicInput { display: none; }
+        .hamburger { display: none; background: none; border: none; color: var(--text); font-size: 28px; cursor: pointer; }
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .main-area { margin-left: 0; }
+            .hamburger { display: block; }
+            .live-scan-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div id="loginScreen" class="login-screen">
+        <div class="login-card">
+            <div class="logo">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h1>e___h12</h1>
+                <p>ADVANCED THREAT INTELLIGENCE</p>
+            </div>
+            <div class="error" id="loginError">Invalid password</div>
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="loginUser" placeholder="Enter any username" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="loginPass" placeholder="Enter password" autocomplete="off">
+            </div>
+            <button class="btn" id="loginBtn">Authenticate</button>
+            <div class="hint">
+                <i class="fa-solid fa-key"></i> Password: <strong style="color:var(--accent);">yamen</strong>
+            </div>
+        </div>
+    </div>
+
+    <div id="appMain" class="app">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header"><span class="sidebar-logo">e___h12</span></div>
+            <div class="sidebar-nav">
+                <div class="nav-item active" data-page="dashboard"><i class="fa-solid fa-grid-2"></i> Dashboard</div>
+                <div class="nav-item" data-page="scanner"><i class="fa-solid fa-magnifying-glass-chart"></i> URL Scanner</div>
+                <div class="nav-item" data-page="history"><i class="fa-solid fa-clock-rotate-left"></i> History</div>
+                <div class="nav-item" data-page="settings"><i class="fa-solid fa-gear"></i> Settings</div>
+            </div>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar" id="sidebarAvatar"><i class="fa-solid fa-user"></i></div>
+                    <span id="displayName" style="font-weight:600;"></span>
+                </div>
+                <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+            </div>
+        </aside>
+
+        <div class="main-area">
+            <div class="topbar">
+                <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <div class="top-avatar" id="topAvatar"><i class="fa-solid fa-user"></i></div>
+                    <span style="color:var(--text2);">Welcome, <strong id="welcomeUser"></strong></span>
+                </div>
+                <div style="color:var(--accent); font-weight:600;" id="liveClock"></div>
+            </div>
+
+            <div id="dashboardPage" class="page active">
+                <h2 style="margin-bottom:20px;">Security Dashboard</h2>
+                <div class="stats-grid" id="statsContainer"></div>
+                <div class="card"><h3 style="margin-bottom:16px;">Recent Scans</h3><table id="recentTable"><thead><tr><th>URL</th><th>Risk</th><th>Level</th><th>Date</th></tr></thead><tbody></tbody></table></div>
+            </div>
+
+            <div id="scannerPage" class="page">
+                <h2>URL Scanner</h2>
+                <p style="color:var(--text2); margin-bottom:20px;">Real-time step-by-step analysis with Threat Intelligence.</p>
+                <div class="scanner-input-wrap">
+                    <input type="text" id="urlInput" class="scanner-input" placeholder="https://example.com">
+                    <button class="scan-btn" id="scanBtn">Scan Now</button>
+                </div>
+                <div id="scanArea"></div>
+            </div>
+
+            <div id="historyPage" class="page">
+                <h2>Scan History</h2>
+                <table style="margin-top:20px;" id="historyTable"><thead><tr><th>#</th><th>URL</th><th>Risk</th><th>Level</th><th>Date</th></tr></thead><tbody></tbody></table>
+            </div>
+
+            <div id="settingsPage" class="page">
+                <h2>Settings</h2>
+                <div class="card">
+                    <h3 style="margin-bottom:16px;">Profile Information</h3>
+                    <p style="margin-bottom:12px;">Username: <strong id="settingsUser"></strong></p>
+                    <p style="margin-bottom:20px;">Role: Administrator</p>
+                    <h4 style="margin-bottom:12px; color: var(--accent);">Profile Picture</h4>
+                    <div class="profile-pic-section">
+                        <div class="profile-pic-large" id="settingsAvatar"><i class="fa-solid fa-user"></i></div>
+                        <div>
+                            <button class="upload-btn" onclick="document.getElementById('profilePicInput').click()"><i class="fa-solid fa-camera"></i> Change Picture</button>
+                            <input type="file" id="profilePicInput" accept="image/*" onchange="handleProfilePic(event)">
+                            <p style="font-size:12px; color:var(--text2); margin-top:8px;">Recommended: Square image, max 5MB</p>
+                            <button class="upload-btn" style="margin-top:8px; background:transparent; border-color:var(--danger); color:var(--danger);" onclick="removeProfilePic()"><i class="fa-solid fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ⚡ مفتاح Google Safe Browsing API مدمج تلقائياً
+            const GOOGLE_SAFE_BROWSING_KEY = 'AIzaSyAas5Fd4M-rPH7o1JKnn-udFmXWQX84bwI';
+            const PASS = 'yamen';
+            let username = '';
+
+            if (sessionStorage.getItem('loggedIn') === 'true') {
+                username = sessionStorage.getItem('username') || 'User';
+                showApp();
+            }
+
+            document.getElementById('loginBtn').addEventListener('click', () => {
+                const user = document.getElementById('loginUser').value.trim();
+                const pass = document.getElementById('loginPass').value.trim();
+                if (!user) return alert('Enter a username');
+                if (pass !== PASS) {
+                    document.getElementById('loginError').style.display = 'block';
+                    return;
+                }
+                username = user;
+                sessionStorage.setItem('loggedIn', 'true');
+                sessionStorage.setItem('username', user);
+                showApp();
+            });
+
+            function showApp() {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('appMain').style.display = 'block';
+                document.getElementById('displayName').textContent = username;
+                document.getElementById('welcomeUser').textContent = username;
+                document.getElementById('settingsUser').textContent = username;
+                loadProfilePicture();
+                updateDashboard();
+            }
+
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                sessionStorage.clear();
+                location.reload();
+            });
+
+            document.getElementById('hamburger').addEventListener('click', () => {
+                document.getElementById('sidebar').classList.toggle('open');
+            });
+
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                    item.classList.add('active');
+                    const page = item.dataset.page;
+                    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                    document.getElementById(page + 'Page').classList.add('active');
+                    if (page === 'dashboard') updateDashboard();
+                    if (page === 'history') loadHistory();
+                    document.getElementById('sidebar').classList.remove('open');
+                });
+            });
+
+            setInterval(() => {
+                document.getElementById('liveClock').textContent = new Date().toLocaleTimeString();
+            }, 1000);
+
+            function getProfilePicKey() { return `profilePic_${username}`; }
+            function loadProfilePicture() {
+                const key = getProfilePicKey();
+                const savedPic = localStorage.getItem(key);
+                const sidebarAvatar = document.getElementById('sidebarAvatar');
+                const topAvatar = document.getElementById('topAvatar');
+                const settingsAvatar = document.getElementById('settingsAvatar');
+                if (savedPic) {
+                    [sidebarAvatar, topAvatar, settingsAvatar].forEach(el => {
+                        el.style.backgroundImage = `url(${savedPic})`;
+                        el.style.backgroundSize = 'cover';
+                        el.style.backgroundPosition = 'center';
+                        el.style.color = 'transparent';
+                        el.innerHTML = '';
+                    });
+                } else {
+                    [sidebarAvatar, topAvatar, settingsAvatar].forEach(el => {
+                        el.style.backgroundImage = 'var(--gradient)';
+                        el.style.color = '#fff';
+                        el.innerHTML = '<i class="fa-solid fa-user"></i>';
+                    });
+                }
+            }
+            window.handleProfilePic = function(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+                if (file.size > 5 * 1024 * 1024) { alert('Image size must be less than 5MB'); return; }
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    localStorage.setItem(getProfilePicKey(), e.target.result);
+                    loadProfilePicture();
+                };
+                reader.readAsDataURL(file);
+            };
+            window.removeProfilePic = function() {
+                localStorage.removeItem(getProfilePicKey());
+                loadProfilePicture();
+            };
+
+            function getScans() { return JSON.parse(localStorage.getItem('scans') || '[]'); }
+            function saveScan(s) { const scans = getScans(); scans.unshift(s); localStorage.setItem('scans', JSON.stringify(scans)); }
+
+            function updateDashboard() {
+                const scans = getScans();
+                const total = scans.length;
+                const threats = scans.filter(s => s.risk >= 60).length;
+                const safe = scans.filter(s => s.risk < 30).length;
+                const rate = total ? Math.round((threats / total) * 100) : 0;
+                document.getElementById('statsContainer').innerHTML = `
+                    <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-magnifying-glass"></i></div><div><div style="font-size:32px;font-weight:700;">${total}</div><div style="color:var(--text2);font-size:12px;">Total Scans</div></div></div>
+                    <div class="stat-card"><div class="stat-icon" style="background:rgba(244,63,94,0.1);color:var(--danger)"><i class="fa-solid fa-bug"></i></div><div><div style="font-size:32px;font-weight:700;">${threats}</div><div style="color:var(--text2);font-size:12px;">Threats</div></div></div>
+                    <div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,0.1);color:var(--success)"><i class="fa-solid fa-shield-check"></i></div><div><div style="font-size:32px;font-weight:700;">${safe}</div><div style="color:var(--text2);font-size:12px;">Safe URLs</div></div></div>
+                    <div class="stat-card"><div class="stat-icon" style="background:rgba(245,158,11,0.1);color:var(--warning)"><i class="fa-solid fa-percent"></i></div><div><div style="font-size:32px;font-weight:700;">${rate}%</div><div style="color:var(--text2);font-size:12px;">Detection Rate</div></div></div>
+                `;
+                const recent = scans.slice(0, 5);
+                document.querySelector('#recentTable tbody').innerHTML = recent.map(s => `
+                    <tr><td>${s.url}</td><td><strong>${s.risk}/100</strong></td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>
+                `).join('');
+            }
+
+            function loadHistory() {
+                const scans = getScans();
+                document.querySelector('#historyTable tbody').innerHTML = scans.map((s, i) => `
+                    <tr><td>${i+1}</td><td>${s.url}</td><td>${s.risk}/100</td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>
+                `).join('');
+            }
+
+            document.getElementById('scanBtn').addEventListener('click', async () => {
+                const url = document.getElementById('urlInput').value.trim();
+                if (!url) return alert('Enter URL');
+                if (!url.startsWith('http://') && !url.startsWith('https://')) return alert('URL must start with http:// or https://');
+
+                const scanArea = document.getElementById('scanArea');
+                scanArea.innerHTML = `
+                    <div class="live-scan-container">
+                        <div class="checklist-panel" id="checklistPanel"></div>
+                        <div class="terminal-panel" id="terminalPanel">
+                            <div class="terminal-title"><i class="fa-solid fa-terminal"></i> Live Terminal</div>
+                            <div id="terminalContent"></div>
+                        </div>
+                    </div>
+                `;
+
+                const checklistPanel = document.getElementById('checklistPanel');
+                const terminalContent = document.getElementById('terminalContent');
+                const scanBtn = document.getElementById('scanBtn');
+                scanBtn.disabled = true;
+
+                function logTerminal(msg, color = '#b0bec5') {
+                    const line = document.createElement('div');
+                    line.className = 'terminal-line';
+                    line.style.color = color;
+                    line.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+                    terminalContent.appendChild(line);
+                    terminalContent.scrollTop = terminalContent.scrollHeight;
+                }
+
+                function createCheckItem(label) {
+                    const item = document.createElement('div');
+                    item.className = 'check-item';
+                    item.innerHTML = `<div class="check-spinner" id="spin-${label}"></div><span>${label}</span><span id="status-${label}" style="margin-left:auto;font-weight:600;"></span>`;
+                    checklistPanel.appendChild(item);
+                    return item;
+                }
+
+                const steps = [
+                    { name: 'URL Parsing', check: async () => {
+                        logTerminal(`Parsing URL: ${url}`);
+                        await new Promise(r => setTimeout(r, 600));
+                        try { new URL(url); return { success: true, msg: 'URL structure valid' }; }
+                        catch { return { success: false, msg: 'Invalid URL format' }; }
+                    }},
+                    { name: 'HTTPS Verification', check: async () => {
+                        logTerminal('Checking HTTPS...');
+                        await new Promise(r => setTimeout(r, 800));
+                        return url.startsWith('https://') ? { success: true, msg: 'HTTPS enabled' } : { success: false, msg: 'No encryption (HTTP)' };
+                    }},
+                    { name: 'DNS Resolution', check: async () => {
+                        logTerminal('Resolving domain via Google DNS...');
+                        const domain = new URL(url).hostname;
+                        try {
+                            const resp = await fetch(`https://dns.google/resolve?name=${domain}&type=A`);
+                            const data = await resp.json();
+                            await new Promise(r => setTimeout(r, 700));
+                            if (data.Answer) return { success: true, msg: `Resolved to ${data.Answer[0].data}` };
+                            else return { success: false, msg: 'Domain not found' };
+                        } catch (e) { return { success: false, msg: 'DNS query failed' }; }
+                    }},
+                    { name: 'SSL Handshake', check: async () => {
+                        if (!url.startsWith('https://')) return { success: false, msg: 'Skipped (no HTTPS)' };
+                        logTerminal('Attempting SSL handshake...');
+                        try {
+                            await fetch(url, { mode: 'no-cors', signal: AbortSignal.timeout(5000) });
+                            await new Promise(r => setTimeout(r, 900));
+                            return { success: true, msg: 'SSL connection established' };
+                        } catch { return { success: false, msg: 'SSL handshake failed' }; }
+                    }},
+                    { name: 'Phishing Patterns', check: async () => {
+                        logTerminal('Analyzing domain for phishing indicators...');
+                        await new Promise(r => setTimeout(r, 700));
+                        const domain = new URL(url).hostname;
+                        const suspicious = [/login|account|verify|secure|banking/i, /(.)\1{4,}/, /\.(tk|ml|ga|cf)$/];
+                        const found = suspicious.filter(p => p.test(domain));
+                        return found.length ? { success: false, msg: `Found ${found.length} pattern(s)` } : { success: true, msg: 'No phishing patterns' };
+                    }},
+                    { name: 'Threat Intelligence', check: async () => {
+                        logTerminal('Checking against Google Safe Browsing...', '#00d4ff');
+                        try {
+                            const requestBody = {
+                                client: { clientId: "e___h12", clientVersion: "1.0" },
+                                threatInfo: {
+                                    threatTypes: ["MALWARE", "SOCIAL_ENGINEERING", "UNWANTED_SOFTWARE", "POTENTIALLY_HARMFUL_APPLICATION"],
+                                    platformTypes: ["ANY_PLATFORM"],
+                                    threatEntryTypes: ["URL"],
+                                    threatEntries: [{ url: url }]
+                                }
+                            };
+                            const resp = await fetch(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${GOOGLE_SAFE_BROWSING_KEY}`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(requestBody)
+                            });
+                            const data = await resp.json();
+                            await new Promise(r => setTimeout(r, 600));
+                            if (data.matches && data.matches.length > 0) {
+                                const threats = data.matches.map(m => m.threatType.replace(/_/g, ' ')).join(', ');
+                                return { success: false, msg: `Detected: ${threats}`, critical: true };
+                            } else {
+                                return { success: true, msg: 'No threats found in database' };
+                            }
+                        } catch (e) {
+                            logTerminal('Safe Browsing API request failed', '#f43f5e');
+                            return { success: false, msg: 'API request failed' };
+                        }
+                    }}
+                ];
+
+                let risk = 0;
+                const details = [];
+
+                for (const step of steps) {
+                    const item = createCheckItem(step.name);
+                    logTerminal(`[INFO] Running ${step.name}...`, '#00d4ff');
+                    const result = await step.check();
+                    const spinner = document.getElementById(`spin-${step.name}`);
+                    const statusEl = document.getElementById(`status-${step.name}`);
+                    spinner.className = 'check-icon';
+                    if (result.success) {
+                        spinner.innerHTML = '<i class="fa-solid fa-circle-check success-text" style="font-size:24px;"></i>';
+                        statusEl.innerHTML = `<span class="success-text">✓ ${result.msg}</span>`;
+                        logTerminal(`[OK] ${result.msg}`, '#10b981');
+                    } else {
+                        spinner.innerHTML = '<i class="fa-solid fa-circle-xmark danger-text" style="font-size:24px;"></i>';
+                        statusEl.innerHTML = `<span class="danger-text">✗ ${result.msg}</span>`;
+                        logTerminal(`[FAIL] ${result.msg}`, '#f43f5e');
+                        if (result.critical) risk = 100;
+                        else risk += 20;
+                    }
+                    details.push({ step: step.name, ...result });
+                    await new Promise(r => setTimeout(r, 400));
+                }
+
+                risk = Math.min(risk, 100);
+                const level = risk >= 75 ? 'critical' : risk >= 60 ? 'high' : risk >= 30 ? 'medium' : 'safe';
+                logTerminal(`[DONE] Scan complete. Risk: ${risk}/100 (${level})`, '#ffffff');
+
+                const scanEntry = { url, risk, level, date: new Date().toLocaleString(), details };
+                saveScan(scanEntry);
+
+                const resultBox = document.createElement('div');
+                resultBox.className = 'result-box';
+                resultBox.innerHTML = `
+                    <div class="risk-display">
+                        <div class="risk-circle" style="border-color:${level==='critical'?'var(--danger)':level==='high'?'var(--danger)':level==='medium'?'var(--warning)':'var(--success)'};color:${level==='critical'?'#fff':level==='high'?'var(--danger)':level==='medium'?'var(--warning)':'var(--success)'};background:rgba(0,0,0,0.3); box-shadow:${level==='critical'?'0 0 30px var(--danger)':'none'};">
+                            ${risk}
+                        </div>
+                        <div>
+                            <h3>${url}</h3>
+                            <span class="badge ${level}" style="font-size:14px;">${level.toUpperCase()}</span>
+                            <p style="color:var(--text2);margin-top:8px;">${details.map(d => d.msg).join(' | ')}</p>
+                        </div>
+                    </div>
+                `;
+                scanArea.appendChild(resultBox);
+                scanBtn.disabled = false;
+                updateDashboard();
+            });
+
+            document.getElementById('liveClock').textContent = new Date().toLocaleTimeString();
+        })();
+    </script>
+</body>
+</html>
