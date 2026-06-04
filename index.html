@@ -39,8 +39,6 @@
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-
-        /* LOGIN */
         .login-screen {
             position: fixed; inset: 0; display: flex; align-items: center;
             justify-content: center; background: radial-gradient(circle at 30% 20%, var(--surface), var(--bg));
@@ -79,8 +77,6 @@
         .btn:active { transform: scale(0.98); }
         .error { color: var(--danger); text-align: center; margin-bottom: 12px; display: none; font-size: 14px; }
         .hint { text-align: center; margin-top: 20px; color: var(--text2); font-size: 13px; background: rgba(124,58,237,0.1); padding: 10px; border-radius: 10px; border: 1px solid var(--border); }
-
-        /* MAIN APP */
         .app { display: none; }
         .sidebar {
             position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-width);
@@ -396,12 +392,12 @@
                 document.getElementById(type==='monthly'?'monthlyCodeDisplay':'vipCodeDisplay').textContent = code;
             };
             window.activatePlan = function() {
-                const input = document.getElementById('activationCodeInput').value.trim();
+                const input = document.getElementById('activationCodeInput').value.trim().toUpperCase();
                 const status = document.getElementById('activationStatus');
                 if (!input) return;
                 const codes = getValidCodes();
-                const entry = codes.find(c => c.code === input.toUpperCase());
-                if (!entry) { status.innerHTML = '<span style="color:var(--danger);">❌ Invalid</span>'; return; }
+                const entry = codes.find(c => c.code === input);
+                if (!entry) { status.innerHTML = '<span style="color:var(--danger);">❌ Invalid code</span>'; return; }
                 if (entry.used) { status.innerHTML = '<span style="color:var(--danger);">❌ Already used</span>'; return; }
                 entry.used = true; saveValidCodes(codes);
                 setPlan(entry.type === 'monthly' ? 'monthly' : 'vip', entry.type === 'monthly' ? 30 : 180);
@@ -426,7 +422,6 @@
             }
             function loadHistory(){document.querySelector('#historyTable tbody').innerHTML=getScans().map((s,i)=>`<tr><td>${i+1}</td><td>${s.url}</td><td>${s.risk}/100</td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>`).join('');}
 
-            // Device Scanner feature
             function loadDeviceScanner() {
                 const plan = getPlanData();
                 const container = document.getElementById('deviceContent');
