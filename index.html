@@ -161,7 +161,7 @@
     </style>
 </head>
 <body>
-    <!-- LOGIN -->
+    <!-- Login Screen -->
     <div id="loginScreen" class="login-screen">
         <div class="login-card">
             <div class="logo">
@@ -177,7 +177,7 @@
         </div>
     </div>
 
-    <!-- APP -->
+    <!-- Main App -->
     <div id="appMain" class="app">
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header"><span class="sidebar-logo">e___h12</span></div>
@@ -196,6 +196,7 @@
                 <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
             </div>
         </aside>
+
         <div class="main-area">
             <div class="topbar">
                 <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
@@ -227,21 +228,21 @@
                 <div id="subscriptionInfo" class="card" style="display:none;"><h3>Your Plan: <span id="currentPlanName"></span></h3><p>Expires: <strong id="expiryDate"></strong></p></div>
                 <div id="normalPlans">
                     <div class="plans-grid">
-                        <div class="plan-card"><h3>🆓 Free</h3><div class="plan-price">$0</div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> 3 scans per day</li><li><i class="fa-solid fa-check"></i> Basic detection</li></ul><button class="btn" style="background:var(--surface2);" disabled>Current Plan</button></div>
-                        <div class="plan-card featured"><div style="position:absolute;top:12px;right:12px;background:var(--accent);padding:4px 12px;border-radius:20px;font-size:11px;">POPULAR</div><h3>⚡ Monthly Pro</h3><div class="plan-price">$10<span style="font-size:16px;">/mo</span></div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> Unlimited scans</li><li><i class="fa-solid fa-check"></i> Google Safe Browsing</li></ul><div class="paypal-container" id="paypal-container-3L59GMWVL59B4"></div><p style="margin-top:12px;font-size:13px;color:var(--text2);">After payment, contact us:</p><a href="https://wa.me/971544472016?text=Hello%2C%20I%20just%20paid%20for%20the%20Monthly%20Pro%20plan." target="_blank" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> Contact via WhatsApp</a></div>
-                        <div class="plan-card"><h3>👑 VIP</h3><div class="plan-price">$400<span style="font-size:16px;">/6mo</span></div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> Unlimited scans</li><li><i class="fa-solid fa-check"></i> Advanced intelligence</li></ul><div class="paypal-container" id="paypal-container-F7MXVUZBRVBZS"></div><p style="margin-top:12px;font-size:13px;color:var(--text2);">After payment, contact us:</p><a href="https://wa.me/971544472016?text=Hello%2C%20I%20just%20paid%20for%20the%20VIP%20plan." target="_blank" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> Contact via WhatsApp</a></div>
+                        <div class="plan-card"><h3>🆓 Free</h3><div class="plan-price">$0</div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> 3 scans per day</li></ul><button class="btn" style="background:var(--surface2);" disabled>Current Plan</button></div>
+                        <div class="plan-card featured"><div style="position:absolute;top:12px;right:12px;background:var(--accent);padding:4px 12px;border-radius:20px;font-size:11px;">POPULAR</div><h3>⚡ Monthly Pro</h3><div class="plan-price">$10/mo</div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> Unlimited scans</li></ul><div class="paypal-container" id="paypal-container-3L59GMWVL59B4"></div><a href="https://wa.me/971544472016" target="_blank" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> Contact via WhatsApp</a></div>
+                        <div class="plan-card"><h3>👑 VIP</h3><div class="plan-price">$400/6mo</div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> Unlimited scans</li></ul><div class="paypal-container" id="paypal-container-F7MXVUZBRVBZS"></div><a href="https://wa.me/971544472016" target="_blank" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> Contact via WhatsApp</a></div>
                     </div>
                 </div>
-                <div class="card" style="margin-top:24px;"><h3>Activate Your Plan</h3><input type="text" id="activationCodeInput" class="scanner-input" placeholder="Enter activation code" style="margin:12px 0;"><button class="btn" onclick="activatePlan()" style="width:auto;padding:12px 24px;">Activate</button><span id="activationStatus" style="margin-left:12px;"></span></div>
+                <div class="card" style="margin-top:24px;"><h3>Activate Your Plan</h3><input type="text" id="activationCodeInput" class="scanner-input" placeholder="Enter activation code"><button class="btn" onclick="activatePlan()" style="width:auto;padding:12px 24px;">Activate</button><span id="activationStatus" style="margin-left:12px;"></span></div>
             </div>
 
-            <div id="supportPage" class="page"><h2>AI Support</h2><div class="chat-container" id="chatContainer"><div class="chat-message bot"><div class="chat-bubble">Hello! How can I help?</div></div></div><div style="display:flex;gap:12px;"><input type="text" id="chatInput" class="scanner-input" placeholder="Type..."><button class="scan-btn" onclick="sendMessage()" style="width:auto;"><i class="fa-solid fa-paper-plane"></i></button></div></div>
+            <div id="supportPage" class="page"><h2>AI Support</h2><div class="chat-container" id="chatContainer"></div><div style="display:flex;gap:12px;"><input type="text" id="chatInput" class="scanner-input"><button class="scan-btn" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button></div></div>
 
-            <div id="aboutPage" class="page"><h2>About e___h12</h2><div class="card"><p>Advanced cybersecurity platform for real-time threat detection.</p></div></div>
+            <div id="aboutPage" class="page"><h2>About e___h12</h2><div class="card"><p>Advanced cybersecurity platform.</p></div></div>
 
-            <div id="settingsPage" class="page"><h2>Settings</h2><div class="card"><h3>Profile</h3><div class="profile-pic-section"><div class="profile-pic-large" id="settingsAvatar"><i class="fa-solid fa-user"></i></div><div><button class="upload-btn" onclick="document.getElementById('profilePicInput').click()"><i class="fa-solid fa-camera"></i> Change Picture</button><input type="file" id="profilePicInput" accept="image/*" onchange="handleProfilePic(event)"><button class="upload-btn" style="background:transparent;border-color:var(--danger);color:var(--danger);" onclick="removeProfilePic()">Remove</button></div></div></div><div class="card"><h3>More</h3><button class="btn" style="width:auto;margin:8px;" onclick="clearAllData()">Clear All Data</button></div></div>
+            <div id="settingsPage" class="page"><h2>Settings</h2><div class="card"><h3>Profile</h3><div class="profile-pic-section"><div class="profile-pic-large" id="settingsAvatar"><i class="fa-solid fa-user"></i></div><div><button class="upload-btn" onclick="document.getElementById('profilePicInput').click()">Change Picture</button><input type="file" id="profilePicInput" accept="image/*" onchange="handleProfilePic(event)"><button class="upload-btn" style="background:transparent;border-color:var(--danger);color:var(--danger);" onclick="removeProfilePic()">Remove</button></div></div></div></div>
 
-            <div id="adminPage" class="page admin-only-page"><h2>Admin Panel</h2><div class="card"><h3>Generate Monthly Code</h3><button class="btn" onclick="generateCode('monthly')">Generate</button><div id="monthlyCodeDisplay" class="code-box" style="display:none;"></div></div><div class="card"><h3>Generate VIP Code (6 months)</h3><button class="btn" onclick="generateCode('vip')">Generate</button><div id="vipCodeDisplay" class="code-box" style="display:none;"></div></div></div>
+            <div id="adminPage" class="page admin-only-page"><h2>Admin Panel</h2><div class="card"><h3>Generate Monthly Code</h3><button class="btn" onclick="generateCode('monthly')">Generate</button><div id="monthlyCodeDisplay" class="code-box" style="display:none;"></div></div><div class="card"><h3>Generate VIP Code</h3><button class="btn" onclick="generateCode('vip')">Generate</button><div id="vipCodeDisplay" class="code-box" style="display:none;"></div></div></div>
         </div>
     </div>
 
@@ -254,27 +255,14 @@
             let username = '';
             let isAdmin = false;
 
-            const translations = {
-                ar: {
-                    'login-subtitle': 'منصة متقدمة للاستخبارات الأمنية', 'login-error': 'كلمة مرور غير صالحة', 'username': 'اسم المستخدم', 'password': 'كلمة المرور',
-                    'login-btn': 'تسجيل الدخول', 'login-hint': 'كلمة المرور:', 'dashboard': 'لوحة التحكم', 'scanner': 'ماسح الروابط', 'history': 'السجل', 'plans': 'الخطط',
-                    'support': 'الدعم', 'about': 'من نحن', 'settings': 'الإعدادات', 'admin': 'لوحة المدير', 'logout': 'تسجيل الخروج', 'welcome': 'أهلاً',
-                },
-                en: {}
-            };
-
+            // ---------- Language & Theme ----------
             let currentLang = localStorage.getItem('lang') || 'ar';
             function setLanguage(lang) {
                 currentLang = lang;
                 localStorage.setItem('lang', lang);
                 document.documentElement.lang = lang;
                 document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-                document.querySelectorAll('[data-trans]').forEach(el => {
-                    const key = el.getAttribute('data-trans');
-                    if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
-                });
             }
-
             let currentTheme = localStorage.getItem('theme') || 'dark';
             function setTheme(theme) {
                 currentTheme = theme;
@@ -287,34 +275,41 @@
             setTheme(currentTheme);
             setLanguage(currentLang);
 
-            function checkAdmin(u, p) { return u === ADMIN_USER && p === ADMIN_PASS; }
+            // ---------- Per-user storage keys ----------
+            function storageKey(base) { return `${base}_${username}`; }
 
             function getPlanData() {
                 if (isAdmin) return { plan: 'admin', expiry: null };
-                const data = JSON.parse(localStorage.getItem('planData') || '{}');
-                if (data.expiry && Date.now() > data.expiry) { localStorage.removeItem('planData'); return { plan: 'free', expiry: null }; }
+                const data = JSON.parse(localStorage.getItem(storageKey('planData')) || '{}');
+                if (data.expiry && Date.now() > data.expiry) {
+                    localStorage.removeItem(storageKey('planData'));
+                    return { plan: 'free', expiry: null };
+                }
                 return data.plan ? data : { plan: 'free', expiry: null };
             }
 
             function setPlan(plan, days) {
                 if (isAdmin) return;
                 const expiry = days ? Date.now() + days * 86400000 : null;
-                localStorage.setItem('planData', JSON.stringify({ plan, expiry }));
+                localStorage.setItem(storageKey('planData'), JSON.stringify({ plan, expiry }));
                 updatePlanUI();
             }
 
             function getDailyScanCount() {
                 const today = new Date().toDateString();
-                const data = JSON.parse(localStorage.getItem('dailyScans') || '{}');
-                if (data.date !== today) { localStorage.setItem('dailyScans', JSON.stringify({ date: today, count: 0 })); return 0; }
+                const data = JSON.parse(localStorage.getItem(storageKey('dailyScans')) || '{}');
+                if (data.date !== today) {
+                    localStorage.setItem(storageKey('dailyScans'), JSON.stringify({ date: today, count: 0 }));
+                    return 0;
+                }
                 return data.count;
             }
 
             function incrementScanCount() {
                 const today = new Date().toDateString();
-                const data = JSON.parse(localStorage.getItem('dailyScans') || '{}');
+                const data = JSON.parse(localStorage.getItem(storageKey('dailyScans')) || '{}');
                 const newCount = (data.date === today ? data.count : 0) + 1;
-                localStorage.setItem('dailyScans', JSON.stringify({ date: today, count: newCount }));
+                localStorage.setItem(storageKey('dailyScans'), JSON.stringify({ date: today, count: newCount }));
                 return newCount;
             }
 
@@ -323,12 +318,23 @@
                 const badge = document.getElementById('topPlanBadge');
                 if (badge) {
                     if (plan.plan === 'admin') { badge.textContent = 'Admin'; badge.className = 'plan-badge vip'; }
-                    else { badge.textContent = plan.plan === 'vip' ? 'VIP' : plan.plan === 'monthly' ? 'Pro' : 'Free'; badge.className = 'plan-badge' + (plan.plan === 'vip' ? ' vip' : ''); }
+                    else {
+                        badge.textContent = plan.plan === 'vip' ? 'VIP' : plan.plan === 'monthly' ? 'Pro' : 'Free';
+                        badge.className = 'plan-badge' + (plan.plan === 'vip' ? ' vip' : '');
+                    }
+                }
+                const planInfo = document.getElementById('planInfo');
+                if (planInfo) {
+                    if (plan.plan === 'admin') planInfo.textContent = 'Admin (unlimited)';
+                    else if (plan.plan === 'vip') planInfo.textContent = 'VIP Plan (unlimited)';
+                    else if (plan.plan === 'monthly') planInfo.textContent = 'Pro Plan (unlimited)';
+                    else planInfo.textContent = 'Free Plan (3/day)';
                 }
                 const count = getDailyScanCount();
                 const max = (plan.plan === 'free' && !isAdmin) ? 3 : 999;
                 document.getElementById('scanCount').textContent = `${count}/${max === 999 ? '∞' : max}`;
                 document.getElementById('scanBtn').disabled = (!isAdmin && plan.plan === 'free' && count >= 3);
+
                 const subInfo = document.getElementById('subscriptionInfo');
                 const normalPlans = document.getElementById('normalPlans');
                 if (!isAdmin && plan.plan !== 'free' && plan.expiry) {
@@ -339,6 +345,7 @@
                 document.querySelectorAll('.admin-only').forEach(el => el.style.display = isAdmin ? 'flex' : 'none');
             }
 
+            // ---------- Activation codes (global, but used once) ----------
             function getValidCodes() { return JSON.parse(localStorage.getItem('validCodes') || '[]'); }
             function saveValidCodes(codes) { localStorage.setItem('validCodes', JSON.stringify(codes)); }
 
@@ -367,6 +374,67 @@
                 updatePlanUI();
             };
 
+            // ---------- Profile picture (per user) ----------
+            function getProfilePicKey() { return `profilePic_${username}`; }
+            function loadProfilePicture() {
+                const key = getProfilePicKey();
+                const savedPic = localStorage.getItem(key);
+                [document.getElementById('sidebarAvatar'), document.getElementById('topAvatar'), document.getElementById('settingsAvatar')].forEach(el => {
+                    if (savedPic) {
+                        el.style.backgroundImage = `url(${savedPic})`;
+                        el.style.backgroundSize = 'cover';
+                        el.style.color = 'transparent';
+                        el.innerHTML = '';
+                    } else {
+                        el.style.backgroundImage = 'var(--gradient)';
+                        el.style.color = '#fff';
+                        el.innerHTML = '<i class="fa-solid fa-user"></i>';
+                    }
+                });
+            }
+            window.handleProfilePic = function(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = e => { localStorage.setItem(getProfilePicKey(), e.target.result); loadProfilePicture(); };
+                reader.readAsDataURL(file);
+            };
+            window.removeProfilePic = function() { localStorage.removeItem(getProfilePicKey()); loadProfilePicture(); };
+
+            // ---------- Scan history (per user) ----------
+            function getScans() {
+                return JSON.parse(localStorage.getItem(storageKey('scans')) || '[]');
+            }
+            function saveScan(entry) {
+                const scans = getScans();
+                scans.unshift(entry);
+                localStorage.setItem(storageKey('scans'), JSON.stringify(scans));
+            }
+
+            function updateDashboard() {
+                const scans = getScans();
+                const total = scans.length, threats = scans.filter(s => s.risk >= 60).length, safe = scans.filter(s => s.risk < 30).length;
+                const rate = total ? Math.round((threats / total) * 100) : 0;
+                document.getElementById('statsContainer').innerHTML = `
+                    <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-magnifying-glass"></i></div><div><div style="font-size:32px;font-weight:700;">${total}</div><div style="color:var(--text2);font-size:12px;">Total Scans</div></div></div>
+                    <div class="stat-card"><div class="stat-icon" style="background:rgba(244,63,94,0.1);color:var(--danger)"><i class="fa-solid fa-bug"></i></div><div><div style="font-size:32px;font-weight:700;">${threats}</div><div style="color:var(--text2);font-size:12px;">Threats</div></div></div>
+                    <div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,0.1);color:var(--success)"><i class="fa-solid fa-shield-check"></i></div><div><div style="font-size:32px;font-weight:700;">${safe}</div><div style="color:var(--text2);font-size:12px;">Safe</div></div></div>
+                    <div class="stat-card"><div class="stat-icon" style="background:rgba(245,158,11,0.1);color:var(--warning)"><i class="fa-solid fa-percent"></i></div><div><div style="font-size:32px;font-weight:700;">${rate}%</div><div style="color:var(--text2);font-size:12px;">Detection Rate</div></div></div>
+                `;
+                const recent = scans.slice(0, 5);
+                document.querySelector('#recentTable tbody').innerHTML = recent.map(s => `
+                    <tr><td>${s.url}</td><td><strong>${s.risk}/100</strong></td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>
+                `).join('');
+            }
+
+            function loadHistory() {
+                const scans = getScans();
+                document.querySelector('#historyTable tbody').innerHTML = scans.map((s, i) => `
+                    <tr><td>${i+1}</td><td>${s.url}</td><td>${s.risk}/100</td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>
+                `).join('');
+            }
+
+            // ---------- Login ----------
             if (sessionStorage.getItem('loggedIn') === 'true') {
                 username = sessionStorage.getItem('username') || 'User';
                 isAdmin = sessionStorage.getItem('isAdmin') === 'true';
@@ -377,14 +445,19 @@
                 const user = document.getElementById('loginUser').value.trim();
                 const pass = document.getElementById('loginPass').value.trim();
                 if (!user) return;
-                if (checkAdmin(user, pass)) {
+                if (user === ADMIN_USER && pass === ADMIN_PASS) {
                     username = user; isAdmin = true;
-                    sessionStorage.setItem('loggedIn', 'true'); sessionStorage.setItem('username', user); sessionStorage.setItem('isAdmin', 'true');
-                    showApp(); return;
+                    sessionStorage.setItem('loggedIn', 'true');
+                    sessionStorage.setItem('username', user);
+                    sessionStorage.setItem('isAdmin', 'true');
+                    showApp();
+                    return;
                 }
                 if (pass !== PASS) { document.getElementById('loginError').style.display = 'block'; return; }
                 username = user; isAdmin = false;
-                sessionStorage.setItem('loggedIn', 'true'); sessionStorage.setItem('username', user); sessionStorage.setItem('isAdmin', 'false');
+                sessionStorage.setItem('loggedIn', 'true');
+                sessionStorage.setItem('username', user);
+                sessionStorage.setItem('isAdmin', 'false');
                 showApp();
             });
 
@@ -417,46 +490,7 @@
 
             setInterval(() => document.getElementById('liveClock').textContent = new Date().toLocaleTimeString(), 1000);
 
-            function getProfilePicKey() { return `profilePic_${username}`; }
-            function loadProfilePicture() {
-                const key = getProfilePicKey();
-                const savedPic = localStorage.getItem(key);
-                [document.getElementById('sidebarAvatar'), document.getElementById('topAvatar'), document.getElementById('settingsAvatar')].forEach(el => {
-                    if (savedPic) { el.style.backgroundImage = `url(${savedPic})`; el.style.backgroundSize = 'cover'; el.style.color = 'transparent'; el.innerHTML = ''; }
-                    else { el.style.backgroundImage = 'var(--gradient)'; el.style.color = '#fff'; el.innerHTML = '<i class="fa-solid fa-user"></i>'; }
-                });
-            }
-            window.handleProfilePic = function(event) {
-                const file = event.target.files[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = e => { localStorage.setItem(getProfilePicKey(), e.target.result); loadProfilePicture(); };
-                reader.readAsDataURL(file);
-            };
-            window.removeProfilePic = function() { localStorage.removeItem(getProfilePicKey()); loadProfilePicture(); };
-            function clearAllData() { localStorage.clear(); sessionStorage.clear(); location.reload(); }
-
-            function getScans() { return JSON.parse(localStorage.getItem('scans') || '[]'); }
-            function saveScan(s) { const scans = getScans(); scans.unshift(s); localStorage.setItem('scans', JSON.stringify(scans)); }
-
-            function updateDashboard() {
-                const scans = getScans();
-                const total = scans.length, threats = scans.filter(s => s.risk >= 60).length, safe = scans.filter(s => s.risk < 30).length;
-                const rate = total ? Math.round((threats / total) * 100) : 0;
-                document.getElementById('statsContainer').innerHTML = `
-                    <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-magnifying-glass"></i></div><div><div style="font-size:32px;font-weight:700;">${total}</div><div style="color:var(--text2);font-size:12px;">Total Scans</div></div></div>
-                    <div class="stat-card"><div class="stat-icon" style="background:rgba(244,63,94,0.1);color:var(--danger)"><i class="fa-solid fa-bug"></i></div><div><div style="font-size:32px;font-weight:700;">${threats}</div><div style="color:var(--text2);font-size:12px;">Threats</div></div></div>
-                    <div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,0.1);color:var(--success)"><i class="fa-solid fa-shield-check"></i></div><div><div style="font-size:32px;font-weight:700;">${safe}</div><div style="color:var(--text2);font-size:12px;">Safe</div></div></div>
-                    <div class="stat-card"><div class="stat-icon" style="background:rgba(245,158,11,0.1);color:var(--warning)"><i class="fa-solid fa-percent"></i></div><div><div style="font-size:32px;font-weight:700;">${rate}%</div><div style="color:var(--text2);font-size:12px;">Detection Rate</div></div></div>
-                `;
-                document.querySelector('#recentTable tbody').innerHTML = scans.slice(0,5).map(s => `<tr><td>${s.url}</td><td><strong>${s.risk}/100</strong></td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>`).join('');
-            }
-
-            function loadHistory() {
-                document.querySelector('#historyTable tbody').innerHTML = getScans().map((s,i) => `<tr><td>${i+1}</td><td>${s.url}</td><td>${s.risk}/100</td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>`).join('');
-            }
-
-            // ========== REAL SCAN ENGINE ==========
+            // ---------- Scanner Engine ----------
             document.getElementById('scanBtn').addEventListener('click', async () => {
                 const plan = getPlanData();
                 if (!isAdmin && plan.plan === 'free' && getDailyScanCount() >= 3) return alert('Daily free limit reached. Upgrade to continue.');
@@ -532,6 +566,7 @@
                 scanBtn.disabled = false;
             });
 
+            // ---------- AI Chat ----------
             window.sendMessage = function() {
                 const input = document.getElementById('chatInput');
                 const msg = input.value.trim();
@@ -545,6 +580,7 @@
                 }, 500);
             };
 
+            // PayPal rendering (only non-admin)
             if (!isAdmin && typeof paypal !== 'undefined') {
                 paypal.HostedButtons({ hostedButtonId: "3L59GMWVL59B4" }).render("#paypal-container-3L59GMWVL59B4");
                 paypal.HostedButtons({ hostedButtonId: "F7MXVUZBRVBZS" }).render("#paypal-container-F7MXVUZBRVBZS");
