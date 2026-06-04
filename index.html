@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="dark">
 <head>
@@ -162,211 +161,87 @@
     </style>
 </head>
 <body>
-    <!-- Login Screen -->
+    <!-- LOGIN -->
     <div id="loginScreen" class="login-screen">
         <div class="login-card">
             <div class="logo">
                 <i class="fa-solid fa-shield-halved"></i>
                 <h1>e___h12</h1>
-                <p data-trans="login-subtitle">ADVANCED THREAT INTELLIGENCE</p>
+                <p>ADVANCED THREAT INTELLIGENCE</p>
             </div>
-            <div class="error" id="loginError" data-trans="login-error">Invalid password</div>
-            <div class="input-group">
-                <label data-trans="username">Username</label>
-                <input type="text" id="loginUser" placeholder="Username" autocomplete="off">
-            </div>
-            <div class="input-group">
-                <label data-trans="password">Password</label>
-                <input type="password" id="loginPass" placeholder="Password" autocomplete="off">
-            </div>
-            <button class="btn" id="loginBtn" data-trans="login-btn">Authenticate</button>
-            <div class="hint">
-                <i class="fa-solid fa-key"></i> <span data-trans="login-hint">Password:</span> <strong style="color:var(--accent);">yamen</strong>
-            </div>
+            <div class="error" id="loginError">Invalid password</div>
+            <div class="input-group"><label>Username</label><input type="text" id="loginUser" placeholder="Username" autocomplete="off"></div>
+            <div class="input-group"><label>Password</label><input type="password" id="loginPass" placeholder="Password" autocomplete="off"></div>
+            <button class="btn" id="loginBtn">Authenticate</button>
+            <div class="hint"><i class="fa-solid fa-key"></i> Password: <strong style="color:var(--accent);">yamen</strong></div>
         </div>
     </div>
 
-    <!-- Main App -->
+    <!-- APP -->
     <div id="appMain" class="app">
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header"><span class="sidebar-logo">e___h12</span></div>
             <div class="sidebar-nav">
-                <div class="nav-item active" data-page="dashboard"><i class="fa-solid fa-grid-2"></i> <span data-trans="dashboard">Dashboard</span></div>
-                <div class="nav-item" data-page="scanner"><i class="fa-solid fa-magnifying-glass-chart"></i> <span data-trans="scanner">URL Scanner</span></div>
-                <div class="nav-item" data-page="history"><i class="fa-solid fa-clock-rotate-left"></i> <span data-trans="history">History</span></div>
-                <div class="nav-item" data-page="plans"><i class="fa-solid fa-crown"></i> <span data-trans="plans">Plans</span></div>
-                <div class="nav-item" data-page="support"><i class="fa-solid fa-headset"></i> <span data-trans="support">Support</span></div>
-                <div class="nav-item" data-page="about"><i class="fa-solid fa-circle-info"></i> <span data-trans="about">About Us</span></div>
-                <div class="nav-item" data-page="settings"><i class="fa-solid fa-gear"></i> <span data-trans="settings">Settings</span></div>
-                <div class="nav-item admin-only" data-page="admin"><i class="fa-solid fa-user-shield"></i> <span data-trans="admin">Admin Panel</span></div>
+                <div class="nav-item active" data-page="dashboard"><i class="fa-solid fa-grid-2"></i> Dashboard</div>
+                <div class="nav-item" data-page="scanner"><i class="fa-solid fa-magnifying-glass-chart"></i> URL Scanner</div>
+                <div class="nav-item" data-page="history"><i class="fa-solid fa-clock-rotate-left"></i> History</div>
+                <div class="nav-item" data-page="plans"><i class="fa-solid fa-crown"></i> Plans</div>
+                <div class="nav-item" data-page="support"><i class="fa-solid fa-headset"></i> Support</div>
+                <div class="nav-item" data-page="about"><i class="fa-solid fa-circle-info"></i> About Us</div>
+                <div class="nav-item" data-page="settings"><i class="fa-solid fa-gear"></i> Settings</div>
+                <div class="nav-item admin-only" data-page="admin"><i class="fa-solid fa-user-shield"></i> Admin Panel</div>
             </div>
             <div class="sidebar-footer">
-                <div class="user-info">
-                    <div class="user-avatar" id="sidebarAvatar"><i class="fa-solid fa-user"></i></div>
-                    <span id="displayName" style="font-weight:600;"></span>
-                </div>
-                <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> <span data-trans="logout">Logout</span></button>
+                <div class="user-info"><div class="user-avatar" id="sidebarAvatar"><i class="fa-solid fa-user"></i></div><span id="displayName" style="font-weight:600;"></span></div>
+                <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
             </div>
         </aside>
-
         <div class="main-area">
             <div class="topbar">
                 <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <div class="top-avatar" id="topAvatar"><i class="fa-solid fa-user"></i></div>
-                    <span style="color:var(--text2);"><span data-trans="welcome">Welcome</span>, <strong id="welcomeUser"></strong></span>
-                    <span class="plan-badge" id="topPlanBadge">Free</span>
-                </div>
+                <div style="display:flex;align-items:center;gap:10px;"><div class="top-avatar" id="topAvatar"><i class="fa-solid fa-user"></i></div><span style="color:var(--text2);">Welcome, <strong id="welcomeUser"></strong></span><span class="plan-badge" id="topPlanBadge">Free</span></div>
                 <div class="topbar-actions">
-                    <button class="icon-btn" id="themeToggle" title="Toggle theme"><i class="fa-solid fa-sun"></i></button>
-                    <button class="icon-btn" id="langToggle" title="Change language"><i class="fa-solid fa-language"></i></button>
-                    <div style="color:var(--accent); font-weight:600;" id="liveClock"></div>
+                    <button class="icon-btn" id="themeToggle"><i class="fa-solid fa-sun"></i></button>
+                    <button class="icon-btn" id="langToggle"><i class="fa-solid fa-language"></i></button>
+                    <div style="color:var(--accent);font-weight:600;" id="liveClock"></div>
                 </div>
             </div>
 
-            <!-- Dashboard -->
             <div id="dashboardPage" class="page active">
-                <h2 data-trans="dashboard-title">Security Dashboard</h2>
+                <h2>Security Dashboard</h2>
                 <div class="stats-grid" id="statsContainer"></div>
-                <div class="card"><h3 data-trans="recent-scans">Recent Scans</h3><table id="recentTable"><thead><tr><th data-trans="url-col">URL</th><th data-trans="risk-col">Risk</th><th data-trans="level-col">Level</th><th data-trans="date-col">Date</th></tr></thead><tbody></tbody></table></div>
+                <div class="card"><h3>Recent Scans</h3><table id="recentTable"><thead><tr><th>URL</th><th>Risk</th><th>Level</th><th>Date</th></tr></thead><tbody></tbody></table></div>
             </div>
 
-            <!-- Scanner -->
             <div id="scannerPage" class="page">
-                <h2 data-trans="scanner-title">URL Scanner</h2>
-                <p style="color:var(--text2);" data-trans="scanner-desc">Real-time analysis with Threat Intelligence.</p>
-                <div class="daily-counter">
-                    <span><i class="fa-solid fa-magnifying-glass"></i> <span data-trans="scans-today">Scans today:</span> <strong id="scanCount">0/3</strong></span>
-                    <span style="color:var(--text2);" id="planInfo">Free Plan</span>
-                </div>
-                <div class="scanner-input-wrap">
-                    <input type="text" id="urlInput" class="scanner-input" placeholder="https://example.com">
-                    <button class="scan-btn" id="scanBtn" data-trans="scan-btn">Scan Now</button>
-                </div>
+                <h2>URL Scanner</h2>
+                <div class="daily-counter"><span><i class="fa-solid fa-magnifying-glass"></i> Scans today: <strong id="scanCount">0/3</strong></span><span style="color:var(--text2);" id="planInfo">Free Plan</span></div>
+                <div class="scanner-input-wrap"><input type="text" id="urlInput" class="scanner-input" placeholder="https://example.com"><button class="scan-btn" id="scanBtn">Scan Now</button></div>
                 <div id="scanArea"></div>
             </div>
 
-            <!-- History -->
-            <div id="historyPage" class="page">
-                <h2 data-trans="history-title">Scan History</h2>
-                <table id="historyTable"><thead><tr><th>#</th><th data-trans="url-col">URL</th><th data-trans="risk-col">Risk</th><th data-trans="level-col">Level</th><th data-trans="date-col">Date</th></tr></thead><tbody></tbody></table>
-            </div>
+            <div id="historyPage" class="page"><h2>Scan History</h2><table id="historyTable"><thead><tr><th>#</th><th>URL</th><th>Risk</th><th>Level</th><th>Date</th></tr></thead><tbody></tbody></table></div>
 
-            <!-- Plans -->
             <div id="plansPage" class="page">
-                <h2 data-trans="plans-title">Subscription Plans</h2>
-                <div id="subscriptionInfo" class="card" style="display:none;">
-                    <h3><span data-trans="your-plan">Your Plan:</span> <span id="currentPlanName"></span></h3>
-                    <p><span data-trans="expires">Expires:</span> <strong id="expiryDate"></strong></p>
-                </div>
+                <h2>Subscription Plans</h2>
+                <div id="subscriptionInfo" class="card" style="display:none;"><h3>Your Plan: <span id="currentPlanName"></span></h3><p>Expires: <strong id="expiryDate"></strong></p></div>
                 <div id="normalPlans">
-                    <p style="color:var(--text2);" data-trans="plans-desc">Choose your plan and pay securely with PayPal</p>
                     <div class="plans-grid">
-                        <div class="plan-card">
-                            <h3>🆓 Free</h3>
-                            <div class="plan-price">$0</div>
-                            <ul class="plan-features">
-                                <li><i class="fa-solid fa-check"></i> <span data-trans="feat-3scans">3 scans per day</span></li>
-                                <li><i class="fa-solid fa-check"></i> <span data-trans="feat-basic">Basic detection</span></li>
-                                <li><i class="fa-solid fa-times" style="color:var(--danger);"></i> <span data-trans="feat-noapi">No API</span></li>
-                            </ul>
-                            <button class="btn" style="background:var(--surface2);" disabled data-trans="current-plan">Current Plan</button>
-                        </div>
-                        <div class="plan-card featured">
-                            <div style="position:absolute;top:12px;right:12px;background:var(--accent);padding:4px 12px;border-radius:20px;font-size:11px;">POPULAR</div>
-                            <h3>⚡ Monthly Pro</h3>
-                            <div class="plan-price">$10<span style="font-size:16px;">/mo</span></div>
-                            <ul class="plan-features">
-                                <li><i class="fa-solid fa-check"></i> <span data-trans="feat-unlimited">Unlimited scans</span></li>
-                                <li><i class="fa-solid fa-check"></i> Google Safe Browsing</li>
-                                <li><i class="fa-solid fa-check"></i> <span data-trans="feat-support">Priority support</span></li>
-                            </ul>
-                            <div class="paypal-container" id="paypal-container-3L59GMWVL59B4"></div>
-                            <p style="margin-top:12px; font-size:13px; color:var(--text2);" data-trans="after-pay">After payment, contact us to activate:</p>
-                            <a href="https://wa.me/971544472016?text=Hello%2C%20I%20just%20paid%20for%20the%20Monthly%20Pro%20plan%20and%20need%20activation." target="_blank" class="whatsapp-btn">
-                                <i class="fa-brands fa-whatsapp"></i> <span data-trans="whatsapp-contact">Contact via WhatsApp</span>
-                            </a>
-                        </div>
-                        <div class="plan-card">
-                            <h3>👑 VIP</h3>
-                            <div class="plan-price">$400<span style="font-size:16px;">/6mo</span></div>
-                            <ul class="plan-features">
-                                <li><i class="fa-solid fa-check"></i> <span data-trans="feat-unlimited">Unlimited scans</span></li>
-                                <li><i class="fa-solid fa-check"></i> <span data-trans="feat-advanced">Advanced intelligence</span></li>
-                                <li><i class="fa-solid fa-check"></i> <span data-trans="feat-pdf">PDF reports</span></li>
-                                <li><i class="fa-solid fa-check"></i> <span data-trans="feat-dedicated">Dedicated support</span></li>
-                            </ul>
-                            <div class="paypal-container" id="paypal-container-F7MXVUZBRVBZS"></div>
-                            <p style="margin-top:12px; font-size:13px; color:var(--text2);" data-trans="after-pay">After payment, contact us to activate:</p>
-                            <a href="https://wa.me/971544472016?text=Hello%2C%20I%20just%20paid%20for%20the%20VIP%20plan%20and%20need%20activation." target="_blank" class="whatsapp-btn">
-                                <i class="fa-brands fa-whatsapp"></i> <span data-trans="whatsapp-contact">Contact via WhatsApp</span>
-                            </a>
-                        </div>
+                        <div class="plan-card"><h3>🆓 Free</h3><div class="plan-price">$0</div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> 3 scans per day</li><li><i class="fa-solid fa-check"></i> Basic detection</li></ul><button class="btn" style="background:var(--surface2);" disabled>Current Plan</button></div>
+                        <div class="plan-card featured"><div style="position:absolute;top:12px;right:12px;background:var(--accent);padding:4px 12px;border-radius:20px;font-size:11px;">POPULAR</div><h3>⚡ Monthly Pro</h3><div class="plan-price">$10<span style="font-size:16px;">/mo</span></div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> Unlimited scans</li><li><i class="fa-solid fa-check"></i> Google Safe Browsing</li></ul><div class="paypal-container" id="paypal-container-3L59GMWVL59B4"></div><p style="margin-top:12px;font-size:13px;color:var(--text2);">After payment, contact us:</p><a href="https://wa.me/971544472016?text=Hello%2C%20I%20just%20paid%20for%20the%20Monthly%20Pro%20plan." target="_blank" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> Contact via WhatsApp</a></div>
+                        <div class="plan-card"><h3>👑 VIP</h3><div class="plan-price">$400<span style="font-size:16px;">/6mo</span></div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> Unlimited scans</li><li><i class="fa-solid fa-check"></i> Advanced intelligence</li></ul><div class="paypal-container" id="paypal-container-F7MXVUZBRVBZS"></div><p style="margin-top:12px;font-size:13px;color:var(--text2);">After payment, contact us:</p><a href="https://wa.me/971544472016?text=Hello%2C%20I%20just%20paid%20for%20the%20VIP%20plan." target="_blank" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> Contact via WhatsApp</a></div>
                     </div>
                 </div>
-                <div class="card" style="margin-top:24px;">
-                    <h3 data-trans="activation-title">Activate Your Plan</h3>
-                    <input type="text" id="activationCodeInput" class="scanner-input" placeholder="Enter activation code" style="margin:12px 0;">
-                    <button class="btn" onclick="activatePlan()" style="width:auto; padding:12px 24px;" data-trans="activate-btn">Activate</button>
-                    <span id="activationStatus" style="margin-left:12px;"></span>
-                </div>
+                <div class="card" style="margin-top:24px;"><h3>Activate Your Plan</h3><input type="text" id="activationCodeInput" class="scanner-input" placeholder="Enter activation code" style="margin:12px 0;"><button class="btn" onclick="activatePlan()" style="width:auto;padding:12px 24px;">Activate</button><span id="activationStatus" style="margin-left:12px;"></span></div>
             </div>
 
-            <!-- Support (AI Chat) -->
-            <div id="supportPage" class="page">
-                <h2 data-trans="support-title">AI Support</h2>
-                <div class="chat-container" id="chatContainer">
-                    <div class="chat-message bot"><div class="chat-bubble">مرحباً! أنا مساعد e___h12 الذكي. كيف يمكنني مساعدتك؟</div></div>
-                </div>
-                <div style="display:flex; gap:12px;">
-                    <input type="text" id="chatInput" class="scanner-input" placeholder="Type your message...">
-                    <button class="scan-btn" onclick="sendMessage()" style="width:auto;"><i class="fa-solid fa-paper-plane"></i></button>
-                </div>
-            </div>
+            <div id="supportPage" class="page"><h2>AI Support</h2><div class="chat-container" id="chatContainer"><div class="chat-message bot"><div class="chat-bubble">Hello! How can I help?</div></div></div><div style="display:flex;gap:12px;"><input type="text" id="chatInput" class="scanner-input" placeholder="Type..."><button class="scan-btn" onclick="sendMessage()" style="width:auto;"><i class="fa-solid fa-paper-plane"></i></button></div></div>
 
-            <!-- About Us -->
-            <div id="aboutPage" class="page">
-                <h2 data-trans="about-title">About e___h12</h2>
-                <div class="card">
-                    <p>e___h12 هي منصة متطورة لتحليل الروابط والكشف عن التصيد والبرمجيات الخبيثة باستخدام أحدث تقنيات الذكاء الاصطناعي وقواعد بيانات Google Safe Browsing. نهدف إلى توفير أداة احترافية وسهلة الاستخدام للأفراد والشركات.</p>
-                    <p style="margin-top:16px;">تم تطويرها بواسطة فريق متخصص في الأمن السيبراني، وتستخدم واجهات برمجة تطبيقات حقيقية لتقديم نتائج دقيقة وموثوقة.</p>
-                </div>
-            </div>
+            <div id="aboutPage" class="page"><h2>About e___h12</h2><div class="card"><p>Advanced cybersecurity platform for real-time threat detection.</p></div></div>
 
-            <!-- Settings -->
-            <div id="settingsPage" class="page">
-                <h2 data-trans="settings-title">Settings</h2>
-                <div class="card">
-                    <h3 data-trans="profile-info">Profile Information</h3>
-                    <div class="profile-pic-section">
-                        <div class="profile-pic-large" id="settingsAvatar"><i class="fa-solid fa-user"></i></div>
-                        <div>
-                            <button class="upload-btn" onclick="document.getElementById('profilePicInput').click()"><i class="fa-solid fa-camera"></i> <span data-trans="change-pic">Change Picture</span></button>
-                            <input type="file" id="profilePicInput" accept="image/*" onchange="handleProfilePic(event)">
-                            <button class="upload-btn" style="background:transparent; border-color:var(--danger); color:var(--danger);" onclick="removeProfilePic()"><i class="fa-solid fa-trash"></i> <span data-trans="remove-pic">Remove</span></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3>More Settings</h3>
-                    <button class="btn" style="width:auto; margin:8px;" onclick="clearAllData()">Clear All Local Data</button>
-                </div>
-            </div>
+            <div id="settingsPage" class="page"><h2>Settings</h2><div class="card"><h3>Profile</h3><div class="profile-pic-section"><div class="profile-pic-large" id="settingsAvatar"><i class="fa-solid fa-user"></i></div><div><button class="upload-btn" onclick="document.getElementById('profilePicInput').click()"><i class="fa-solid fa-camera"></i> Change Picture</button><input type="file" id="profilePicInput" accept="image/*" onchange="handleProfilePic(event)"><button class="upload-btn" style="background:transparent;border-color:var(--danger);color:var(--danger);" onclick="removeProfilePic()">Remove</button></div></div></div><div class="card"><h3>More</h3><button class="btn" style="width:auto;margin:8px;" onclick="clearAllData()">Clear All Data</button></div></div>
 
-            <!-- Admin Panel -->
-            <div id="adminPage" class="page admin-only-page">
-                <h2>Admin Panel</h2>
-                <div class="card">
-                    <h3>Generate Monthly Code</h3>
-                    <button class="btn" onclick="generateCode('monthly')">Generate</button>
-                    <div id="monthlyCodeDisplay" class="code-box" style="display:none;"></div>
-                </div>
-                <div class="card">
-                    <h3>Generate VIP Code (6 months)</h3>
-                    <button class="btn" onclick="generateCode('vip')">Generate</button>
-                    <div id="vipCodeDisplay" class="code-box" style="display:none;"></div>
-                </div>
-            </div>
+            <div id="adminPage" class="page admin-only-page"><h2>Admin Panel</h2><div class="card"><h3>Generate Monthly Code</h3><button class="btn" onclick="generateCode('monthly')">Generate</button><div id="monthlyCodeDisplay" class="code-box" style="display:none;"></div></div><div class="card"><h3>Generate VIP Code (6 months)</h3><button class="btn" onclick="generateCode('vip')">Generate</button><div id="vipCodeDisplay" class="code-box" style="display:none;"></div></div></div>
         </div>
     </div>
 
@@ -379,110 +254,13 @@
             let username = '';
             let isAdmin = false;
 
-            // ---------- TRANSLATIONS ----------
             const translations = {
                 ar: {
-                    'login-subtitle': 'منصة متقدمة للاستخبارات الأمنية',
-                    'login-error': 'كلمة مرور غير صالحة',
-                    'username': 'اسم المستخدم',
-                    'password': 'كلمة المرور',
-                    'login-btn': 'تسجيل الدخول',
-                    'login-hint': 'كلمة المرور:',
-                    'dashboard': 'لوحة التحكم',
-                    'scanner': 'ماسح الروابط',
-                    'history': 'السجل',
-                    'plans': 'الخطط',
-                    'support': 'الدعم',
-                    'about': 'من نحن',
-                    'settings': 'الإعدادات',
-                    'admin': 'لوحة المدير',
-                    'logout': 'تسجيل الخروج',
-                    'welcome': 'أهلاً',
-                    'dashboard-title': 'لوحة الأمن',
-                    'recent-scans': 'آخر الفحوصات',
-                    'url-col': 'الرابط',
-                    'risk-col': 'الخطورة',
-                    'level-col': 'المستوى',
-                    'date-col': 'التاريخ',
-                    'scanner-title': 'ماسح الروابط',
-                    'scanner-desc': 'تحليل فوري مع ذكاء التهديدات',
-                    'scans-today': 'فحوصات اليوم:',
-                    'scan-btn': 'ابدأ الفحص',
-                    'history-title': 'سجل الفحوصات',
-                    'plans-title': 'خطط الاشتراك',
-                    'plans-desc': 'اختر خطتك وادفع بأمان عبر PayPal',
-                    'feat-3scans': '3 فحوصات يومياً',
-                    'feat-basic': 'كشف أساسي',
-                    'feat-noapi': 'بدون API',
-                    'current-plan': 'الخطة الحالية',
-                    'feat-unlimited': 'فحوصات غير محدودة',
-                    'feat-support': 'دعم ذو أولوية',
-                    'feat-advanced': 'ذكاء متقدم',
-                    'feat-pdf': 'تقارير PDF',
-                    'feat-dedicated': 'دعم مخصص',
-                    'after-pay': 'بعد الدفع، تواصل معنا للتفعيل:',
-                    'whatsapp-contact': 'تواصل عبر واتساب',
-                    'activation-title': 'تفعيل الخطة',
-                    'activate-btn': 'تفعيل',
-                    'settings-title': 'الإعدادات',
-                    'profile-info': 'معلومات الملف الشخصي',
-                    'change-pic': 'تغيير الصورة',
-                    'remove-pic': 'إزالة',
-                    'your-plan': 'خطتك:',
-                    'expires': 'تنتهي:',
-                    'support-title': 'الدعم الفني الذكي',
+                    'login-subtitle': 'منصة متقدمة للاستخبارات الأمنية', 'login-error': 'كلمة مرور غير صالحة', 'username': 'اسم المستخدم', 'password': 'كلمة المرور',
+                    'login-btn': 'تسجيل الدخول', 'login-hint': 'كلمة المرور:', 'dashboard': 'لوحة التحكم', 'scanner': 'ماسح الروابط', 'history': 'السجل', 'plans': 'الخطط',
+                    'support': 'الدعم', 'about': 'من نحن', 'settings': 'الإعدادات', 'admin': 'لوحة المدير', 'logout': 'تسجيل الخروج', 'welcome': 'أهلاً',
                 },
-                en: {
-                    'login-subtitle': 'ADVANCED THREAT INTELLIGENCE',
-                    'login-error': 'Invalid password',
-                    'username': 'Username',
-                    'password': 'Password',
-                    'login-btn': 'Authenticate',
-                    'login-hint': 'Password:',
-                    'dashboard': 'Dashboard',
-                    'scanner': 'URL Scanner',
-                    'history': 'History',
-                    'plans': 'Plans',
-                    'support': 'Support',
-                    'about': 'About Us',
-                    'settings': 'Settings',
-                    'admin': 'Admin Panel',
-                    'logout': 'Logout',
-                    'welcome': 'Welcome',
-                    'dashboard-title': 'Security Dashboard',
-                    'recent-scans': 'Recent Scans',
-                    'url-col': 'URL',
-                    'risk-col': 'Risk',
-                    'level-col': 'Level',
-                    'date-col': 'Date',
-                    'scanner-title': 'URL Scanner',
-                    'scanner-desc': 'Real-time analysis with Threat Intelligence.',
-                    'scans-today': 'Scans today:',
-                    'scan-btn': 'Scan Now',
-                    'history-title': 'Scan History',
-                    'plans-title': 'Subscription Plans',
-                    'plans-desc': 'Choose your plan and pay securely with PayPal',
-                    'feat-3scans': '3 scans per day',
-                    'feat-basic': 'Basic detection',
-                    'feat-noapi': 'No API',
-                    'current-plan': 'Current Plan',
-                    'feat-unlimited': 'Unlimited scans',
-                    'feat-support': 'Priority support',
-                    'feat-advanced': 'Advanced intelligence',
-                    'feat-pdf': 'PDF reports',
-                    'feat-dedicated': 'Dedicated support',
-                    'after-pay': 'After payment, contact us to activate:',
-                    'whatsapp-contact': 'Contact via WhatsApp',
-                    'activation-title': 'Activate Your Plan',
-                    'activate-btn': 'Activate',
-                    'settings-title': 'Settings',
-                    'profile-info': 'Profile Information',
-                    'change-pic': 'Change Picture',
-                    'remove-pic': 'Remove',
-                    'your-plan': 'Your Plan:',
-                    'expires': 'Expires:',
-                    'support-title': 'AI Support',
-                }
+                en: {}
             };
 
             let currentLang = localStorage.getItem('lang') || 'ar';
@@ -493,13 +271,8 @@
                 document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
                 document.querySelectorAll('[data-trans]').forEach(el => {
                     const key = el.getAttribute('data-trans');
-                    if (translations[lang] && translations[lang][key]) {
-                        el.textContent = translations[lang][key];
-                    }
+                    if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
                 });
-                document.getElementById('loginUser').placeholder = translations[lang]['username'];
-                document.getElementById('loginPass').placeholder = translations[lang]['password'];
-                updatePlanUI();
             }
 
             let currentTheme = localStorage.getItem('theme') || 'dark';
@@ -507,29 +280,19 @@
                 currentTheme = theme;
                 localStorage.setItem('theme', theme);
                 document.documentElement.setAttribute('data-theme', theme);
-                const icon = document.getElementById('themeToggle').querySelector('i');
-                icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+                document.getElementById('themeToggle').querySelector('i').className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
             }
-            document.getElementById('themeToggle').addEventListener('click', () => {
-                setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-            });
-            document.getElementById('langToggle').addEventListener('click', () => {
-                setLanguage(currentLang === 'ar' ? 'en' : 'ar');
-            });
+            document.getElementById('themeToggle').addEventListener('click', () => setTheme(currentTheme === 'dark' ? 'light' : 'dark'));
+            document.getElementById('langToggle').addEventListener('click', () => setLanguage(currentLang === 'ar' ? 'en' : 'ar'));
             setTheme(currentTheme);
             setLanguage(currentLang);
 
-            // ---------- ADMIN CHECK ----------
             function checkAdmin(u, p) { return u === ADMIN_USER && p === ADMIN_PASS; }
 
-            // ---------- PLAN SYSTEM ----------
             function getPlanData() {
                 if (isAdmin) return { plan: 'admin', expiry: null };
                 const data = JSON.parse(localStorage.getItem('planData') || '{}');
-                if (data.expiry && Date.now() > data.expiry) {
-                    localStorage.removeItem('planData');
-                    return { plan: 'free', expiry: null };
-                }
+                if (data.expiry && Date.now() > data.expiry) { localStorage.removeItem('planData'); return { plan: 'free', expiry: null }; }
                 return data.plan ? data : { plan: 'free', expiry: null };
             }
 
@@ -543,10 +306,7 @@
             function getDailyScanCount() {
                 const today = new Date().toDateString();
                 const data = JSON.parse(localStorage.getItem('dailyScans') || '{}');
-                if (data.date !== today) {
-                    localStorage.setItem('dailyScans', JSON.stringify({ date: today, count: 0 }));
-                    return 0;
-                }
+                if (data.date !== today) { localStorage.setItem('dailyScans', JSON.stringify({ date: today, count: 0 })); return 0; }
                 return data.count;
             }
 
@@ -561,62 +321,35 @@
             function updatePlanUI() {
                 const plan = getPlanData();
                 const badge = document.getElementById('topPlanBadge');
-                const planInfo = document.getElementById('planInfo');
                 if (badge) {
                     if (plan.plan === 'admin') { badge.textContent = 'Admin'; badge.className = 'plan-badge vip'; }
-                    else {
-                        badge.textContent = plan.plan === 'vip' ? 'VIP' : plan.plan === 'monthly' ? 'Pro' : 'Free';
-                        badge.className = 'plan-badge' + (plan.plan === 'vip' ? ' vip' : '');
-                    }
-                }
-                if (planInfo) {
-                    if (plan.plan === 'admin') planInfo.textContent = currentLang === 'ar' ? 'مدير (غير محدود)' : 'Admin (unlimited)';
-                    else if (plan.plan === 'vip') planInfo.textContent = currentLang === 'ar' ? 'خطة VIP (غير محدودة)' : 'VIP Plan (unlimited)';
-                    else if (plan.plan === 'monthly') planInfo.textContent = currentLang === 'ar' ? 'خطة Pro (غير محدودة)' : 'Pro Plan (unlimited)';
-                    else planInfo.textContent = currentLang === 'ar' ? 'خطة مجانية (3/يوم)' : 'Free Plan (3/day)';
+                    else { badge.textContent = plan.plan === 'vip' ? 'VIP' : plan.plan === 'monthly' ? 'Pro' : 'Free'; badge.className = 'plan-badge' + (plan.plan === 'vip' ? ' vip' : ''); }
                 }
                 const count = getDailyScanCount();
                 const max = (plan.plan === 'free' && !isAdmin) ? 3 : 999;
                 document.getElementById('scanCount').textContent = `${count}/${max === 999 ? '∞' : max}`;
                 document.getElementById('scanBtn').disabled = (!isAdmin && plan.plan === 'free' && count >= 3);
-
-                // Subscription info display
                 const subInfo = document.getElementById('subscriptionInfo');
                 const normalPlans = document.getElementById('normalPlans');
                 if (!isAdmin && plan.plan !== 'free' && plan.expiry) {
-                    subInfo.style.display = 'block';
-                    normalPlans.style.display = 'none';
-                    document.getElementById('currentPlanName').textContent = plan.plan === 'vip' ? 'VIP' : 'Pro';
-                    document.getElementById('expiryDate').textContent = new Date(plan.expiry).toLocaleDateString(currentLang === 'ar' ? 'ar-AE' : 'en-US');
-                } else {
-                    subInfo.style.display = 'none';
-                    normalPlans.style.display = 'block';
-                }
-
-                // Admin panel visibility
+                    subInfo.style.display = 'block'; normalPlans.style.display = 'none';
+                    document.getElementById('currentPlanName').textContent = plan.plan;
+                    document.getElementById('expiryDate').textContent = new Date(plan.expiry).toLocaleDateString();
+                } else { subInfo.style.display = 'none'; normalPlans.style.display = 'block'; }
                 document.querySelectorAll('.admin-only').forEach(el => el.style.display = isAdmin ? 'flex' : 'none');
             }
 
-            // ---------- ACTIVATION SYSTEM (one-time codes) ----------
-            function getValidCodes() {
-                return JSON.parse(localStorage.getItem('validCodes') || '[]');
-            }
-            function saveValidCodes(codes) {
-                localStorage.setItem('validCodes', JSON.stringify(codes));
-            }
-            function getDeviceFingerprint() {
-                return btoa(navigator.userAgent + screen.width + 'x' + screen.height + Intl.DateTimeFormat().resolvedOptions().timeZone);
-            }
+            function getValidCodes() { return JSON.parse(localStorage.getItem('validCodes') || '[]'); }
+            function saveValidCodes(codes) { localStorage.setItem('validCodes', JSON.stringify(codes)); }
 
             window.generateCode = function(type) {
                 const code = 'FATO-' + Math.random().toString(36).substr(2, 8).toUpperCase();
                 const codes = getValidCodes();
-                codes.push({ code, type, used: false, device: null });
+                codes.push({ code, type, used: false });
                 saveValidCodes(codes);
-                const displayEl = type === 'monthly' ? document.getElementById('monthlyCodeDisplay') : document.getElementById('vipCodeDisplay');
+                const displayEl = document.getElementById(type === 'monthly' ? 'monthlyCodeDisplay' : 'vipCodeDisplay');
                 displayEl.style.display = 'block';
                 displayEl.textContent = code;
-                alert(currentLang === 'ar' ? `تم إنشاء كود ${type === 'monthly' ? 'شهري' : 'VIP'} بنجاح: ${code}` : `Generated ${type} code: ${code}`);
             };
 
             window.activatePlan = function() {
@@ -625,26 +358,15 @@
                 if (!input) return;
                 const codes = getValidCodes();
                 const codeEntry = codes.find(c => c.code === input);
-                if (!codeEntry) {
-                    status.innerHTML = '<span style="color:var(--danger);">❌ كود غير صالح</span>';
-                    return;
-                }
-                if (codeEntry.used) {
-                    status.innerHTML = '<span style="color:var(--danger);">❌ هذا الكود مستخدم بالفعل</span>';
-                    return;
-                }
-                const fp = getDeviceFingerprint();
-                // Bind code to this device
+                if (!codeEntry) { status.innerHTML = '<span style="color:var(--danger);">❌ Invalid</span>'; return; }
+                if (codeEntry.used) { status.innerHTML = '<span style="color:var(--danger);">❌ Already used</span>'; return; }
                 codeEntry.used = true;
-                codeEntry.device = fp;
                 saveValidCodes(codes);
-                const days = codeEntry.type === 'monthly' ? 30 : 180;
-                setPlan(codeEntry.type === 'monthly' ? 'monthly' : 'vip', days);
-                status.innerHTML = '<span style="color:var(--success);">✅ تم التفعيل بنجاح!</span>';
+                setPlan(codeEntry.type === 'monthly' ? 'monthly' : 'vip', codeEntry.type === 'monthly' ? 30 : 180);
+                status.innerHTML = '<span style="color:var(--success);">✅ Activated!</span>';
                 updatePlanUI();
             };
 
-            // ---------- LOGIN ----------
             if (sessionStorage.getItem('loggedIn') === 'true') {
                 username = sessionStorage.getItem('username') || 'User';
                 isAdmin = sessionStorage.getItem('isAdmin') === 'true';
@@ -654,19 +376,15 @@
             document.getElementById('loginBtn').addEventListener('click', () => {
                 const user = document.getElementById('loginUser').value.trim();
                 const pass = document.getElementById('loginPass').value.trim();
-                if (!user) return alert(currentLang === 'ar' ? 'أدخل اسم المستخدم' : 'Enter username');
+                if (!user) return;
                 if (checkAdmin(user, pass)) {
                     username = user; isAdmin = true;
-                    sessionStorage.setItem('loggedIn', 'true');
-                    sessionStorage.setItem('username', user);
-                    sessionStorage.setItem('isAdmin', 'true');
+                    sessionStorage.setItem('loggedIn', 'true'); sessionStorage.setItem('username', user); sessionStorage.setItem('isAdmin', 'true');
                     showApp(); return;
                 }
                 if (pass !== PASS) { document.getElementById('loginError').style.display = 'block'; return; }
                 username = user; isAdmin = false;
-                sessionStorage.setItem('loggedIn', 'true');
-                sessionStorage.setItem('username', user);
-                sessionStorage.setItem('isAdmin', 'false');
+                sessionStorage.setItem('loggedIn', 'true'); sessionStorage.setItem('username', user); sessionStorage.setItem('isAdmin', 'false');
                 showApp();
             });
 
@@ -683,7 +401,6 @@
             document.getElementById('logoutBtn').addEventListener('click', () => { sessionStorage.clear(); location.reload(); });
             document.getElementById('hamburger').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
 
-            // Navigation
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.addEventListener('click', () => {
                     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -698,25 +415,15 @@
                 });
             });
 
-            setInterval(() => document.getElementById('liveClock').textContent = new Date().toLocaleTimeString(currentLang === 'ar' ? 'ar-AE' : 'en-US'), 1000);
+            setInterval(() => document.getElementById('liveClock').textContent = new Date().toLocaleTimeString(), 1000);
 
-            // Profile picture
             function getProfilePicKey() { return `profilePic_${username}`; }
             function loadProfilePicture() {
                 const key = getProfilePicKey();
                 const savedPic = localStorage.getItem(key);
                 [document.getElementById('sidebarAvatar'), document.getElementById('topAvatar'), document.getElementById('settingsAvatar')].forEach(el => {
-                    if (savedPic) {
-                        el.style.backgroundImage = `url(${savedPic})`;
-                        el.style.backgroundSize = 'cover';
-                        el.style.backgroundPosition = 'center';
-                        el.style.color = 'transparent';
-                        el.innerHTML = '';
-                    } else {
-                        el.style.backgroundImage = 'var(--gradient)';
-                        el.style.color = '#fff';
-                        el.innerHTML = '<i class="fa-solid fa-user"></i>';
-                    }
+                    if (savedPic) { el.style.backgroundImage = `url(${savedPic})`; el.style.backgroundSize = 'cover'; el.style.color = 'transparent'; el.innerHTML = ''; }
+                    else { el.style.backgroundImage = 'var(--gradient)'; el.style.color = '#fff'; el.innerHTML = '<i class="fa-solid fa-user"></i>'; }
                 });
             }
             window.handleProfilePic = function(event) {
@@ -727,10 +434,8 @@
                 reader.readAsDataURL(file);
             };
             window.removeProfilePic = function() { localStorage.removeItem(getProfilePicKey()); loadProfilePicture(); };
+            function clearAllData() { localStorage.clear(); sessionStorage.clear(); location.reload(); }
 
-            function clearAllData() { localStorage.clear(); sessionStorage.clear(); alert('All data cleared'); location.reload(); }
-
-            // Data store
             function getScans() { return JSON.parse(localStorage.getItem('scans') || '[]'); }
             function saveScan(s) { const scans = getScans(); scans.unshift(s); localStorage.setItem('scans', JSON.stringify(scans)); }
 
@@ -739,10 +444,10 @@
                 const total = scans.length, threats = scans.filter(s => s.risk >= 60).length, safe = scans.filter(s => s.risk < 30).length;
                 const rate = total ? Math.round((threats / total) * 100) : 0;
                 document.getElementById('statsContainer').innerHTML = `
-                    <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-magnifying-glass"></i></div><div><div style="font-size:32px;font-weight:700;">${total}</div><div style="color:var(--text2);font-size:12px;">${currentLang==='ar'?'مجموع الفحوصات':'Total Scans'}</div></div></div>
-                    <div class="stat-card"><div class="stat-icon" style="background:rgba(244,63,94,0.1);color:var(--danger)"><i class="fa-solid fa-bug"></i></div><div><div style="font-size:32px;font-weight:700;">${threats}</div><div style="color:var(--text2);font-size:12px;">${currentLang==='ar'?'تهديدات':'Threats'}</div></div></div>
-                    <div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,0.1);color:var(--success)"><i class="fa-solid fa-shield-check"></i></div><div><div style="font-size:32px;font-weight:700;">${safe}</div><div style="color:var(--text2);font-size:12px;">${currentLang==='ar'?'آمنة':'Safe'}</div></div></div>
-                    <div class="stat-card"><div class="stat-icon" style="background:rgba(245,158,11,0.1);color:var(--warning)"><i class="fa-solid fa-percent"></i></div><div><div style="font-size:32px;font-weight:700;">${rate}%</div><div style="color:var(--text2);font-size:12px;">${currentLang==='ar'?'نسبة الكشف':'Detection Rate'}</div></div></div>
+                    <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-magnifying-glass"></i></div><div><div style="font-size:32px;font-weight:700;">${total}</div><div style="color:var(--text2);font-size:12px;">Total Scans</div></div></div>
+                    <div class="stat-card"><div class="stat-icon" style="background:rgba(244,63,94,0.1);color:var(--danger)"><i class="fa-solid fa-bug"></i></div><div><div style="font-size:32px;font-weight:700;">${threats}</div><div style="color:var(--text2);font-size:12px;">Threats</div></div></div>
+                    <div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,0.1);color:var(--success)"><i class="fa-solid fa-shield-check"></i></div><div><div style="font-size:32px;font-weight:700;">${safe}</div><div style="color:var(--text2);font-size:12px;">Safe</div></div></div>
+                    <div class="stat-card"><div class="stat-icon" style="background:rgba(245,158,11,0.1);color:var(--warning)"><i class="fa-solid fa-percent"></i></div><div><div style="font-size:32px;font-weight:700;">${rate}%</div><div style="color:var(--text2);font-size:12px;">Detection Rate</div></div></div>
                 `;
                 document.querySelector('#recentTable tbody').innerHTML = scans.slice(0,5).map(s => `<tr><td>${s.url}</td><td><strong>${s.risk}/100</strong></td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>`).join('');
             }
@@ -751,23 +456,82 @@
                 document.querySelector('#historyTable tbody').innerHTML = getScans().map((s,i) => `<tr><td>${i+1}</td><td>${s.url}</td><td>${s.risk}/100</td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>`).join('');
             }
 
-            // Scanner (same logic)
+            // ========== REAL SCAN ENGINE ==========
             document.getElementById('scanBtn').addEventListener('click', async () => {
                 const plan = getPlanData();
-                if (!isAdmin && plan.plan === 'free' && getDailyScanCount() >= 3) return alert(currentLang === 'ar' ? 'الحد اليومي المجاني' : 'Free limit');
+                if (!isAdmin && plan.plan === 'free' && getDailyScanCount() >= 3) return alert('Daily free limit reached. Upgrade to continue.');
+
                 const url = document.getElementById('urlInput').value.trim();
-                if (!url) return;
-                // simplified scan for brevity
-                const risk = Math.floor(Math.random()*100); // real scan logic omitted for length but present in previous version
-                const level = risk >= 60 ? 'high' : 'medium';
+                if (!url) return alert('Enter URL');
+                if (!url.startsWith('http://') && !url.startsWith('https://')) return alert('URL must start with http:// or https://');
+
+                const scanArea = document.getElementById('scanArea');
+                scanArea.innerHTML = `<div class="live-scan-container"><div class="checklist-panel" id="checklistPanel"></div><div class="terminal-panel" id="terminalPanel"><div class="terminal-title"><i class="fa-solid fa-terminal"></i> Live Terminal</div><div id="terminalContent"></div></div></div>`;
+                const checklistPanel = document.getElementById('checklistPanel');
+                const terminalContent = document.getElementById('terminalContent');
+                const scanBtn = document.getElementById('scanBtn');
+                scanBtn.disabled = true;
+
+                function logTerminal(msg, color = '#b0bec5') {
+                    const line = document.createElement('div');
+                    line.className = 'terminal-line';
+                    line.style.color = color;
+                    line.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+                    terminalContent.appendChild(line);
+                    terminalContent.scrollTop = terminalContent.scrollHeight;
+                }
+
+                function createCheckItem(label) {
+                    const item = document.createElement('div');
+                    item.className = 'check-item';
+                    item.innerHTML = `<div class="check-spinner" id="spin-${label}"></div><span>${label}</span><span id="status-${label}" style="margin-left:auto;font-weight:600;"></span>`;
+                    checklistPanel.appendChild(item);
+                    return item;
+                }
+
+                const steps = [
+                    { name: 'URL Parsing', check: async () => { logTerminal(`Parsing: ${url}`); await new Promise(r=>setTimeout(r,600)); try{new URL(url);return{ok:true,msg:'Valid'}}catch{return{ok:false,msg:'Invalid'}} }},
+                    { name: 'HTTPS', check: async () => { logTerminal('Checking HTTPS...'); await new Promise(r=>setTimeout(r,800)); return url.startsWith('https://')?{ok:true,msg:'Enabled'}:{ok:false,msg:'No HTTPS'}; }},
+                    { name: 'DNS', check: async () => { logTerminal('Resolving DNS...'); try{const d=new URL(url).hostname;const r=await fetch(`https://dns.google/resolve?name=${d}&type=A`);const j=await r.json();await new Promise(r=>setTimeout(r,700));if(j.Answer)return{ok:true,msg:j.Answer[0].data};return{ok:false,msg:'No DNS'};}catch{return{ok:false,msg:'Fail'};} }},
+                    { name: 'SSL', check: async () => { if(!url.startsWith('https://'))return{ok:false,msg:'No SSL'};logTerminal('SSL handshake...'); try{await fetch(url,{mode:'no-cors',signal:AbortSignal.timeout(5000)});await new Promise(r=>setTimeout(r,900));return{ok:true,msg:'OK'};}catch{return{ok:false,msg:'Fail'};} }},
+                    { name: 'Phishing', check: async () => { logTerminal('Phishing check...'); await new Promise(r=>setTimeout(r,700));const d=new URL(url).hostname;const f=[/login|account|verify|secure|banking/i,/(.)\1{4,}/,/\.(tk|ml|ga|cf)$/].filter(p=>p.test(d));return f.length?{ok:false,msg:'Patterns found'}:{ok:true,msg:'Clean'}; }},
+                    { name: 'Threat Intel', check: async () => { logTerminal('Google Safe Browsing...'); try{const r=await fetch(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${GOOGLE_SAFE_BROWSING_KEY}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({client:{clientId:"e___h12",clientVersion:"1.0"},threatInfo:{threatTypes:["MALWARE","SOCIAL_ENGINEERING","UNWANTED_SOFTWARE"],platformTypes:["ANY_PLATFORM"],threatEntryTypes:["URL"],threatEntries:[{url}]}})});const d=await r.json();await new Promise(r=>setTimeout(r,600));if(d.matches)return{ok:false,msg:'Detected!',critical:true};return{ok:true,msg:'Clean'};}catch{return{ok:false,msg:'API fail'};} }}
+                ];
+
+                let risk = 0;
+                for (const step of steps) {
+                    const item = createCheckItem(step.name);
+                    logTerminal(`[INFO] Running ${step.name}...`);
+                    const result = await step.check();
+                    const spinner = document.getElementById(`spin-${step.name}`);
+                    const statusEl = document.getElementById(`status-${step.name}`);
+                    spinner.className = 'check-icon';
+                    if (result.ok) {
+                        spinner.innerHTML = '<i class="fa-solid fa-circle-check success-text"></i>';
+                        statusEl.innerHTML = `<span class="success-text">✓ ${result.msg||''}</span>`;
+                        logTerminal(`[OK] ${result.msg||''}`, '#10b981');
+                    } else {
+                        spinner.innerHTML = '<i class="fa-solid fa-circle-xmark danger-text"></i>';
+                        statusEl.innerHTML = `<span class="danger-text">✗ ${result.msg||''}</span>`;
+                        logTerminal(`[FAIL] ${result.msg||''}`, '#f43f5e');
+                        if (result.critical) risk = 100; else risk += 20;
+                    }
+                    await new Promise(r => setTimeout(r, 400));
+                }
+                risk = Math.min(risk, 100);
+                const level = risk >= 75 ? 'critical' : risk >= 60 ? 'high' : risk >= 30 ? 'medium' : 'safe';
                 saveScan({ url, risk, level, date: new Date().toLocaleString() });
                 incrementScanCount();
                 updatePlanUI();
                 updateDashboard();
-                alert(`${url} scanned. Risk: ${risk}`);
+
+                const resultBox = document.createElement('div');
+                resultBox.className = 'result-box';
+                resultBox.innerHTML = `<div class="risk-display"><div class="risk-circle" style="border-color:${level==='critical'?'var(--danger)':level==='high'?'var(--danger)':level==='medium'?'var(--warning)':'var(--success)'};color:${level==='critical'?'#fff':level==='high'?'var(--danger)':level==='medium'?'var(--warning)':'var(--success)'};">${risk}</div><div><h3>${url}</h3><span class="badge ${level}">${level}</span></div></div>`;
+                scanArea.appendChild(resultBox);
+                scanBtn.disabled = false;
             });
 
-            // AI Chatbot
             window.sendMessage = function() {
                 const input = document.getElementById('chatInput');
                 const msg = input.value.trim();
@@ -775,24 +539,18 @@
                 const chatContainer = document.getElementById('chatContainer');
                 chatContainer.innerHTML += `<div class="chat-message user"><div class="chat-bubble">${msg}</div></div>`;
                 input.value = '';
-                let reply = '';
-                const lower = msg.toLowerCase();
-                if (lower.includes('scan') || lower.includes('فحص')) reply = 'يمكنك فحص أي رابط من صفحة Scanner.';
-                else if (lower.includes('pay') || lower.includes('دفع')) reply = 'الدفع عبر PayPal أو تواصل معنا على واتساب.';
-                else reply = 'شكراً لتواصلك! سأقوم بالرد قريباً.';
                 setTimeout(() => {
-                    chatContainer.innerHTML += `<div class="chat-message bot"><div class="chat-bubble">${reply}</div></div>`;
+                    chatContainer.innerHTML += `<div class="chat-message bot"><div class="chat-bubble">Thanks for your message! We'll respond soon.</div></div>`;
                     chatContainer.scrollTop = chatContainer.scrollHeight;
                 }, 500);
             };
 
-            // PayPal
             if (!isAdmin && typeof paypal !== 'undefined') {
                 paypal.HostedButtons({ hostedButtonId: "3L59GMWVL59B4" }).render("#paypal-container-3L59GMWVL59B4");
                 paypal.HostedButtons({ hostedButtonId: "F7MXVUZBRVBZS" }).render("#paypal-container-F7MXVUZBRVBZS");
             }
 
-            document.getElementById('liveClock').textContent = new Date().toLocaleTimeString(currentLang === 'ar' ? 'ar-AE' : 'en-US');
+            document.getElementById('liveClock').textContent = new Date().toLocaleTimeString();
         })();
     </script>
 </body>
