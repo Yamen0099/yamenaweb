@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="dark">
 <head>
@@ -167,13 +168,21 @@
             <div class="logo">
                 <i class="fa-solid fa-shield-halved"></i>
                 <h1>e___h12</h1>
-                <p>ADVANCED THREAT INTELLIGENCE</p>
+                <p id="loginSubtitle">ADVANCED THREAT INTELLIGENCE</p>
             </div>
             <div class="error" id="loginError">Invalid password</div>
-            <div class="input-group"><label>Username</label><input type="text" id="loginUser" placeholder="Username" autocomplete="off"></div>
-            <div class="input-group"><label>Password</label><input type="password" id="loginPass" placeholder="Password" autocomplete="off"></div>
+            <div class="input-group">
+                <label id="lblUser">Username</label>
+                <input type="text" id="loginUser" placeholder="Username" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <label id="lblPass">Password</label>
+                <input type="password" id="loginPass" placeholder="Password" autocomplete="off">
+            </div>
             <button class="btn" id="loginBtn">Authenticate</button>
-            <div class="hint"><i class="fa-solid fa-key"></i> Password: <strong style="color:var(--accent);">yamen</strong></div>
+            <div class="hint">
+                <i class="fa-solid fa-key"></i> <span id="loginHint">Password:</span> <strong style="color:var(--accent);">yamen</strong>
+            </div>
         </div>
     </div>
 
@@ -182,25 +191,32 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header"><span class="sidebar-logo">e___h12</span></div>
             <div class="sidebar-nav">
-                <div class="nav-item active" data-page="dashboard"><i class="fa-solid fa-grid-2"></i> Dashboard</div>
-                <div class="nav-item" data-page="scanner"><i class="fa-solid fa-magnifying-glass-chart"></i> URL Scanner</div>
-                <div class="nav-item" data-page="history"><i class="fa-solid fa-clock-rotate-left"></i> History</div>
-                <div class="nav-item" data-page="plans"><i class="fa-solid fa-crown"></i> Plans</div>
-                <div class="nav-item" data-page="support"><i class="fa-solid fa-headset"></i> Support</div>
-                <div class="nav-item" data-page="about"><i class="fa-solid fa-circle-info"></i> About Us</div>
-                <div class="nav-item" data-page="settings"><i class="fa-solid fa-gear"></i> Settings</div>
-                <div class="nav-item admin-only" data-page="admin"><i class="fa-solid fa-user-shield"></i> Admin Panel</div>
+                <div class="nav-item active" data-page="dashboard"><i class="fa-solid fa-grid-2"></i> <span data-trans="navDashboard">Dashboard</span></div>
+                <div class="nav-item" data-page="scanner"><i class="fa-solid fa-magnifying-glass-chart"></i> <span data-trans="navScanner">URL Scanner</span></div>
+                <div class="nav-item" data-page="history"><i class="fa-solid fa-clock-rotate-left"></i> <span data-trans="navHistory">History</span></div>
+                <div class="nav-item" data-page="plans"><i class="fa-solid fa-crown"></i> <span data-trans="navPlans">Plans</span></div>
+                <div class="nav-item" data-page="support"><i class="fa-solid fa-headset"></i> <span data-trans="navSupport">Support</span></div>
+                <div class="nav-item" data-page="about"><i class="fa-solid fa-circle-info"></i> <span data-trans="navAbout">About Us</span></div>
+                <div class="nav-item" data-page="settings"><i class="fa-solid fa-gear"></i> <span data-trans="navSettings">Settings</span></div>
+                <div class="nav-item admin-only" data-page="admin"><i class="fa-solid fa-user-shield"></i> <span data-trans="navAdmin">Admin Panel</span></div>
             </div>
             <div class="sidebar-footer">
-                <div class="user-info"><div class="user-avatar" id="sidebarAvatar"><i class="fa-solid fa-user"></i></div><span id="displayName" style="font-weight:600;"></span></div>
-                <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                <div class="user-info">
+                    <div class="user-avatar" id="sidebarAvatar"><i class="fa-solid fa-user"></i></div>
+                    <span id="displayName" style="font-weight:600;"></span>
+                </div>
+                <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> <span data-trans="btnLogout">Logout</span></button>
             </div>
         </aside>
 
         <div class="main-area">
             <div class="topbar">
                 <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
-                <div style="display:flex;align-items:center;gap:10px;"><div class="top-avatar" id="topAvatar"><i class="fa-solid fa-user"></i></div><span style="color:var(--text2);">Welcome, <strong id="welcomeUser"></strong></span><span class="plan-badge" id="topPlanBadge">Free</span></div>
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="top-avatar" id="topAvatar"><i class="fa-solid fa-user"></i></div>
+                    <span style="color:var(--text2);"><span data-trans="txtWelcome">Welcome</span>, <strong id="welcomeUser"></strong></span>
+                    <span class="plan-badge" id="topPlanBadge">Free</span>
+                </div>
                 <div class="topbar-actions">
                     <button class="icon-btn" id="themeToggle"><i class="fa-solid fa-sun"></i></button>
                     <button class="icon-btn" id="langToggle"><i class="fa-solid fa-language"></i></button>
@@ -209,38 +225,63 @@
             </div>
 
             <div id="dashboardPage" class="page active">
-                <h2>Security Dashboard</h2>
+                <h2 data-trans="titleDashboard">Security Dashboard</h2>
                 <div class="stats-grid" id="statsContainer"></div>
-                <div class="card"><h3>Recent Scans</h3><table id="recentTable"><thead><tr><th>URL</th><th>Risk</th><th>Level</th><th>Date</th></tr></thead><tbody></tbody></table></div>
+                <div class="card"><h3 data-trans="titleRecent">Recent Scans</h3><table id="recentTable"><thead><tr><th data-trans="colURL">URL</th><th data-trans="colRisk">Risk</th><th data-trans="colLevel">Level</th><th data-trans="colDate">Date</th></tr></thead><tbody></tbody></table></div>
             </div>
 
             <div id="scannerPage" class="page">
-                <h2>URL Scanner</h2>
-                <div class="daily-counter"><span><i class="fa-solid fa-magnifying-glass"></i> Scans today: <strong id="scanCount">0/3</strong></span><span style="color:var(--text2);" id="planInfo">Free Plan</span></div>
-                <div class="scanner-input-wrap"><input type="text" id="urlInput" class="scanner-input" placeholder="https://example.com"><button class="scan-btn" id="scanBtn">Scan Now</button></div>
+                <h2 data-trans="titleScanner">URL Scanner</h2>
+                <div class="daily-counter"><span><i class="fa-solid fa-magnifying-glass"></i> <span data-trans="lblScansToday">Scans today:</span> <strong id="scanCount">0/3</strong></span><span style="color:var(--text2);" id="planInfo">Free Plan</span></div>
+                <div class="scanner-input-wrap"><input type="text" id="urlInput" class="scanner-input" placeholder="https://example.com"><button class="scan-btn" id="scanBtn" data-trans="btnScanNow">Scan Now</button></div>
                 <div id="scanArea"></div>
             </div>
 
-            <div id="historyPage" class="page"><h2>Scan History</h2><table id="historyTable"><thead><tr><th>#</th><th>URL</th><th>Risk</th><th>Level</th><th>Date</th></tr></thead><tbody></tbody></table></div>
+            <div id="historyPage" class="page"><h2 data-trans="titleHistory">Scan History</h2><table id="historyTable"><thead><tr><th>#</th><th data-trans="colURL">URL</th><th data-trans="colRisk">Risk</th><th data-trans="colLevel">Level</th><th data-trans="colDate">Date</th></tr></thead><tbody></tbody></table></div>
 
             <div id="plansPage" class="page">
-                <h2>Subscription Plans</h2>
-                <div id="subscriptionInfo" class="card" style="display:none;"><h3>Your Plan: <span id="currentPlanName"></span></h3><p>Expires: <strong id="expiryDate"></strong></p></div>
+                <h2 data-trans="titlePlans">Subscription Plans</h2>
+                <div id="subscriptionInfo" class="card" style="display:none;"><h3><span data-trans="lblYourPlan">Your Plan:</span> <span id="currentPlanName"></span></h3><p><span data-trans="lblExpires">Expires:</span> <strong id="expiryDate"></strong></p></div>
                 <div id="normalPlans">
                     <div class="plans-grid">
-                        <div class="plan-card"><h3>🆓 Free</h3><div class="plan-price">$0</div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> 3 scans per day</li></ul><button class="btn" style="background:var(--surface2);" disabled>Current Plan</button></div>
-                        <div class="plan-card featured"><div style="position:absolute;top:12px;right:12px;background:var(--accent);padding:4px 12px;border-radius:20px;font-size:11px;">POPULAR</div><h3>⚡ Monthly Pro</h3><div class="plan-price">$10/mo</div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> Unlimited scans</li></ul><div class="paypal-container" id="paypal-container-3L59GMWVL59B4"></div><a href="https://wa.me/971544472016" target="_blank" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> Contact via WhatsApp</a></div>
-                        <div class="plan-card"><h3>👑 VIP</h3><div class="plan-price">$400/6mo</div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> Unlimited scans</li></ul><div class="paypal-container" id="paypal-container-F7MXVUZBRVBZS"></div><a href="https://wa.me/971544472016" target="_blank" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> Contact via WhatsApp</a></div>
+                        <div class="plan-card"><h3>🆓 Free</h3><div class="plan-price">$0</div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> <span data-trans="feat3Scans">3 scans per day</span></li></ul><button class="btn" style="background:var(--surface2);" disabled data-trans="btnCurrentPlan">Current Plan</button></div>
+                        <div class="plan-card featured">
+                            <div style="position:absolute;top:12px;right:12px;background:var(--accent);padding:4px 12px;border-radius:20px;font-size:11px;">POPULAR</div>
+                            <h3>⚡ Monthly Pro</h3><div class="plan-price">$10<span style="font-size:16px;">/mo</span></div>
+                            <ul class="plan-features"><li><i class="fa-solid fa-check"></i> <span data-trans="featUnlimited">Unlimited scans</span></li><li><i class="fa-solid fa-check"></i> Google Safe Browsing</li></ul>
+                            <div class="paypal-container" id="paypal-container-3L59GMWVL59B4"></div>
+                            <a href="https://wa.me/971544472016" target="_blank" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> <span data-trans="btnWhatsApp">Contact via WhatsApp</span></a>
+                        </div>
+                        <div class="plan-card">
+                            <h3>👑 VIP</h3><div class="plan-price">$400<span style="font-size:16px;">/6mo</span></div>
+                            <ul class="plan-features"><li><i class="fa-solid fa-check"></i> <span data-trans="featUnlimited">Unlimited scans</span></li><li><i class="fa-solid fa-check"></i> <span data-trans="featAdvanced">Advanced intelligence</span></li></ul>
+                            <div class="paypal-container" id="paypal-container-F7MXVUZBRVBZS"></div>
+                            <a href="https://wa.me/971544472016" target="_blank" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> <span data-trans="btnWhatsApp">Contact via WhatsApp</span></a>
+                        </div>
                     </div>
                 </div>
-                <div class="card" style="margin-top:24px;"><h3>Activate Your Plan</h3><input type="text" id="activationCodeInput" class="scanner-input" placeholder="Enter activation code"><button class="btn" onclick="activatePlan()" style="width:auto;padding:12px 24px;">Activate</button><span id="activationStatus" style="margin-left:12px;"></span></div>
+                <div class="card" style="margin-top:24px;">
+                    <h3 data-trans="titleActivate">Activate Your Plan</h3>
+                    <input type="text" id="activationCodeInput" class="scanner-input" placeholder="Enter activation code">
+                    <button class="btn" onclick="activatePlan()" style="width:auto;padding:12px 24px;margin-top:12px;" data-trans="btnActivate">Activate</button>
+                    <span id="activationStatus" style="margin-left:12px;"></span>
+                </div>
             </div>
 
-            <div id="supportPage" class="page"><h2>AI Support</h2><div class="chat-container" id="chatContainer"></div><div style="display:flex;gap:12px;"><input type="text" id="chatInput" class="scanner-input"><button class="scan-btn" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button></div></div>
+            <div id="supportPage" class="page">
+                <h2 data-trans="titleSupport">AI Support</h2>
+                <div class="chat-container" id="chatContainer">
+                    <div class="chat-message bot"><div class="chat-bubble" id="welcomeMessage">مرحباً بك في منصة e___h12، معك المطور يامن شادي. كيف يمكنني مساعدتك؟</div></div>
+                </div>
+                <div style="display:flex;gap:12px;">
+                    <input type="text" id="chatInput" class="scanner-input" placeholder="اكتب رسالتك...">
+                    <button class="scan-btn" onclick="sendMessage()" style="width:auto;"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
 
-            <div id="aboutPage" class="page"><h2>About e___h12</h2><div class="card"><p>Advanced cybersecurity platform.</p></div></div>
+            <div id="aboutPage" class="page"><h2 data-trans="titleAbout">About e___h12</h2><div class="card"><p data-trans="textAbout">منصة متطورة لتحليل الروابط والكشف عن التصيد والبرمجيات الخبيثة باستخدام أحدث تقنيات الذكاء الاصطناعي وقواعد بيانات Google Safe Browsing.</p></div></div>
 
-            <div id="settingsPage" class="page"><h2>Settings</h2><div class="card"><h3>Profile</h3><div class="profile-pic-section"><div class="profile-pic-large" id="settingsAvatar"><i class="fa-solid fa-user"></i></div><div><button class="upload-btn" onclick="document.getElementById('profilePicInput').click()">Change Picture</button><input type="file" id="profilePicInput" accept="image/*" onchange="handleProfilePic(event)"><button class="upload-btn" style="background:transparent;border-color:var(--danger);color:var(--danger);" onclick="removeProfilePic()">Remove</button></div></div></div></div>
+            <div id="settingsPage" class="page"><h2 data-trans="titleSettings">Settings</h2><div class="card"><h3 data-trans="lblProfile">Profile</h3><div class="profile-pic-section"><div class="profile-pic-large" id="settingsAvatar"><i class="fa-solid fa-user"></i></div><div><button class="upload-btn" onclick="document.getElementById('profilePicInput').click()"><i class="fa-solid fa-camera"></i> <span data-trans="btnChangePic">Change Picture</span></button><input type="file" id="profilePicInput" accept="image/*" onchange="handleProfilePic(event)"><button class="upload-btn" style="background:transparent;border-color:var(--danger);color:var(--danger);" onclick="removeProfilePic()"><i class="fa-solid fa-trash"></i> <span data-trans="btnRemovePic">Remove</span></button></div></div></div></div>
 
             <div id="adminPage" class="page admin-only-page"><h2>Admin Panel</h2><div class="card"><h3>Generate Monthly Code</h3><button class="btn" onclick="generateCode('monthly')">Generate</button><div id="monthlyCodeDisplay" class="code-box" style="display:none;"></div></div><div class="card"><h3>Generate VIP Code</h3><button class="btn" onclick="generateCode('vip')">Generate</button><div id="vipCodeDisplay" class="code-box" style="display:none;"></div></div></div>
         </div>
@@ -255,14 +296,127 @@
             let username = '';
             let isAdmin = false;
 
-            // ---------- Language & Theme ----------
+            // Translations (English/Arabic)
+            const translations = {
+                en: {
+                    loginSubtitle: 'ADVANCED THREAT INTELLIGENCE',
+                    loginError: 'Invalid password',
+                    lblUser: 'Username',
+                    lblPass: 'Password',
+                    loginBtn: 'Authenticate',
+                    loginHint: 'Password:',
+                    navDashboard: 'Dashboard',
+                    navScanner: 'URL Scanner',
+                    navHistory: 'History',
+                    navPlans: 'Plans',
+                    navSupport: 'Support',
+                    navAbout: 'About Us',
+                    navSettings: 'Settings',
+                    navAdmin: 'Admin Panel',
+                    btnLogout: 'Logout',
+                    txtWelcome: 'Welcome',
+                    titleDashboard: 'Security Dashboard',
+                    titleRecent: 'Recent Scans',
+                    colURL: 'URL',
+                    colRisk: 'Risk',
+                    colLevel: 'Level',
+                    colDate: 'Date',
+                    titleScanner: 'URL Scanner',
+                    lblScansToday: 'Scans today:',
+                    btnScanNow: 'Scan Now',
+                    titleHistory: 'Scan History',
+                    titlePlans: 'Subscription Plans',
+                    lblYourPlan: 'Your Plan:',
+                    lblExpires: 'Expires:',
+                    feat3Scans: '3 scans per day',
+                    featUnlimited: 'Unlimited scans',
+                    featAdvanced: 'Advanced intelligence',
+                    btnCurrentPlan: 'Current Plan',
+                    btnWhatsApp: 'Contact via WhatsApp',
+                    titleActivate: 'Activate Your Plan',
+                    btnActivate: 'Activate',
+                    titleSupport: 'AI Support',
+                    welcomeMessage: 'Welcome to e___h12 platform, I am the developer Yamen Shadi. How can I help you?',
+                    titleAbout: 'About e___h12',
+                    textAbout: 'An advanced platform for URL analysis and detection of phishing and malware using the latest AI technologies and Google Safe Browsing.',
+                    titleSettings: 'Settings',
+                    lblProfile: 'Profile',
+                    btnChangePic: 'Change Picture',
+                    btnRemovePic: 'Remove',
+                },
+                ar: {
+                    loginSubtitle: 'منصة متقدمة للاستخبارات الأمنية',
+                    loginError: 'كلمة مرور غير صالحة',
+                    lblUser: 'اسم المستخدم',
+                    lblPass: 'كلمة المرور',
+                    loginBtn: 'تسجيل الدخول',
+                    loginHint: 'كلمة المرور:',
+                    navDashboard: 'لوحة التحكم',
+                    navScanner: 'ماسح الروابط',
+                    navHistory: 'السجل',
+                    navPlans: 'الخطط',
+                    navSupport: 'الدعم',
+                    navAbout: 'من نحن',
+                    navSettings: 'الإعدادات',
+                    navAdmin: 'لوحة المدير',
+                    btnLogout: 'تسجيل الخروج',
+                    txtWelcome: 'أهلاً',
+                    titleDashboard: 'لوحة الأمن',
+                    titleRecent: 'آخر الفحوصات',
+                    colURL: 'الرابط',
+                    colRisk: 'الخطورة',
+                    colLevel: 'المستوى',
+                    colDate: 'التاريخ',
+                    titleScanner: 'ماسح الروابط',
+                    lblScansToday: 'فحوصات اليوم:',
+                    btnScanNow: 'ابدأ الفحص',
+                    titleHistory: 'سجل الفحوصات',
+                    titlePlans: 'خطط الاشتراك',
+                    lblYourPlan: 'خطتك:',
+                    lblExpires: 'تنتهي:',
+                    feat3Scans: '3 فحوصات يومياً',
+                    featUnlimited: 'فحوصات غير محدودة',
+                    featAdvanced: 'ذكاء متقدم',
+                    btnCurrentPlan: 'الخطة الحالية',
+                    btnWhatsApp: 'تواصل عبر واتساب',
+                    titleActivate: 'تفعيل الخطة',
+                    btnActivate: 'تفعيل',
+                    titleSupport: 'الدعم الفني',
+                    welcomeMessage: 'مرحباً بك في منصة e___h12، معك المطور يامن شادي. كيف يمكنني مساعدتك؟',
+                    titleAbout: 'عن e___h12',
+                    textAbout: 'منصة متطورة لتحليل الروابط والكشف عن التصيد والبرمجيات الخبيثة باستخدام أحدث تقنيات الذكاء الاصطناعي وقواعد بيانات Google Safe Browsing.',
+                    titleSettings: 'الإعدادات',
+                    lblProfile: 'الملف الشخصي',
+                    btnChangePic: 'تغيير الصورة',
+                    btnRemovePic: 'إزالة',
+                }
+            };
+
             let currentLang = localStorage.getItem('lang') || 'ar';
             function setLanguage(lang) {
                 currentLang = lang;
                 localStorage.setItem('lang', lang);
                 document.documentElement.lang = lang;
                 document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+                const t = translations[lang];
+                // Update elements with data-trans
+                document.querySelectorAll('[data-trans]').forEach(el => {
+                    const key = el.getAttribute('data-trans');
+                    if (t[key]) el.textContent = t[key];
+                });
+                // Update specific ids
+                if (document.getElementById('loginSubtitle')) document.getElementById('loginSubtitle').textContent = t.loginSubtitle;
+                if (document.getElementById('loginError')) document.getElementById('loginError').textContent = t.loginError;
+                if (document.getElementById('lblUser')) document.getElementById('lblUser').textContent = t.lblUser;
+                if (document.getElementById('lblPass')) document.getElementById('lblPass').textContent = t.lblPass;
+                if (document.getElementById('loginBtn')) document.getElementById('loginBtn').textContent = t.loginBtn;
+                if (document.getElementById('loginHint')) document.getElementById('loginHint').textContent = t.loginHint;
+                if (document.getElementById('welcomeMessage')) document.getElementById('welcomeMessage').textContent = t.welcomeMessage;
+                // Update placeholders
+                document.getElementById('loginUser').placeholder = t.lblUser;
+                document.getElementById('loginPass').placeholder = t.lblPass;
             }
+
             let currentTheme = localStorage.getItem('theme') || 'dark';
             function setTheme(theme) {
                 currentTheme = theme;
@@ -270,12 +424,14 @@
                 document.documentElement.setAttribute('data-theme', theme);
                 document.getElementById('themeToggle').querySelector('i').className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
             }
+
             document.getElementById('themeToggle').addEventListener('click', () => setTheme(currentTheme === 'dark' ? 'light' : 'dark'));
             document.getElementById('langToggle').addEventListener('click', () => setLanguage(currentLang === 'ar' ? 'en' : 'ar'));
+
             setTheme(currentTheme);
             setLanguage(currentLang);
 
-            // ---------- Per-user storage keys ----------
+            // Per-user storage helper
             function storageKey(base) { return `${base}_${username}`; }
 
             function getPlanData() {
@@ -323,32 +479,30 @@
                         badge.className = 'plan-badge' + (plan.plan === 'vip' ? ' vip' : '');
                     }
                 }
-                const planInfo = document.getElementById('planInfo');
-                if (planInfo) {
-                    if (plan.plan === 'admin') planInfo.textContent = 'Admin (unlimited)';
-                    else if (plan.plan === 'vip') planInfo.textContent = 'VIP Plan (unlimited)';
-                    else if (plan.plan === 'monthly') planInfo.textContent = 'Pro Plan (unlimited)';
-                    else planInfo.textContent = 'Free Plan (3/day)';
-                }
                 const count = getDailyScanCount();
                 const max = (plan.plan === 'free' && !isAdmin) ? 3 : 999;
                 document.getElementById('scanCount').textContent = `${count}/${max === 999 ? '∞' : max}`;
                 document.getElementById('scanBtn').disabled = (!isAdmin && plan.plan === 'free' && count >= 3);
-
+                const planInfo = document.getElementById('planInfo');
+                if (planInfo) {
+                    if (plan.plan === 'admin') planInfo.textContent = 'Admin (unlimited)';
+                    else if (plan.plan === 'vip') planInfo.textContent = 'VIP (unlimited)';
+                    else if (plan.plan === 'monthly') planInfo.textContent = 'Pro (unlimited)';
+                    else planInfo.textContent = 'Free (3/day)';
+                }
                 const subInfo = document.getElementById('subscriptionInfo');
                 const normalPlans = document.getElementById('normalPlans');
                 if (!isAdmin && plan.plan !== 'free' && plan.expiry) {
                     subInfo.style.display = 'block'; normalPlans.style.display = 'none';
                     document.getElementById('currentPlanName').textContent = plan.plan;
-                    document.getElementById('expiryDate').textContent = new Date(plan.expiry).toLocaleDateString();
+                    document.getElementById('expiryDate').textContent = new Date(plan.expiry).toLocaleDateString(currentLang === 'ar' ? 'ar-AE' : 'en-US');
                 } else { subInfo.style.display = 'none'; normalPlans.style.display = 'block'; }
                 document.querySelectorAll('.admin-only').forEach(el => el.style.display = isAdmin ? 'flex' : 'none');
             }
 
-            // ---------- Activation codes (global, but used once) ----------
+            // Activation codes
             function getValidCodes() { return JSON.parse(localStorage.getItem('validCodes') || '[]'); }
             function saveValidCodes(codes) { localStorage.setItem('validCodes', JSON.stringify(codes)); }
-
             window.generateCode = function(type) {
                 const code = 'FATO-' + Math.random().toString(36).substr(2, 8).toUpperCase();
                 const codes = getValidCodes();
@@ -358,7 +512,6 @@
                 displayEl.style.display = 'block';
                 displayEl.textContent = code;
             };
-
             window.activatePlan = function() {
                 const input = document.getElementById('activationCodeInput').value.trim();
                 const status = document.getElementById('activationStatus');
@@ -374,7 +527,7 @@
                 updatePlanUI();
             };
 
-            // ---------- Profile picture (per user) ----------
+            // Profile picture
             function getProfilePicKey() { return `profilePic_${username}`; }
             function loadProfilePicture() {
                 const key = getProfilePicKey();
@@ -396,15 +549,19 @@
                 const file = event.target.files[0];
                 if (!file) return;
                 const reader = new FileReader();
-                reader.onload = e => { localStorage.setItem(getProfilePicKey(), e.target.result); loadProfilePicture(); };
+                reader.onload = function(e) {
+                    localStorage.setItem(getProfilePicKey(), e.target.result);
+                    loadProfilePicture();
+                };
                 reader.readAsDataURL(file);
             };
-            window.removeProfilePic = function() { localStorage.removeItem(getProfilePicKey()); loadProfilePicture(); };
+            window.removeProfilePic = function() {
+                localStorage.removeItem(getProfilePicKey());
+                loadProfilePicture();
+            };
 
-            // ---------- Scan history (per user) ----------
-            function getScans() {
-                return JSON.parse(localStorage.getItem(storageKey('scans')) || '[]');
-            }
+            // Scan history (per user)
+            function getScans() { return JSON.parse(localStorage.getItem(storageKey('scans')) || '[]'); }
             function saveScan(entry) {
                 const scans = getScans();
                 scans.unshift(entry);
@@ -416,25 +573,19 @@
                 const total = scans.length, threats = scans.filter(s => s.risk >= 60).length, safe = scans.filter(s => s.risk < 30).length;
                 const rate = total ? Math.round((threats / total) * 100) : 0;
                 document.getElementById('statsContainer').innerHTML = `
-                    <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-magnifying-glass"></i></div><div><div style="font-size:32px;font-weight:700;">${total}</div><div style="color:var(--text2);font-size:12px;">Total Scans</div></div></div>
+                    <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-magnifying-glass"></i></div><div><div style="font-size:32px;font-weight:700;">${total}</div><div style="color:var(--text2);font-size:12px;">${translations[currentLang].titleDashboard}</div></div></div>
                     <div class="stat-card"><div class="stat-icon" style="background:rgba(244,63,94,0.1);color:var(--danger)"><i class="fa-solid fa-bug"></i></div><div><div style="font-size:32px;font-weight:700;">${threats}</div><div style="color:var(--text2);font-size:12px;">Threats</div></div></div>
                     <div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,0.1);color:var(--success)"><i class="fa-solid fa-shield-check"></i></div><div><div style="font-size:32px;font-weight:700;">${safe}</div><div style="color:var(--text2);font-size:12px;">Safe</div></div></div>
                     <div class="stat-card"><div class="stat-icon" style="background:rgba(245,158,11,0.1);color:var(--warning)"><i class="fa-solid fa-percent"></i></div><div><div style="font-size:32px;font-weight:700;">${rate}%</div><div style="color:var(--text2);font-size:12px;">Detection Rate</div></div></div>
                 `;
-                const recent = scans.slice(0, 5);
-                document.querySelector('#recentTable tbody').innerHTML = recent.map(s => `
-                    <tr><td>${s.url}</td><td><strong>${s.risk}/100</strong></td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>
-                `).join('');
+                document.querySelector('#recentTable tbody').innerHTML = scans.slice(0,5).map(s => `<tr><td>${s.url}</td><td><strong>${s.risk}/100</strong></td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>`).join('');
             }
 
             function loadHistory() {
-                const scans = getScans();
-                document.querySelector('#historyTable tbody').innerHTML = scans.map((s, i) => `
-                    <tr><td>${i+1}</td><td>${s.url}</td><td>${s.risk}/100</td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>
-                `).join('');
+                document.querySelector('#historyTable tbody').innerHTML = getScans().map((s,i) => `<tr><td>${i+1}</td><td>${s.url}</td><td>${s.risk}/100</td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>`).join('');
             }
 
-            // ---------- Login ----------
+            // Login
             if (sessionStorage.getItem('loggedIn') === 'true') {
                 username = sessionStorage.getItem('username') || 'User';
                 isAdmin = sessionStorage.getItem('isAdmin') === 'true';
@@ -488,9 +639,9 @@
                 });
             });
 
-            setInterval(() => document.getElementById('liveClock').textContent = new Date().toLocaleTimeString(), 1000);
+            setInterval(() => document.getElementById('liveClock').textContent = new Date().toLocaleTimeString(currentLang === 'ar' ? 'ar-AE' : 'en-US'), 1000);
 
-            // ---------- Scanner Engine ----------
+            // Scanner Engine
             document.getElementById('scanBtn').addEventListener('click', async () => {
                 const plan = getPlanData();
                 if (!isAdmin && plan.plan === 'free' && getDailyScanCount() >= 3) return alert('Daily free limit reached. Upgrade to continue.');
@@ -566,7 +717,7 @@
                 scanBtn.disabled = false;
             });
 
-            // ---------- AI Chat ----------
+            // AI Chatbot
             window.sendMessage = function() {
                 const input = document.getElementById('chatInput');
                 const msg = input.value.trim();
@@ -574,19 +725,25 @@
                 const chatContainer = document.getElementById('chatContainer');
                 chatContainer.innerHTML += `<div class="chat-message user"><div class="chat-bubble">${msg}</div></div>`;
                 input.value = '';
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+                // Simple automated response
                 setTimeout(() => {
-                    chatContainer.innerHTML += `<div class="chat-message bot"><div class="chat-bubble">Thanks for your message! We'll respond soon.</div></div>`;
+                    let reply = '';
+                    if (msg.includes('سعر') || msg.includes('price')) reply = 'الخطط تبدأ من 10$ شهرياً.';
+                    else if (msg.includes('فحص') || msg.includes('scan')) reply = 'يمكنك فحص أي رابط من صفحة Scanner.';
+                    else reply = 'شكراً لتواصلك، سأقوم بالرد قريباً.';
+                    chatContainer.innerHTML += `<div class="chat-message bot"><div class="chat-bubble">${reply}</div></div>`;
                     chatContainer.scrollTop = chatContainer.scrollHeight;
-                }, 500);
+                }, 800);
             };
 
-            // PayPal rendering (only non-admin)
+            // PayPal
             if (!isAdmin && typeof paypal !== 'undefined') {
                 paypal.HostedButtons({ hostedButtonId: "3L59GMWVL59B4" }).render("#paypal-container-3L59GMWVL59B4");
                 paypal.HostedButtons({ hostedButtonId: "F7MXVUZBRVBZS" }).render("#paypal-container-F7MXVUZBRVBZS");
             }
 
-            document.getElementById('liveClock').textContent = new Date().toLocaleTimeString();
+            document.getElementById('liveClock').textContent = new Date().toLocaleTimeString(currentLang === 'ar' ? 'ar-AE' : 'en-US');
         })();
     </script>
 </body>
