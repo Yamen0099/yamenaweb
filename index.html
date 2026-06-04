@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="dark">
 <head>
@@ -177,7 +176,9 @@
         .chat-bubble { padding: 8px 14px; border-radius: 14px; background: var(--surface); max-width: 85%; font-size: clamp(12px,2vw,14px); word-break: break-word; }
         .chat-message.user .chat-bubble { background: var(--accent); color: #000; }
         .code-box { background: #000; color: #0f0; padding: 12px; border-radius: 12px; font-family: monospace; word-break: break-all; margin: 8px 0; font-size: 13px; }
-        .hidden-mobile { }
+        .device-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+        .device-info-item { background: var(--surface2); padding: 12px; border-radius: 8px; }
+        .device-info-item strong { display: block; color: var(--accent); margin-bottom: 4px; }
         .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
         @media (max-width: 1024px) {
@@ -187,7 +188,6 @@
             .sidebar-overlay.show { display: block; }
             .main-area { margin-left: 0; }
             .hamburger { display: flex; }
-            .hidden-mobile { display: none; }
         }
         @media (max-width: 640px) {
             .topbar { padding: 0 10px; gap: 4px; }
@@ -216,11 +216,7 @@
 <body>
     <div id="loginScreen" class="login-screen">
         <div class="login-card">
-            <div class="logo">
-                <i class="fa-solid fa-shield-halved"></i>
-                <h1>e___h12</h1>
-                <p id="loginSubtitle">ADVANCED THREAT INTELLIGENCE</p>
-            </div>
+            <div class="logo"><i class="fa-solid fa-shield-halved"></i><h1>e___h12</h1><p id="loginSubtitle">ADVANCED THREAT INTELLIGENCE</p></div>
             <div class="error" id="loginError">Invalid password</div>
             <div class="input-group"><label id="lblUser">Username</label><input type="text" id="loginUser" placeholder="Username" autocomplete="off"></div>
             <div class="input-group"><label id="lblPass">Password</label><input type="password" id="loginPass" placeholder="Password" autocomplete="off"></div>
@@ -232,13 +228,11 @@
     <div id="appMain" class="app">
         <div class="sidebar-overlay" id="sidebarOverlay"></div>
         <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <span class="sidebar-logo">e___h12</span>
-                <button class="sidebar-close" id="sidebarClose"><i class="fa-solid fa-times"></i></button>
-            </div>
+            <div class="sidebar-header"><span class="sidebar-logo">e___h12</span><button class="sidebar-close" id="sidebarClose"><i class="fa-solid fa-times"></i></button></div>
             <div class="sidebar-nav">
                 <div class="nav-item active" data-page="dashboard"><i class="fa-solid fa-grid-2"></i> <span data-trans="navDashboard">Dashboard</span></div>
                 <div class="nav-item" data-page="scanner"><i class="fa-solid fa-magnifying-glass-chart"></i> <span data-trans="navScanner">URL Scanner</span></div>
+                <div class="nav-item" data-page="device"><i class="fa-solid fa-mobile-screen-button"></i> <span data-trans="navDevice">Device Scanner</span></div>
                 <div class="nav-item" data-page="history"><i class="fa-solid fa-clock-rotate-left"></i> <span data-trans="navHistory">History</span></div>
                 <div class="nav-item" data-page="plans"><i class="fa-solid fa-crown"></i> <span data-trans="navPlans">Plans</span></div>
                 <div class="nav-item" data-page="support"><i class="fa-solid fa-headset"></i> <span data-trans="navSupport">Support</span></div>
@@ -254,68 +248,47 @@
 
         <div class="main-area">
             <div class="topbar">
-                <div class="topbar-left">
-                    <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
-                    <div class="top-avatar" id="topAvatar"><i class="fa-solid fa-user"></i></div>
-                    <span class="welcome-text"><span data-trans="txtWelcome">Welcome</span>, <strong id="welcomeUser"></strong></span>
-                </div>
-                <div class="topbar-right">
-                    <span class="plan-badge" id="topPlanBadge">Free</span>
-                    <button class="icon-btn" id="themeToggle"><i class="fa-solid fa-sun"></i></button>
-                    <button class="icon-btn" id="langToggle"><i class="fa-solid fa-language"></i></button>
-                    <div style="color:var(--accent);font-weight:600;font-size:clamp(11px,2vw,14px);white-space:nowrap;" id="liveClock"></div>
-                </div>
+                <div class="topbar-left"><button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button><div class="top-avatar" id="topAvatar"><i class="fa-solid fa-user"></i></div><span class="welcome-text"><span data-trans="txtWelcome">Welcome</span>, <strong id="welcomeUser"></strong></span></div>
+                <div class="topbar-right"><span class="plan-badge" id="topPlanBadge">Free</span><button class="icon-btn" id="themeToggle"><i class="fa-solid fa-sun"></i></button><button class="icon-btn" id="langToggle"><i class="fa-solid fa-language"></i></button><div style="color:var(--accent);font-weight:600;font-size:clamp(11px,2vw,14px);white-space:nowrap;" id="liveClock"></div></div>
             </div>
 
             <div id="dashboardPage" class="page active">
-                <h2 data-trans="titleDashboard" style="font-size:clamp(18px,3vw,24px);margin-bottom:16px;">Security Dashboard</h2>
+                <h2 data-trans="titleDashboard">Security Dashboard</h2>
                 <div class="stats-grid" id="statsContainer"></div>
                 <div class="card"><h3 data-trans="titleRecent">Recent Scans</h3><div class="table-responsive"><table id="recentTable"><thead><tr><th data-trans="colURL">URL</th><th data-trans="colRisk">Risk</th><th data-trans="colLevel">Level</th><th data-trans="colDate">Date</th></tr></thead><tbody></tbody></table></div></div>
             </div>
 
             <div id="scannerPage" class="page">
-                <h2 data-trans="titleScanner" style="font-size:clamp(18px,3vw,24px);">URL Scanner</h2>
+                <h2 data-trans="titleScanner">URL Scanner</h2>
                 <div class="daily-counter"><span><i class="fa-solid fa-magnifying-glass"></i> <span data-trans="lblScansToday">Scans today:</span> <strong id="scanCount">0/3</strong></span><span style="color:var(--text2);" id="planInfo">Free Plan</span></div>
                 <div class="scanner-input-wrap"><input type="text" id="urlInput" class="scanner-input" placeholder="https://example.com"><button class="scan-btn" id="scanBtn" data-trans="btnScanNow">Scan Now</button></div>
                 <div id="scanArea"></div>
             </div>
 
-            <div id="historyPage" class="page"><h2 data-trans="titleHistory" style="font-size:clamp(18px,3vw,24px);">Scan History</h2><div class="table-responsive"><table id="historyTable"><thead><tr><th>#</th><th data-trans="colURL">URL</th><th data-trans="colRisk">Risk</th><th data-trans="colLevel">Level</th><th data-trans="colDate">Date</th></tr></thead><tbody></tbody></table></div></div>
+            <div id="devicePage" class="page">
+                <h2 data-trans="titleDevice">Device Scanner</h2>
+                <p style="color:var(--text2);margin-bottom:20px;" id="deviceAccessMessage">This feature is available for Pro and VIP users.</p>
+                <div id="deviceContent"></div>
+            </div>
+
+            <div id="historyPage" class="page"><h2 data-trans="titleHistory">Scan History</h2><div class="table-responsive"><table id="historyTable"><thead><tr><th>#</th><th data-trans="colURL">URL</th><th data-trans="colRisk">Risk</th><th data-trans="colLevel">Level</th><th data-trans="colDate">Date</th></tr></thead><tbody></tbody></table></div></div>
 
             <div id="plansPage" class="page">
-                <h2 data-trans="titlePlans" style="font-size:clamp(18px,3vw,24px);">Subscription Plans</h2>
+                <h2 data-trans="titlePlans">Subscription Plans</h2>
                 <div id="subscriptionInfo" class="card" style="display:none;"><h3><span data-trans="lblYourPlan">Your Plan:</span> <span id="currentPlanName"></span></h3><p><span data-trans="lblExpires">Expires:</span> <strong id="expiryDate"></strong></p></div>
                 <div id="normalPlans">
                     <div class="plans-grid">
-                        <div class="plan-card"><h3>🆓 Free</h3><div class="plan-price">$0</div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> <span data-trans="feat3Scans">3 scans per day</span></li></ul><button class="btn" style="background:var(--surface2);" disabled data-trans="btnCurrentPlan">Current Plan</button></div>
-                        <div class="plan-card featured">
-                            <div style="position:absolute;top:12px;right:12px;background:var(--accent);padding:4px 12px;border-radius:20px;font-size:11px;">POPULAR</div>
-                            <h3>⚡ Monthly Pro</h3><div class="plan-price">$10<span style="font-size:16px;">/mo</span></div>
-                            <ul class="plan-features"><li><i class="fa-solid fa-check"></i> <span data-trans="featUnlimited">Unlimited scans</span></li><li><i class="fa-solid fa-check"></i> Google Safe Browsing</li></ul>
-                            <div class="paypal-container" id="paypal-container-3L59GMWVL59B4"></div>
-                            <a href="https://wa.me/971544472016" target="_blank" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> <span data-trans="btnWhatsApp">Contact via WhatsApp</span></a>
-                        </div>
-                        <div class="plan-card">
-                            <h3>👑 VIP</h3><div class="plan-price">$400<span style="font-size:16px;">/6mo</span></div>
-                            <ul class="plan-features"><li><i class="fa-solid fa-check"></i> <span data-trans="featUnlimited">Unlimited scans</span></li><li><i class="fa-solid fa-check"></i> <span data-trans="featAdvanced">Advanced intelligence</span></li></ul>
-                            <div class="paypal-container" id="paypal-container-F7MXVUZBRVBZS"></div>
-                            <a href="https://wa.me/971544472016" target="_blank" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> <span data-trans="btnWhatsApp">Contact via WhatsApp</span></a>
-                        </div>
+                        <div class="plan-card"><h3>🆓 Free</h3><div class="plan-price">$0</div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> <span data-trans="feat3Scans">3 scans per day</span></li><li><i class="fa-solid fa-times" style="color:var(--danger);"></i> No Device Scanner</li></ul><button class="btn" style="background:var(--surface2);" disabled>Current Plan</button></div>
+                        <div class="plan-card featured"><div style="position:absolute;top:12px;right:12px;background:var(--accent);padding:4px 12px;border-radius:20px;font-size:11px;">POPULAR</div><h3>⚡ Monthly Pro</h3><div class="plan-price">$10<span style="font-size:16px;">/mo</span></div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> Unlimited URL Scans</li><li><i class="fa-solid fa-check"></i> Basic Device Info</li></ul><div class="paypal-container" id="paypal-container-3L59GMWVL59B4"></div><a href="https://wa.me/971544472016" target="_blank" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> Contact via WhatsApp</a></div>
+                        <div class="plan-card"><h3>👑 VIP</h3><div class="plan-price">$400<span style="font-size:16px;">/6mo</span></div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> Unlimited URL Scans</li><li><i class="fa-solid fa-check"></i> Advanced Device Scanner</li></ul><div class="paypal-container" id="paypal-container-F7MXVUZBRVBZS"></div><a href="https://wa.me/971544472016" target="_blank" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> Contact via WhatsApp</a></div>
                     </div>
                 </div>
-                <div class="card" style="margin-top:24px;"><h3 data-trans="titleActivate">Activate Your Plan</h3><input type="text" id="activationCodeInput" class="scanner-input" placeholder="Enter activation code"><button class="btn" onclick="activatePlan()" style="width:auto;padding:12px 24px;margin-top:12px;" data-trans="btnActivate">Activate</button><span id="activationStatus" style="margin-left:12px;"></span></div>
+                <div class="card" style="margin-top:24px;"><h3 data-trans="titleActivate">Activate Your Plan</h3><input type="text" id="activationCodeInput" class="scanner-input" placeholder="Enter activation code"><button class="btn" onclick="activatePlan()" style="width:auto;padding:12px 24px;margin-top:12px;">Activate</button><span id="activationStatus" style="margin-left:12px;"></span></div>
             </div>
 
-            <div id="supportPage" class="page">
-                <h2 data-trans="titleSupport" style="font-size:clamp(18px,3vw,24px);">AI Support</h2>
-                <div class="chat-container" id="chatContainer"><div class="chat-message bot"><div class="chat-bubble" id="welcomeMessage">مرحباً بك في منصة e___h12، معك المطور يامن شادي. كيف يمكنني مساعدتك؟</div></div></div>
-                <div style="display:flex;gap:8px;"><input type="text" id="chatInput" class="scanner-input" placeholder="اكتب رسالتك..."><button class="scan-btn" onclick="sendMessage()" style="width:auto;padding:12px 20px;"><i class="fa-solid fa-paper-plane"></i></button></div>
-            </div>
-
-            <div id="aboutPage" class="page"><h2 data-trans="titleAbout" style="font-size:clamp(18px,3vw,24px);">About e___h12</h2><div class="card"><p data-trans="textAbout">منصة متطورة لتحليل الروابط والكشف عن التصيد والبرمجيات الخبيثة باستخدام أحدث تقنيات الذكاء الاصطناعي وقواعد بيانات Google Safe Browsing.</p></div></div>
-
-            <div id="settingsPage" class="page"><h2 data-trans="titleSettings" style="font-size:clamp(18px,3vw,24px);">Settings</h2><div class="card"><h3 data-trans="lblProfile">Profile</h3><div class="profile-pic-section"><div class="profile-pic-large" id="settingsAvatar"><i class="fa-solid fa-user"></i></div><div style="display:flex;flex-direction:column;gap:8px;"><button class="upload-btn" onclick="document.getElementById('profilePicInput').click()"><i class="fa-solid fa-camera"></i> <span data-trans="btnChangePic">Change Picture</span></button><input type="file" id="profilePicInput" accept="image/*" onchange="handleProfilePic(event)"><button class="upload-btn" style="background:transparent;border-color:var(--danger);color:var(--danger);" onclick="removeProfilePic()"><i class="fa-solid fa-trash"></i> <span data-trans="btnRemovePic">Remove</span></button></div></div></div></div>
-
+            <div id="supportPage" class="page"><h2>AI Support</h2><div class="chat-container" id="chatContainer"><div class="chat-message bot"><div class="chat-bubble" id="welcomeMessage">مرحباً بك في منصة e___h12، معك المطور يامن شادي. كيف يمكنني مساعدتك؟</div></div></div><div style="display:flex;gap:8px;"><input type="text" id="chatInput" class="scanner-input" placeholder="اكتب رسالتك..."><button class="scan-btn" onclick="sendMessage()" style="width:auto;padding:12px 20px;"><i class="fa-solid fa-paper-plane"></i></button></div></div>
+            <div id="aboutPage" class="page"><h2>About e___h12</h2><div class="card"><p>منصة متطورة لتحليل الروابط والكشف عن التصيد والبرمجيات الخبيثة.</p></div></div>
+            <div id="settingsPage" class="page"><h2>Settings</h2><div class="card"><h3>Profile</h3><div class="profile-pic-section"><div class="profile-pic-large" id="settingsAvatar"><i class="fa-solid fa-user"></i></div><div style="display:flex;flex-direction:column;gap:8px;"><button class="upload-btn" onclick="document.getElementById('profilePicInput').click()">Change Picture</button><input type="file" id="profilePicInput" accept="image/*" onchange="handleProfilePic(event)"><button class="upload-btn" style="background:transparent;border-color:var(--danger);color:var(--danger);" onclick="removeProfilePic()">Remove</button></div></div></div></div>
             <div id="adminPage" class="page admin-only-page"><h2>Admin Panel</h2><div class="card"><h3>Generate Monthly Code</h3><button class="btn" onclick="generateCode('monthly')">Generate</button><div id="monthlyCodeDisplay" class="code-box" style="display:none;"></div></div><div class="card"><h3>Generate VIP Code</h3><button class="btn" onclick="generateCode('vip')">Generate</button><div id="vipCodeDisplay" class="code-box" style="display:none;"></div></div></div>
         </div>
     </div>
@@ -332,21 +305,23 @@
             const translations = {
                 en: {
                     loginSubtitle:'ADVANCED THREAT INTELLIGENCE',loginError:'Invalid password',lblUser:'Username',lblPass:'Password',loginBtn:'Authenticate',loginHint:'Password:',
-                    navDashboard:'Dashboard',navScanner:'URL Scanner',navHistory:'History',navPlans:'Plans',navSupport:'Support',navAbout:'About Us',navSettings:'Settings',navAdmin:'Admin Panel',
+                    navDashboard:'Dashboard',navScanner:'URL Scanner',navDevice:'Device Scanner',navHistory:'History',navPlans:'Plans',navSupport:'Support',navAbout:'About Us',navSettings:'Settings',navAdmin:'Admin Panel',
                     btnLogout:'Logout',txtWelcome:'Welcome',titleDashboard:'Security Dashboard',titleRecent:'Recent Scans',colURL:'URL',colRisk:'Risk',colLevel:'Level',colDate:'Date',
                     titleScanner:'URL Scanner',lblScansToday:'Scans today:',btnScanNow:'Scan Now',titleHistory:'Scan History',titlePlans:'Subscription Plans',lblYourPlan:'Your Plan:',lblExpires:'Expires:',
                     feat3Scans:'3 scans per day',featUnlimited:'Unlimited scans',featAdvanced:'Advanced intelligence',btnCurrentPlan:'Current Plan',btnWhatsApp:'Contact via WhatsApp',
                     titleActivate:'Activate Your Plan',btnActivate:'Activate',titleSupport:'AI Support',welcomeMessage:'Welcome to e___h12, I am developer Yamen Shadi. How can I help?',
-                    titleAbout:'About e___h12',textAbout:'Advanced platform for URL analysis and detection of phishing and malware.',titleSettings:'Settings',lblProfile:'Profile',btnChangePic:'Change Picture',btnRemovePic:'Remove'
+                    titleAbout:'About e___h12',textAbout:'Advanced platform for URL analysis and detection of phishing and malware.',titleSettings:'Settings',lblProfile:'Profile',btnChangePic:'Change Picture',btnRemovePic:'Remove',
+                    titleDevice:'Device Scanner', deviceAccessMessage:'This feature is available for Pro and VIP users.'
                 },
                 ar: {
                     loginSubtitle:'منصة متقدمة للاستخبارات الأمنية',loginError:'كلمة مرور غير صالحة',lblUser:'اسم المستخدم',lblPass:'كلمة المرور',loginBtn:'تسجيل الدخول',loginHint:'كلمة المرور:',
-                    navDashboard:'لوحة التحكم',navScanner:'ماسح الروابط',navHistory:'السجل',navPlans:'الخطط',navSupport:'الدعم',navAbout:'من نحن',navSettings:'الإعدادات',navAdmin:'لوحة المدير',
+                    navDashboard:'لوحة التحكم',navScanner:'ماسح الروابط',navDevice:'ماسح الجهاز',navHistory:'السجل',navPlans:'الخطط',navSupport:'الدعم',navAbout:'من نحن',navSettings:'الإعدادات',navAdmin:'لوحة المدير',
                     btnLogout:'تسجيل الخروج',txtWelcome:'أهلاً',titleDashboard:'لوحة الأمن',titleRecent:'آخر الفحوصات',colURL:'الرابط',colRisk:'الخطورة',colLevel:'المستوى',colDate:'التاريخ',
                     titleScanner:'ماسح الروابط',lblScansToday:'فحوصات اليوم:',btnScanNow:'ابدأ الفحص',titleHistory:'سجل الفحوصات',titlePlans:'خطط الاشتراك',lblYourPlan:'خطتك:',lblExpires:'تنتهي:',
                     feat3Scans:'3 فحوصات يومياً',featUnlimited:'فحوصات غير محدودة',featAdvanced:'ذكاء متقدم',btnCurrentPlan:'الخطة الحالية',btnWhatsApp:'تواصل عبر واتساب',
                     titleActivate:'تفعيل الخطة',btnActivate:'تفعيل',titleSupport:'الدعم الفني',welcomeMessage:'مرحباً بك في منصة e___h12، معك المطور يامن شادي. كيف يمكنني مساعدتك؟',
-                    titleAbout:'عن e___h12',textAbout:'منصة متطورة لتحليل الروابط والكشف عن التصيد والبرمجيات الخبيثة.',titleSettings:'الإعدادات',lblProfile:'الملف الشخصي',btnChangePic:'تغيير الصورة',btnRemovePic:'إزالة'
+                    titleAbout:'عن e___h12',textAbout:'منصة متطورة لتحليل الروابط والكشف عن التصيد والبرمجيات الخبيثة.',titleSettings:'الإعدادات',lblProfile:'الملف الشخصي',btnChangePic:'تغيير الصورة',btnRemovePic:'إزالة',
+                    titleDevice:'ماسح الجهاز', deviceAccessMessage:'هذه الميزة متاحة لمستخدمي Pro و VIP.'
                 }
             };
 
@@ -358,11 +333,9 @@
                 const t = translations[lang];
                 document.querySelectorAll('[data-trans]').forEach(el => { const k = el.getAttribute('data-trans'); if(t[k]) el.textContent = t[k]; });
                 if(document.getElementById('loginSubtitle')) document.getElementById('loginSubtitle').textContent = t.loginSubtitle;
-                if(document.getElementById('loginError')) document.getElementById('loginError').textContent = t.loginError;
                 if(document.getElementById('lblUser')) document.getElementById('lblUser').textContent = t.lblUser;
                 if(document.getElementById('lblPass')) document.getElementById('lblPass').textContent = t.lblPass;
                 if(document.getElementById('loginBtn')) document.getElementById('loginBtn').textContent = t.loginBtn;
-                if(document.getElementById('loginHint')) document.getElementById('loginHint').textContent = t.loginHint;
                 if(document.getElementById('welcomeMessage')) document.getElementById('welcomeMessage').textContent = t.welcomeMessage;
                 document.getElementById('loginUser').placeholder = t.lblUser;
                 document.getElementById('loginPass').placeholder = t.lblPass;
@@ -379,16 +352,11 @@
             document.getElementById('langToggle').addEventListener('click',()=>setLanguage(currentLang==='ar'?'en':'ar'));
             setTheme(currentTheme); setLanguage(currentLang);
 
-            // Mobile sidebar
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
-            const hamburger = document.getElementById('hamburger');
-            const sidebarClose = document.getElementById('sidebarClose');
-            function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('show'); }
-            function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('show'); }
-            hamburger.addEventListener('click', openSidebar);
-            sidebarClose.addEventListener('click', closeSidebar);
-            overlay.addEventListener('click', closeSidebar);
+            document.getElementById('hamburger').addEventListener('click',()=>{sidebar.classList.add('open');overlay.classList.add('show');});
+            document.getElementById('sidebarClose').addEventListener('click',()=>{sidebar.classList.remove('open');overlay.classList.remove('show');});
+            overlay.addEventListener('click',()=>{sidebar.classList.remove('open');overlay.classList.remove('show');});
 
             function storageKey(base) { return `${base}_${username}`; }
             function getPlanData() {
@@ -397,94 +365,101 @@
                 if(d.expiry && Date.now()>d.expiry){localStorage.removeItem(storageKey('planData'));return{plan:'free',expiry:null};}
                 return d.plan?d:{plan:'free',expiry:null};
             }
-            function setPlan(plan,days) {
-                if(isAdmin) return;
-                const expiry = days?Date.now()+days*86400000:null;
-                localStorage.setItem(storageKey('planData'),JSON.stringify({plan,expiry}));
-                updatePlanUI();
-            }
+            function setPlan(plan,days) { if(isAdmin) return; const expiry = days?Date.now()+days*86400000:null; localStorage.setItem(storageKey('planData'),JSON.stringify({plan,expiry})); updatePlanUI(); }
             function getDailyScanCount() {
-                const today = new Date().toDateString();
-                const d = JSON.parse(localStorage.getItem(storageKey('dailyScans'))||'{}');
-                if(d.date!==today){localStorage.setItem(storageKey('dailyScans'),JSON.stringify({date:today,count:0}));return 0;}
-                return d.count;
+                const today = new Date().toDateString(); const d = JSON.parse(localStorage.getItem(storageKey('dailyScans'))||'{}');
+                if(d.date!==today){localStorage.setItem(storageKey('dailyScans'),JSON.stringify({date:today,count:0}));return 0;} return d.count;
             }
             function incrementScanCount() {
-                const today = new Date().toDateString();
-                const d = JSON.parse(localStorage.getItem(storageKey('dailyScans'))||'{}');
-                const n = (d.date===today?d.count:0)+1;
-                localStorage.setItem(storageKey('dailyScans'),JSON.stringify({date:today,count:n}));
-                return n;
+                const today = new Date().toDateString(); const d = JSON.parse(localStorage.getItem(storageKey('dailyScans'))||'{}');
+                const n = (d.date===today?d.count:0)+1; localStorage.setItem(storageKey('dailyScans'),JSON.stringify({date:today,count:n})); return n;
             }
             function updatePlanUI() {
                 const plan = getPlanData();
-                const badge = document.getElementById('topPlanBadge');
-                if(badge){badge.textContent=plan.plan==='admin'?'Admin':plan.plan==='vip'?'VIP':plan.plan==='monthly'?'Pro':'Free';badge.className='plan-badge'+(plan.plan==='vip'?' vip':'');}
-                const count = getDailyScanCount();
-                const max = (!isAdmin&&plan.plan==='free')?3:999;
+                document.getElementById('topPlanBadge').textContent = plan.plan==='admin'?'Admin':plan.plan==='vip'?'VIP':plan.plan==='monthly'?'Pro':'Free';
+                document.getElementById('topPlanBadge').className = 'plan-badge'+(plan.plan==='vip'?' vip':'');
+                const count = getDailyScanCount(); const max = (!isAdmin&&plan.plan==='free')?3:999;
                 document.getElementById('scanCount').textContent = `${count}/${max===999?'∞':max}`;
                 document.getElementById('scanBtn').disabled = (!isAdmin&&plan.plan==='free'&&count>=3);
-                const planInfo = document.getElementById('planInfo');
-                if(planInfo) planInfo.textContent = plan.plan==='admin'?'Admin':plan.plan==='vip'?'VIP':plan.plan==='monthly'?'Pro':'Free (3/day)';
-                const subInfo = document.getElementById('subscriptionInfo');
-                const normalPlans = document.getElementById('normalPlans');
-                if(!isAdmin&&plan.plan!=='free'&&plan.expiry){
-                    subInfo.style.display='block';normalPlans.style.display='none';
-                    document.getElementById('currentPlanName').textContent=plan.plan;
-                    document.getElementById('expiryDate').textContent=new Date(plan.expiry).toLocaleDateString();
-                }else{subInfo.style.display='none';normalPlans.style.display='block';}
+                const subInfo = document.getElementById('subscriptionInfo'); const normalPlans = document.getElementById('normalPlans');
+                if(!isAdmin&&plan.plan!=='free'&&plan.expiry){ subInfo.style.display='block'; normalPlans.style.display='none'; document.getElementById('currentPlanName').textContent=plan.plan; document.getElementById('expiryDate').textContent=new Date(plan.expiry).toLocaleDateString(); }
+                else { subInfo.style.display='none'; normalPlans.style.display='block'; }
                 document.querySelectorAll('.admin-only').forEach(el=>el.style.display=isAdmin?'flex':'none');
             }
 
             function getValidCodes(){return JSON.parse(localStorage.getItem('validCodes')||'[]');}
             function saveValidCodes(c){localStorage.setItem('validCodes',JSON.stringify(c));}
-            window.generateCode=function(type){
-                const code='FATO-'+Math.random().toString(36).substr(2,8).toUpperCase();
-                const codes=getValidCodes();codes.push({code,type,used:false});saveValidCodes(codes);
-                const el=document.getElementById(type==='monthly'?'monthlyCodeDisplay':'vipCodeDisplay');
-                el.style.display='block';el.textContent=code;
+            window.generateCode = function(type) {
+                const code = 'FATO-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+                const codes = getValidCodes(); codes.push({ code, type, used: false }); saveValidCodes(codes);
+                document.getElementById(type==='monthly'?'monthlyCodeDisplay':'vipCodeDisplay').style.display='block';
+                document.getElementById(type==='monthly'?'monthlyCodeDisplay':'vipCodeDisplay').textContent = code;
             };
-            window.activatePlan=function(){
-                const input=document.getElementById('activationCodeInput').value.trim();
-                const status=document.getElementById('activationStatus');
-                if(!input)return;
-                const codes=getValidCodes();const entry=codes.find(c=>c.code===input);
-                if(!entry){status.innerHTML='<span style="color:var(--danger);">❌ Invalid</span>';return;}
-                if(entry.used){status.innerHTML='<span style="color:var(--danger);">❌ Already used</span>';return;}
-                entry.used=true;saveValidCodes(codes);
-                setPlan(entry.type==='monthly'?'monthly':'vip',entry.type==='monthly'?30:180);
-                status.innerHTML='<span style="color:var(--success);">✅ Activated!</span>';updatePlanUI();
+            window.activatePlan = function() {
+                const input = document.getElementById('activationCodeInput').value.trim();
+                const status = document.getElementById('activationStatus');
+                if (!input) return;
+                const codes = getValidCodes();
+                const entry = codes.find(c => c.code === input.toUpperCase());
+                if (!entry) { status.innerHTML = '<span style="color:var(--danger);">❌ Invalid</span>'; return; }
+                if (entry.used) { status.innerHTML = '<span style="color:var(--danger);">❌ Already used</span>'; return; }
+                entry.used = true; saveValidCodes(codes);
+                setPlan(entry.type === 'monthly' ? 'monthly' : 'vip', entry.type === 'monthly' ? 30 : 180);
+                status.innerHTML = '<span style="color:var(--success);">✅ Activated!</span>';
+                updatePlanUI();
             };
 
             function getProfilePicKey(){return `profilePic_${username}`;}
             function loadProfilePicture(){
                 const key=getProfilePicKey();const saved=localStorage.getItem(key);
-                ['sidebarAvatar','topAvatar','settingsAvatar'].forEach(id=>{
-                    const el=document.getElementById(id);
-                    if(saved){el.style.backgroundImage=`url(${saved})`;el.style.backgroundSize='cover';el.style.color='transparent';el.innerHTML='';}
-                    else{el.style.backgroundImage='var(--gradient)';el.style.color='#fff';el.innerHTML='<i class="fa-solid fa-user"></i>';}
-                });
+                ['sidebarAvatar','topAvatar','settingsAvatar'].forEach(id=>{const el=document.getElementById(id);if(saved){el.style.backgroundImage=`url(${saved})`;el.style.backgroundSize='cover';el.style.color='transparent';el.innerHTML='';}else{el.style.backgroundImage='var(--gradient)';el.style.color='#fff';el.innerHTML='<i class="fa-solid fa-user"></i>';}});
             }
-            window.handleProfilePic=function(event){
-                const file=event.target.files[0];if(!file)return;
-                const reader=new FileReader();
-                reader.onload=e=>{localStorage.setItem(getProfilePicKey(),e.target.result);loadProfilePicture();};
-                reader.readAsDataURL(file);
-            };
+            window.handleProfilePic=function(event){const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=e=>{localStorage.setItem(getProfilePicKey(),e.target.result);loadProfilePicture();};reader.readAsDataURL(file);};
             window.removeProfilePic=function(){localStorage.removeItem(getProfilePicKey());loadProfilePicture();};
 
             function getScans(){return JSON.parse(localStorage.getItem(storageKey('scans'))||'[]');}
             function saveScan(e){const s=getScans();s.unshift(e);localStorage.setItem(storageKey('scans'),JSON.stringify(s));}
             function updateDashboard(){
                 const scans=getScans();const t=scans.length,th=scans.filter(s=>s.risk>=60).length,sa=scans.filter(s=>s.risk<30).length;const r=t?Math.round((th/t)*100):0;
-                document.getElementById('statsContainer').innerHTML=`
-                    <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-magnifying-glass"></i></div><div><div class="stat-value">${t}</div><div class="stat-label">Total Scans</div></div></div>
-                    <div class="stat-card"><div class="stat-icon" style="background:rgba(244,63,94,0.1);color:var(--danger)"><i class="fa-solid fa-bug"></i></div><div><div class="stat-value">${th}</div><div class="stat-label">Threats</div></div></div>
-                    <div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,0.1);color:var(--success)"><i class="fa-solid fa-shield-check"></i></div><div><div class="stat-value">${sa}</div><div class="stat-label">Safe</div></div></div>
-                    <div class="stat-card"><div class="stat-icon" style="background:rgba(245,158,11,0.1);color:var(--warning)"><i class="fa-solid fa-percent"></i></div><div><div class="stat-value">${r}%</div><div class="stat-label">Detection Rate</div></div></div>`;
+                document.getElementById('statsContainer').innerHTML=`<div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-magnifying-glass"></i></div><div><div class="stat-value">${t}</div><div class="stat-label">Total Scans</div></div></div><div class="stat-card"><div class="stat-icon" style="background:rgba(244,63,94,0.1);color:var(--danger)"><i class="fa-solid fa-bug"></i></div><div><div class="stat-value">${th}</div><div class="stat-label">Threats</div></div></div><div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,0.1);color:var(--success)"><i class="fa-solid fa-shield-check"></i></div><div><div class="stat-value">${sa}</div><div class="stat-label">Safe</div></div></div><div class="stat-card"><div class="stat-icon" style="background:rgba(245,158,11,0.1);color:var(--warning)"><i class="fa-solid fa-percent"></i></div><div><div class="stat-value">${r}%</div><div class="stat-label">Detection Rate</div></div></div>`;
                 document.querySelector('#recentTable tbody').innerHTML=scans.slice(0,5).map(s=>`<tr><td>${s.url}</td><td><strong>${s.risk}/100</strong></td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>`).join('');
             }
             function loadHistory(){document.querySelector('#historyTable tbody').innerHTML=getScans().map((s,i)=>`<tr><td>${i+1}</td><td>${s.url}</td><td>${s.risk}/100</td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>`).join('');}
+
+            // Device Scanner feature
+            function loadDeviceScanner() {
+                const plan = getPlanData();
+                const container = document.getElementById('deviceContent');
+                const msg = document.getElementById('deviceAccessMessage');
+                if (plan.plan === 'free') {
+                    msg.style.display = 'block';
+                    container.innerHTML = '';
+                    return;
+                }
+                msg.style.display = 'none';
+                let html = '<div class="device-info-grid">';
+                html += `<div class="device-info-item"><strong>User Agent</strong> ${navigator.userAgent}</div>`;
+                html += `<div class="device-info-item"><strong>Platform</strong> ${navigator.platform}</div>`;
+                html += `<div class="device-info-item"><strong>Language</strong> ${navigator.language}</div>`;
+                html += `<div class="device-info-item"><strong>Screen</strong> ${screen.width}x${screen.height}</div>`;
+                html += `<div class="device-info-item"><strong>Cookies</strong> ${navigator.cookieEnabled ? 'Enabled' : 'Disabled'}</div>`;
+                html += `<div class="device-info-item"><strong>Online</strong> ${navigator.onLine ? 'Yes' : 'No'}</div>`;
+                if (plan.plan === 'vip') {
+                    html += `<div class="device-info-item"><strong>RAM</strong> ${navigator.deviceMemory ? navigator.deviceMemory + ' GB' : 'N/A'}</div>`;
+                    html += `<div class="device-info-item"><strong>CPU Cores</strong> ${navigator.hardwareConcurrency || 'N/A'}</div>`;
+                    html += `<div class="device-info-item"><strong>Max Touch Points</strong> ${navigator.maxTouchPoints}</div>`;
+                    if ('getBattery' in navigator) {
+                        navigator.getBattery().then(b => {
+                            const batDiv = document.getElementById('batteryInfo');
+                            if (batDiv) batDiv.innerHTML = `<strong>Battery</strong> ${Math.round(b.level*100)}% ${b.charging?'(Charging)':''}`;
+                        });
+                        html += `<div class="device-info-item" id="batteryInfo"><strong>Battery</strong> Loading...</div>`;
+                    }
+                    html += `<div class="device-info-item"><strong>Do Not Track</strong> ${navigator.doNotTrack || 'N/A'}</div>`;
+                }
+                html += '</div>';
+                container.innerHTML = html;
+            }
 
             if(sessionStorage.getItem('loggedIn')==='true'){username=sessionStorage.getItem('username')||'User';isAdmin=sessionStorage.getItem('isAdmin')==='true';showApp();}
             document.getElementById('loginBtn').addEventListener('click',()=>{
@@ -502,7 +477,8 @@
                 const page=item.dataset.page;document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
                 document.getElementById(page+'Page').classList.add('active');
                 if(page==='dashboard')updateDashboard();if(page==='history')loadHistory();if(page==='scanner'||page==='plans')updatePlanUI();
-                closeSidebar();
+                if(page==='device')loadDeviceScanner();
+                document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('show');
             });});
 
             setInterval(()=>document.getElementById('liveClock').textContent=new Date().toLocaleTimeString(currentLang==='ar'?'ar-AE':'en-US'),1000);
@@ -510,29 +486,14 @@
             document.getElementById('scanBtn').addEventListener('click',async()=>{
                 const plan=getPlanData();if(!isAdmin&&plan.plan==='free'&&getDailyScanCount()>=3)return alert('Daily free limit reached.');
                 const url=document.getElementById('urlInput').value.trim();if(!url)return;if(!url.startsWith('http'))return alert('URL must start with http');
-                const area=document.getElementById('scanArea');
-                area.innerHTML=`<div class="live-scan-container"><div class="checklist-panel" id="checklistPanel"></div><div class="terminal-panel"><div class="terminal-title">Live Terminal</div><div id="terminalContent"></div></div></div>`;
-                const cp=document.getElementById('checklistPanel');const tc=document.getElementById('terminalContent');const sb=document.getElementById('scanBtn');sb.disabled=true;
+                const area=document.getElementById('scanArea');area.innerHTML=`<div class="live-scan-container"><div class="checklist-panel" id="checklistPanel"></div><div class="terminal-panel"><div class="terminal-title">Live Terminal</div><div id="terminalContent"></div></div></div>`;
+                const cp=document.getElementById('checklistPanel');const tc=document.getElementById('terminalContent');document.getElementById('scanBtn').disabled=true;
                 function log(m,c='#b0bec5'){const l=document.createElement('div');l.className='terminal-line';l.style.color=c;l.textContent=`[${new Date().toLocaleTimeString()}] ${m}`;tc.appendChild(l);tc.scrollTop=tc.scrollHeight;}
                 function ci(label){const d=document.createElement('div');d.className='check-item';d.innerHTML=`<div class="check-spinner"></div><span>${label}</span><span style="margin-left:auto;"></span>`;cp.appendChild(d);return d;}
-                const steps=[
-                    {name:'URL',check:async()=>{log('Parsing...');await new Promise(r=>setTimeout(r,600));try{new URL(url);return{ok:true}}catch{return{ok:false}}}},
-                    {name:'HTTPS',check:async()=>{await new Promise(r=>setTimeout(r,800));return url.startsWith('https://')?{ok:true}:{ok:false}}},
-                    {name:'DNS',check:async()=>{try{const d=new URL(url).hostname;const r=await fetch(`https://dns.google/resolve?name=${d}&type=A`);const j=await r.json();await new Promise(r=>setTimeout(r,700));return j.Answer?{ok:true}:{ok:false}}catch{return{ok:false}}}},
-                    {name:'SSL',check:async()=>{if(!url.startsWith('https://'))return{ok:false};try{await fetch(url,{mode:'no-cors',signal:AbortSignal.timeout(5000)});await new Promise(r=>setTimeout(r,900));return{ok:true}}catch{return{ok:false}}}},
-                    {name:'Phishing',check:async()=>{await new Promise(r=>setTimeout(r,700));const d=new URL(url).hostname;return[/login|account|verify|secure|banking/i,/(.)\1{4,}/,/\.(tk|ml|ga|cf)$/].filter(p=>p.test(d)).length?{ok:false}:{ok:true}}},
-                    {name:'Threat Intel',check:async()=>{try{const r=await fetch(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${GOOGLE_SAFE_BROWSING_KEY}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({client:{clientId:"e___h12"},threatInfo:{threatTypes:["MALWARE","SOCIAL_ENGINEERING"],platformTypes:["ANY_PLATFORM"],threatEntryTypes:["URL"],threatEntries:[{url}]}})});const d=await r.json();await new Promise(r=>setTimeout(r,600));return d.matches?{ok:false,critical:true}:{ok:true}}catch{return{ok:false}}}}
-                ];
-                let risk=0;
-                for(const s of steps){const item=ci(s.name);log(`Running ${s.name}...`);const r=await s.check();const sp=item.querySelector('.check-spinner');sp.className='check-icon';
-                    if(r.ok){sp.innerHTML='<i class="fa-solid fa-circle-check success-text"></i>';item.querySelector('span:last-child').innerHTML='<span class="success-text">✓</span>';}
-                    else{sp.innerHTML='<i class="fa-solid fa-circle-xmark danger-text"></i>';item.querySelector('span:last-child').innerHTML='<span class="danger-text">✗</span>';if(r.critical)risk=100;else risk+=20;}
-                    await new Promise(r=>setTimeout(r,400));}
-                risk=Math.min(risk,100);const level=risk>=75?'critical':risk>=60?'high':risk>=30?'medium':'safe';
-                saveScan({url,risk,level,date:new Date().toLocaleString()});incrementScanCount();updatePlanUI();updateDashboard();
-                const box=document.createElement('div');box.className='result-box';
-                box.innerHTML=`<div class="risk-display"><div class="risk-circle" style="border-color:${level==='critical'?'var(--danger)':level==='high'?'var(--danger)':level==='medium'?'var(--warning)':'var(--success)'};color:${level==='critical'?'#fff':'var(--text)'};">${risk}</div><div><h3>${url}</h3><span class="badge ${level}">${level}</span></div></div>`;
-                area.appendChild(box);sb.disabled=false;
+                const steps=[{name:'URL',check:async()=>{log('Parsing...');await new Promise(r=>setTimeout(r,600));try{new URL(url);return{ok:true}}catch{return{ok:false}}}},{name:'HTTPS',check:async()=>{await new Promise(r=>setTimeout(r,800));return url.startsWith('https://')?{ok:true}:{ok:false}}},{name:'DNS',check:async()=>{try{const d=new URL(url).hostname;const r=await fetch(`https://dns.google/resolve?name=${d}&type=A`);const j=await r.json();await new Promise(r=>setTimeout(r,700));return j.Answer?{ok:true}:{ok:false}}catch{return{ok:false}}}},{name:'SSL',check:async()=>{if(!url.startsWith('https://'))return{ok:false};try{await fetch(url,{mode:'no-cors',signal:AbortSignal.timeout(5000)});await new Promise(r=>setTimeout(r,900));return{ok:true}}catch{return{ok:false}}}},{name:'Phishing',check:async()=>{await new Promise(r=>setTimeout(r,700));const d=new URL(url).hostname;return[/login|account|verify|secure|banking/i,/(.)\1{4,}/,/\.(tk|ml|ga|cf)$/].filter(p=>p.test(d)).length?{ok:false}:{ok:true}}},{name:'Threat Intel',check:async()=>{try{const r=await fetch(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${GOOGLE_SAFE_BROWSING_KEY}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({client:{clientId:"e___h12"},threatInfo:{threatTypes:["MALWARE","SOCIAL_ENGINEERING"],platformTypes:["ANY_PLATFORM"],threatEntryTypes:["URL"],threatEntries:[{url}]}})});const d=await r.json();await new Promise(r=>setTimeout(r,600));return d.matches?{ok:false,critical:true}:{ok:true}}catch{return{ok:false}}}}];
+                let risk=0;for(const s of steps){const item=ci(s.name);log(`Running ${s.name}...`);const r=await s.check();const sp=item.querySelector('.check-spinner');sp.className='check-icon';if(r.ok){sp.innerHTML='<i class="fa-solid fa-circle-check success-text"></i>';item.querySelector('span:last-child').innerHTML='<span class="success-text">✓</span>';}else{sp.innerHTML='<i class="fa-solid fa-circle-xmark danger-text"></i>';item.querySelector('span:last-child').innerHTML='<span class="danger-text">✗</span>';if(r.critical)risk=100;else risk+=20;}await new Promise(r=>setTimeout(r,400));}
+                risk=Math.min(risk,100);const level=risk>=75?'critical':risk>=60?'high':risk>=30?'medium':'safe';saveScan({url,risk,level,date:new Date().toLocaleString()});incrementScanCount();updatePlanUI();updateDashboard();
+                const box=document.createElement('div');box.className='result-box';box.innerHTML=`<div class="risk-display"><div class="risk-circle" style="border-color:${level==='critical'?'var(--danger)':level==='high'?'var(--danger)':level==='medium'?'var(--warning)':'var(--success)'};color:${level==='critical'?'#fff':'var(--text)'};">${risk}</div><div><h3>${url}</h3><span class="badge ${level}">${level}</span></div></div>`;area.appendChild(box);document.getElementById('scanBtn').disabled=false;
             });
 
             window.sendMessage=function(){const i=document.getElementById('chatInput');const m=i.value.trim();if(!m)return;const c=document.getElementById('chatContainer');c.innerHTML+=`<div class="chat-message user"><div class="chat-bubble">${m}</div></div>`;i.value='';c.scrollTop=c.scrollHeight;setTimeout(()=>{c.innerHTML+=`<div class="chat-message bot"><div class="chat-bubble">Thanks for your message!</div></div>`;c.scrollTop=c.scrollHeight;},800);};
