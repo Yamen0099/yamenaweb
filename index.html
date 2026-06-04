@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#030712">
-    <title>e___h12 | منصة الأمن السيبراني</title>
+    <title>e___h12 | منصة الأمن السيبراني المتكاملة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://www.paypal.com/sdk/js?client-id=BAAnr-cwpFsu0KPLW1KQoUJiluVVYPFALrgqLlUqBN868XEx_6aAx-r6_4qRFxB1OmQWGgm9dkv1lavjKY&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
     <style>
@@ -35,8 +35,6 @@
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-
-        /* LOGIN */
         .login-screen {
             position: fixed; inset: 0; display: flex; align-items: center;
             justify-content: center; background: radial-gradient(circle at 30% 20%, var(--surface), var(--bg));
@@ -54,7 +52,6 @@
             -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 20px currentColor); }
         .logo h1 { font-size: clamp(28px,6vw,38px); font-weight: 800; background: var(--gradient);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .logo p { color: var(--text2); letter-spacing: 3px; font-size: clamp(10px,2vw,12px); margin-top: 6px; }
         .input-group { margin-bottom: clamp(16px,3vw,24px); }
         .input-group label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase;
             letter-spacing: 2px; color: var(--accent); margin-bottom: 8px; }
@@ -75,8 +72,6 @@
         .btn:active { transform: scale(0.98); }
         .error { color: var(--danger); text-align: center; margin-bottom: 12px; display: none; font-size: 14px; }
         .hint { text-align: center; margin-top: 20px; color: var(--text2); font-size: 13px; background: rgba(124,58,237,0.1); padding: 10px; border-radius: 10px; border: 1px solid var(--border); }
-
-        /* MAIN APP */
         .app { display: none; }
         .sidebar {
             position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-width);
@@ -280,9 +275,9 @@
                 <div id="subscriptionInfo" class="card" style="display:none;"><h3><span data-trans="lblYourPlan">Your Plan:</span> <span id="currentPlanName"></span></h3><p><span data-trans="lblExpires">Expires:</span> <strong id="expiryDate"></strong></p></div>
                 <div id="normalPlans">
                     <div class="plans-grid">
-                        <div class="plan-card"><h3>🆓 Free</h3><div class="plan-price">$0</div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> <span data-trans="feat3Scans">3 scans per day</span></li><li><i class="fa-solid fa-check"></i> Basic Threat Detection</li><li><i class="fa-solid fa-times" style="color:var(--danger);"></i> No Device Scanner</li><li><i class="fa-solid fa-times" style="color:var(--danger);"></i> No VIP Tools</li></ul><button class="btn" style="background:var(--surface2);" disabled>Current Plan</button></div>
-                        <div class="plan-card featured"><div style="position:absolute;top:12px;right:12px;background:var(--accent);padding:4px 12px;border-radius:20px;font-size:11px;">POPULAR</div><h3>⚡ Monthly Pro</h3><div class="plan-price">$10<span style="font-size:16px;">/mo</span></div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> Unlimited URL Scans</li><li><i class="fa-solid fa-check"></i> Google Safe Browsing API</li><li><i class="fa-solid fa-check"></i> Device Info Scanner</li><li><i class="fa-solid fa-check"></i> SSL & DNS Analysis</li><li><i class="fa-solid fa-check"></i> Priority Support</li></ul><div class="paypal-container" id="paypal-container-3L59GMWVL59B4"></div><a href="https://wa.me/971544472016" target="_blank" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> Contact via WhatsApp</a></div>
-                        <div class="plan-card"><h3>👑 VIP</h3><div class="plan-price">$400<span style="font-size:16px;">/6mo</span></div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> All Pro Features</li><li><i class="fa-solid fa-check"></i> IP Lookup Tool</li><li><i class="fa-solid fa-check"></i> Data Breach Check</li><li><i class="fa-solid fa-check"></i> Advanced Device Scanner</li><li><i class="fa-solid fa-check"></i> Export PDF Reports</li><li><i class="fa-solid fa-check"></i> 24/7 Dedicated Support</li></ul><div class="paypal-container" id="paypal-container-F7MXVUZBRVBZS"></div><a href="https://wa.me/971544472016" target="_blank" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> Contact via WhatsApp</a></div>
+                        <div class="plan-card"><h3>🆓 Free</h3><div class="plan-price">$0</div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> 3 scans/day</li><li><i class="fa-solid fa-times" style="color:var(--danger);"></i> No device scanner</li></ul></div>
+                        <div class="plan-card featured"><h3>⚡ Pro</h3><div class="plan-price">$10/mo</div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> Unlimited scans</li><li><i class="fa-solid fa-check"></i> Device info</li></ul><div class="paypal-container" id="paypal-monthly"></div><a href="https://wa.me/971544472016" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></div>
+                        <div class="plan-card"><h3>👑 VIP</h3><div class="plan-price">$400/6mo</div><ul class="plan-features"><li><i class="fa-solid fa-check"></i> All Pro features</li><li><i class="fa-solid fa-check"></i> Advanced tools</li></ul><div class="paypal-container" id="paypal-vip"></div><a href="https://wa.me/971544472016" class="whatsapp-btn"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></div>
                     </div>
                 </div>
                 <div class="card" style="margin-top:24px;"><h3 data-trans="titleActivate">Activate Your Plan</h3><input type="text" id="activationCodeInput" class="scanner-input" placeholder="Enter activation code"><button class="btn" onclick="activatePlan()" style="width:auto;padding:12px 24px;margin-top:12px;">Activate</button><span id="activationStatus" style="margin-left:12px;"></span></div>
@@ -290,8 +285,8 @@
 
             <div id="supportPage" class="page"><h2>AI Support</h2><div class="chat-container" id="chatContainer"><div class="chat-message bot"><div class="chat-bubble" id="welcomeMessage">مرحباً بك في منصة e___h12، معك المطور يامن شادي. كيف يمكنني مساعدتك؟</div></div></div><div style="display:flex;gap:8px;"><input type="text" id="chatInput" class="scanner-input" placeholder="اكتب رسالتك..."><button class="scan-btn" onclick="sendMessage()" style="width:auto;padding:12px 20px;"><i class="fa-solid fa-paper-plane"></i></button></div></div>
             <div id="aboutPage" class="page"><h2>About e___h12</h2><div class="card"><p>منصة متطورة لتحليل الروابط والكشف عن التصيد والبرمجيات الخبيثة.</p></div></div>
-            <div id="settingsPage" class="page"><h2>Settings</h2><div class="card"><h3>Profile</h3><div class="profile-pic-section"><div class="profile-pic-large" id="settingsAvatar"><i class="fa-solid fa-user"></i></div><div style="display:flex;flex-direction:column;gap:8px;"><button class="upload-btn" onclick="document.getElementById('profilePicInput').click()">Change Picture</button><input type="file" id="profilePicInput" accept="image/*" onchange="handleProfilePic(event)"><button class="upload-btn" style="background:transparent;border-color:var(--danger);color:var(--danger);" onclick="removeProfilePic()">Remove</button></div></div><div class="user-id-box" style="margin-top:16px;"><span id="userIDDisplay"></span><button class="btn" style="width:auto;padding:8px 16px;" onclick="copyUserID()">Copy ID</button></div><p style="margin-top:8px;color:var(--text2);">Send this ID to admin after payment.</p></div></div>
-            <div id="adminPage" class="page admin-only-page"><h2>Admin Panel</h2><div class="stats-grid" id="adminStats"></div><div class="card"><h3>Search User by ID</h3><div style="display:flex;gap:8px;margin-bottom:16px;"><input type="text" id="searchUserID" class="scanner-input" placeholder="Paste User ID"><button class="btn" style="width:auto;" onclick="searchUser()">Search</button></div><div id="userSearchResult"></div></div></div>
+            <div id="settingsPage" class="page"><h2>Settings</h2><div class="card"><h3>Profile</h3><div class="profile-pic-section"><div class="profile-pic-large" id="settingsAvatar"><i class="fa-solid fa-user"></i></div><div style="display:flex;flex-direction:column;gap:8px;"><button class="upload-btn" onclick="document.getElementById('profilePicInput').click()">Change Picture</button><input type="file" id="profilePicInput" accept="image/*" onchange="handleProfilePic(event)"><button class="upload-btn" style="background:transparent;border-color:var(--danger);color:var(--danger);" onclick="removeProfilePic()">Remove</button></div></div><div class="user-id-box" style="margin-top:16px;"><span id="userIDDisplay"></span><button class="btn" style="width:auto;padding:8px 16px;" onclick="copyUserID()">Copy ID</button></div><button class="btn" style="margin-top:12px;" onclick="shareMyData()"><i class="fa-solid fa-share-nodes"></i> Share My Data</button><p style="margin-top:8px;color:var(--text2);">Send the shared link to admin after payment.</p></div></div>
+            <div id="adminPage" class="page admin-only-page"><h2>Admin Panel</h2><div class="stats-grid" id="adminStats"></div><div class="card"><h3>Import User Data from Shared Link</h3><input type="text" id="importLinkInput" class="scanner-input" placeholder="Paste shared link here"><button class="btn" style="width:auto;margin-top:8px;" onclick="importUserData()">Import</button></div></div>
         </div>
     </div>
 
@@ -306,33 +301,14 @@
             let currentUserID = '';
 
             const translations = {
-                en: {
-                    loginSubtitle:'ADVANCED THREAT INTELLIGENCE',loginError:'Invalid password',lblUser:'Username',lblPass:'Password',loginBtn:'Authenticate',loginHint:'Password:',
-                    navDashboard:'Dashboard',navScanner:'URL Scanner',navDevice:'Device Scanner',navHistory:'History',navPlans:'Plans',navSupport:'Support',navAbout:'About Us',navSettings:'Settings',navAdmin:'Admin Panel',
-                    btnLogout:'Logout',txtWelcome:'Welcome',titleDashboard:'Security Dashboard',titleRecent:'Recent Scans',colURL:'URL',colRisk:'Risk',colLevel:'Level',colDate:'Date',
-                    titleScanner:'URL Scanner',lblScansToday:'Scans today:',btnScanNow:'Scan Now',titleHistory:'Scan History',titlePlans:'Subscription Plans',lblYourPlan:'Your Plan:',lblExpires:'Expires:',
-                    feat3Scans:'3 scans per day',featUnlimited:'Unlimited scans',featAdvanced:'Advanced intelligence',btnCurrentPlan:'Current Plan',btnWhatsApp:'Contact via WhatsApp',
-                    titleActivate:'Activate Your Plan',btnActivate:'Activate',titleSupport:'AI Support',welcomeMessage:'Welcome to e___h12, I am developer Yamen Shadi. How can I help?',
-                    titleAbout:'About e___h12',textAbout:'Advanced platform for URL analysis and detection of phishing and malware.',titleSettings:'Settings',lblProfile:'Profile',btnChangePic:'Change Picture',btnRemovePic:'Remove',
-                    titleDevice:'Device Scanner', deviceAccessMessage:'This feature is available for Pro and VIP users.'
-                },
-                ar: {
-                    loginSubtitle:'منصة متقدمة للاستخبارات الأمنية',loginError:'كلمة مرور غير صالحة',lblUser:'اسم المستخدم',lblPass:'كلمة المرور',loginBtn:'تسجيل الدخول',loginHint:'كلمة المرور:',
-                    navDashboard:'لوحة التحكم',navScanner:'ماسح الروابط',navDevice:'ماسح الجهاز',navHistory:'السجل',navPlans:'الخطط',navSupport:'الدعم',navAbout:'من نحن',navSettings:'الإعدادات',navAdmin:'لوحة المدير',
-                    btnLogout:'تسجيل الخروج',txtWelcome:'أهلاً',titleDashboard:'لوحة الأمن',titleRecent:'آخر الفحوصات',colURL:'الرابط',colRisk:'الخطورة',colLevel:'المستوى',colDate:'التاريخ',
-                    titleScanner:'ماسح الروابط',lblScansToday:'فحوصات اليوم:',btnScanNow:'ابدأ الفحص',titleHistory:'سجل الفحوصات',titlePlans:'خطط الاشتراك',lblYourPlan:'خطتك:',lblExpires:'تنتهي:',
-                    feat3Scans:'3 فحوصات يومياً',featUnlimited:'فحوصات غير محدودة',featAdvanced:'ذكاء متقدم',btnCurrentPlan:'الخطة الحالية',btnWhatsApp:'تواصل عبر واتساب',
-                    titleActivate:'تفعيل الخطة',btnActivate:'تفعيل',titleSupport:'الدعم الفني',welcomeMessage:'مرحباً بك في منصة e___h12، معك المطور يامن شادي. كيف يمكنني مساعدتك؟',
-                    titleAbout:'عن e___h12',textAbout:'منصة متطورة لتحليل الروابط والكشف عن التصيد والبرمجيات الخبيثة.',titleSettings:'الإعدادات',lblProfile:'الملف الشخصي',btnChangePic:'تغيير الصورة',btnRemovePic:'إزالة',
-                    titleDevice:'ماسح الجهاز', deviceAccessMessage:'هذه الميزة متاحة لمستخدمي Pro و VIP.'
-                }
+                en: { loginSubtitle:'ADVANCED THREAT INTELLIGENCE',lblUser:'Username',lblPass:'Password',loginBtn:'Authenticate',loginHint:'Password:', navDashboard:'Dashboard',navScanner:'URL Scanner',navDevice:'Device Scanner',navHistory:'History',navPlans:'Plans',navSupport:'Support',navAbout:'About Us',navSettings:'Settings',navAdmin:'Admin Panel', btnLogout:'Logout',txtWelcome:'Welcome',titleDashboard:'Security Dashboard',titleRecent:'Recent Scans',colURL:'URL',colRisk:'Risk',colLevel:'Level',colDate:'Date', titleScanner:'URL Scanner',lblScansToday:'Scans today:',btnScanNow:'Scan Now',titleHistory:'Scan History',titlePlans:'Subscription Plans',lblYourPlan:'Your Plan:',lblExpires:'Expires:', titleActivate:'Activate Your Plan',btnActivate:'Activate',titleSupport:'AI Support',welcomeMessage:'Welcome to e___h12, I am developer Yamen Shadi.', titleDevice:'Device Scanner',deviceAccessMessage:'Available for Pro/VIP users.' },
+                ar: { loginSubtitle:'منصة متقدمة للاستخبارات الأمنية',lblUser:'اسم المستخدم',lblPass:'كلمة المرور',loginBtn:'تسجيل الدخول',loginHint:'كلمة المرور:', navDashboard:'لوحة التحكم',navScanner:'ماسح الروابط',navDevice:'ماسح الجهاز',navHistory:'السجل',navPlans:'الخطط',navSupport:'الدعم',navAbout:'من نحن',navSettings:'الإعدادات',navAdmin:'لوحة المدير', btnLogout:'تسجيل الخروج',txtWelcome:'أهلاً',titleDashboard:'لوحة الأمن',titleRecent:'آخر الفحوصات',colURL:'الرابط',colRisk:'الخطورة',colLevel:'المستوى',colDate:'التاريخ', titleScanner:'ماسح الروابط',lblScansToday:'فحوصات اليوم:',btnScanNow:'ابدأ الفحص',titleHistory:'سجل الفحوصات',titlePlans:'خطط الاشتراك',lblYourPlan:'خطتك:',lblExpires:'تنتهي:', titleActivate:'تفعيل الخطة',btnActivate:'تفعيل',titleSupport:'الدعم الفني',welcomeMessage:'مرحباً بك في منصة e___h12، معك المطور يامن شادي.', titleDevice:'ماسح الجهاز',deviceAccessMessage:'متاحة لمستخدمي Pro و VIP.' }
             };
 
             let currentLang = localStorage.getItem('lang') || 'ar';
             function setLanguage(lang) {
                 currentLang = lang; localStorage.setItem('lang', lang);
-                document.documentElement.lang = lang;
-                document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+                document.documentElement.lang = lang; document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
                 const t = translations[lang];
                 document.querySelectorAll('[data-trans]').forEach(el => { const k = el.getAttribute('data-trans'); if(t[k]) el.textContent = t[k]; });
                 if(document.getElementById('loginSubtitle')) document.getElementById('loginSubtitle').textContent = t.loginSubtitle;
@@ -343,27 +319,14 @@
                 document.getElementById('loginUser').placeholder = t.lblUser;
                 document.getElementById('loginPass').placeholder = t.lblPass;
             }
-
             let currentTheme = localStorage.getItem('theme') || 'dark';
-            function setTheme(theme) {
-                currentTheme = theme; localStorage.setItem('theme', theme);
-                document.documentElement.setAttribute('data-theme', theme);
-                document.getElementById('themeToggle').querySelector('i').className = theme==='dark'?'fa-solid fa-sun':'fa-solid fa-moon';
-            }
-
+            function setTheme(theme) { currentTheme=theme; localStorage.setItem('theme',theme); document.documentElement.setAttribute('data-theme',theme); document.getElementById('themeToggle').querySelector('i').className=theme==='dark'?'fa-solid fa-sun':'fa-solid fa-moon'; }
             document.getElementById('themeToggle').addEventListener('click',()=>setTheme(currentTheme==='dark'?'light':'dark'));
             document.getElementById('langToggle').addEventListener('click',()=>setLanguage(currentLang==='ar'?'en':'ar'));
             setTheme(currentTheme); setLanguage(currentLang);
 
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            document.getElementById('hamburger').addEventListener('click',()=>{sidebar.classList.add('open');overlay.classList.add('show');});
-            document.getElementById('sidebarClose').addEventListener('click',()=>{sidebar.classList.remove('open');overlay.classList.remove('show');});
-            overlay.addEventListener('click',()=>{sidebar.classList.remove('open');overlay.classList.remove('show');});
-
-            function genUserID() { return 'USR-' + Math.random().toString(36).substr(2, 10).toUpperCase(); }
-            function getUserID() { let id = localStorage.getItem('userID'); if (!id) { id = genUserID(); localStorage.setItem('userID', id); } return id; }
-
+            function genUserID() { return 'USR-'+Math.random().toString(36).substr(2,10).toUpperCase(); }
+            function getUserID() { let id=localStorage.getItem('userID'); if(!id){ id=genUserID(); localStorage.setItem('userID',id); } return id; }
             function storageKey(base) { return `${base}_${username}`; }
             function getPlanData() {
                 if(isAdmin) return {plan:'admin',expiry:null};
@@ -371,48 +334,33 @@
                 if(d.expiry && Date.now()>d.expiry){localStorage.removeItem(storageKey('planData'));return{plan:'free',expiry:null};}
                 return d.plan?d:{plan:'free',expiry:null};
             }
-            function setPlan(plan,days) { if(isAdmin) return; const expiry = days?Date.now()+days*86400000:null; localStorage.setItem(storageKey('planData'),JSON.stringify({plan,expiry})); updatePlanUI(); }
-            function getDailyScanCount() {
-                const today = new Date().toDateString(); const d = JSON.parse(localStorage.getItem(storageKey('dailyScans'))||'{}');
-                if(d.date!==today){localStorage.setItem(storageKey('dailyScans'),JSON.stringify({date:today,count:0}));return 0;} return d.count;
-            }
-            function incrementScanCount() {
-                const today = new Date().toDateString(); const d = JSON.parse(localStorage.getItem(storageKey('dailyScans'))||'{}');
-                const n = (d.date===today?d.count:0)+1; localStorage.setItem(storageKey('dailyScans'),JSON.stringify({date:today,count:n})); return n;
-            }
+            function setPlan(plan,days) { if(isAdmin) return; const expiry=days?Date.now()+days*86400000:null; localStorage.setItem(storageKey('planData'),JSON.stringify({plan,expiry})); updatePlanUI(); }
+            function getDailyScanCount() { const today=new Date().toDateString(); const d=JSON.parse(localStorage.getItem(storageKey('dailyScans'))||'{}'); if(d.date!==today){localStorage.setItem(storageKey('dailyScans'),JSON.stringify({date:today,count:0}));return 0;} return d.count; }
+            function incrementScanCount() { const today=new Date().toDateString(); const d=JSON.parse(localStorage.getItem(storageKey('dailyScans'))||'{}'); const n=(d.date===today?d.count:0)+1; localStorage.setItem(storageKey('dailyScans'),JSON.stringify({date:today,count:n})); return n; }
             function updatePlanUI() {
-                const plan = getPlanData();
-                document.getElementById('topPlanBadge').textContent = plan.plan==='admin'?'Admin':plan.plan==='vip'?'VIP':plan.plan==='monthly'?'Pro':'Free';
-                document.getElementById('topPlanBadge').className = 'plan-badge'+(plan.plan==='vip'?' vip':'');
-                const count = getDailyScanCount(); const max = (!isAdmin&&plan.plan==='free')?3:999;
-                document.getElementById('scanCount').textContent = `${count}/${max===999?'∞':max}`;
-                document.getElementById('scanBtn').disabled = (!isAdmin&&plan.plan==='free'&&count>=3);
-                const subInfo = document.getElementById('subscriptionInfo'); const normalPlans = document.getElementById('normalPlans');
+                const plan=getPlanData();
+                document.getElementById('topPlanBadge').textContent=plan.plan==='admin'?'Admin':plan.plan==='vip'?'VIP':plan.plan==='monthly'?'Pro':'Free';
+                document.getElementById('topPlanBadge').className='plan-badge'+(plan.plan==='vip'?' vip':'');
+                const count=getDailyScanCount(); const max=(!isAdmin&&plan.plan==='free')?3:999;
+                document.getElementById('scanCount').textContent=`${count}/${max===999?'∞':max}`;
+                document.getElementById('scanBtn').disabled=(!isAdmin&&plan.plan==='free'&&count>=3);
+                const subInfo=document.getElementById('subscriptionInfo'); const normalPlans=document.getElementById('normalPlans');
                 if(!isAdmin&&plan.plan!=='free'&&plan.expiry){ subInfo.style.display='block'; normalPlans.style.display='none'; document.getElementById('currentPlanName').textContent=plan.plan; document.getElementById('expiryDate').textContent=new Date(plan.expiry).toLocaleDateString(); }
                 else { subInfo.style.display='none'; normalPlans.style.display='block'; }
                 document.querySelectorAll('.admin-only').forEach(el=>el.style.display=isAdmin?'flex':'none');
             }
-
             function getValidCodes(){return JSON.parse(localStorage.getItem('validCodes')||'[]');}
             function saveValidCodes(c){localStorage.setItem('validCodes',JSON.stringify(c));}
-            window.generateCode = function(type) {
-                const code = 'FATO-' + Math.random().toString(36).substr(2, 8).toUpperCase();
-                const codes = getValidCodes(); codes.push({ code, type, used: false }); saveValidCodes(codes);
-                document.getElementById(type==='monthly'?'monthlyCodeDisplay':'vipCodeDisplay').style.display='block';
-                document.getElementById(type==='monthly'?'monthlyCodeDisplay':'vipCodeDisplay').textContent = code;
-            };
             window.activatePlan = function() {
-                const input = document.getElementById('activationCodeInput').value.trim().toUpperCase();
-                const status = document.getElementById('activationStatus');
-                if (!input) return;
-                const codes = getValidCodes();
-                const entry = codes.find(c => c.code === input);
-                if (!entry) { status.innerHTML = '<span style="color:var(--danger);">❌ Invalid code</span>'; return; }
-                if (entry.used) { status.innerHTML = '<span style="color:var(--danger);">❌ Already used</span>'; return; }
-                entry.used = true; saveValidCodes(codes);
-                setPlan(entry.type === 'monthly' ? 'monthly' : 'vip', entry.type === 'monthly' ? 30 : 180);
-                status.innerHTML = '<span style="color:var(--success);">✅ Activated!</span>';
-                updatePlanUI();
+                const input=document.getElementById('activationCodeInput').value.trim().toUpperCase();
+                const status=document.getElementById('activationStatus');
+                if(!input)return;
+                const codes=getValidCodes(); const entry=codes.find(c=>c.code===input);
+                if(!entry){status.innerHTML='<span style="color:var(--danger);">❌ Invalid code</span>';return;}
+                if(entry.used){status.innerHTML='<span style="color:var(--danger);">❌ Already used</span>';return;}
+                entry.used=true; saveValidCodes(codes);
+                setPlan(entry.type==='monthly'?'monthly':'vip',entry.type==='monthly'?30:180);
+                status.innerHTML='<span style="color:var(--success);">✅ Activated!</span>'; updatePlanUI();
             };
 
             function getProfilePicKey(){return `profilePic_${username}`;}
@@ -431,62 +379,25 @@
                 document.querySelector('#recentTable tbody').innerHTML=scans.slice(0,5).map(s=>`<tr><td>${s.url}</td><td><strong>${s.risk}/100</strong></td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>`).join('');
             }
             function loadHistory(){document.querySelector('#historyTable tbody').innerHTML=getScans().map((s,i)=>`<tr><td>${i+1}</td><td>${s.url}</td><td>${s.risk}/100</td><td><span class="badge ${s.level}">${s.level}</span></td><td>${s.date}</td></tr>`).join('');}
-
             function loadDeviceScanner() {
-                const plan = getPlanData();
-                const container = document.getElementById('deviceContent');
-                const msg = document.getElementById('deviceAccessMessage');
-                if (plan.plan === 'free') { msg.style.display = 'block'; container.innerHTML = ''; return; }
-                msg.style.display = 'none';
-                let html = '<div class="device-info-grid">';
-                html += `<div class="device-info-item"><strong>User Agent</strong> ${navigator.userAgent}</div>`;
-                html += `<div class="device-info-item"><strong>Platform</strong> ${navigator.platform}</div>`;
-                html += `<div class="device-info-item"><strong>Language</strong> ${navigator.language}</div>`;
-                html += `<div class="device-info-item"><strong>Screen</strong> ${screen.width}x${screen.height}</div>`;
-                html += `<div class="device-info-item"><strong>Cookies</strong> ${navigator.cookieEnabled ? 'Enabled' : 'Disabled'}</div>`;
-                html += `<div class="device-info-item"><strong>Online</strong> ${navigator.onLine ? 'Yes' : 'No'}</div>`;
-                if (plan.plan === 'vip') {
-                    html += `<div class="device-info-item"><strong>RAM</strong> ${navigator.deviceMemory ? navigator.deviceMemory + ' GB' : 'N/A'}</div>`;
-                    html += `<div class="device-info-item"><strong>CPU Cores</strong> ${navigator.hardwareConcurrency || 'N/A'}</div>`;
-                    if ('getBattery' in navigator) {
-                        navigator.getBattery().then(b => {
-                            const batDiv = document.getElementById('batteryInfo');
-                            if (batDiv) batDiv.innerHTML = `<strong>Battery</strong> ${Math.round(b.level*100)}% ${b.charging?'(Charging)':''}`;
-                        });
-                        html += `<div class="device-info-item" id="batteryInfo"><strong>Battery</strong> Loading...</div>`;
-                    }
-                }
-                html += '</div>';
-                container.innerHTML = html;
+                const plan=getPlanData(); const c=document.getElementById('deviceContent'); const m=document.getElementById('deviceAccessMessage');
+                if(plan.plan==='free'){m.style.display='block';c.innerHTML='';return;}
+                m.style.display='none'; let h='<div class="device-info-grid">';
+                h+=`<div class="device-info-item"><strong>User Agent</strong> ${navigator.userAgent}</div>`;
+                h+=`<div class="device-info-item"><strong>Platform</strong> ${navigator.platform}</div>`;
+                h+=`<div class="device-info-item"><strong>Screen</strong> ${screen.width}x${screen.height}</div>`;
+                if(plan.plan==='vip'){ h+=`<div class="device-info-item"><strong>CPU Cores</strong> ${navigator.hardwareConcurrency||'N/A'}</div>`; h+=`<div class="device-info-item"><strong>RAM</strong> ${navigator.deviceMemory||'N/A'} GB</div>`; }
+                h+='</div>'; c.innerHTML=h;
             }
-
             function loadVipTools() {
-                const plan = getPlanData();
-                const container = document.getElementById('vipContent');
-                const msg = document.getElementById('vipAccessMessage');
-                if (plan.plan !== 'vip' && !isAdmin) { msg.style.display = 'block'; container.innerHTML = ''; return; }
-                msg.style.display = 'none';
-                container.innerHTML = `
-                    <div class="card"><h3>IP Lookup</h3><input type="text" id="ipInput" class="scanner-input" placeholder="8.8.8.8"><button class="btn" style="width:auto;margin-top:8px;" onclick="lookupIP()">Lookup</button><div id="ipResult" style="margin-top:8px;"></div></div>
-                    <div class="card"><h3>Breach Check</h3><input type="text" id="emailInput" class="scanner-input" placeholder="user@example.com"><button class="btn" style="width:auto;margin-top:8px;" onclick="checkBreach()">Check</button><div id="breachResult" style="margin-top:8px;"></div></div>
-                    <div class="card"><h3>PDF Report</h3><button class="btn" onclick="generatePDF()">Download Report</button></div>
-                `;
+                const plan=getPlanData(); const c=document.getElementById('vipContent'); const m=document.getElementById('vipAccessMessage');
+                if(plan.plan!=='vip'&&!isAdmin){m.style.display='block';c.innerHTML='';return;}
+                m.style.display='none';
+                c.innerHTML=`<div class="card"><h3>IP Lookup</h3><input type="text" id="ipInput" class="scanner-input" placeholder="8.8.8.8"><button class="btn" style="width:auto;margin-top:8px;" onclick="lookupIP()">Lookup</button><div id="ipResult" style="margin-top:8px;"></div></div><div class="card"><h3>Breach Check</h3><input type="text" id="emailInput" class="scanner-input" placeholder="user@example.com"><button class="btn" style="width:auto;margin-top:8px;" onclick="checkBreach()">Check</button><div id="breachResult" style="margin-top:8px;"></div></div><div class="card"><h3>PDF Report</h3><button class="btn" onclick="generatePDF()">Download Report</button></div>`;
             }
-            window.lookupIP = async function() {
-                let ip = document.getElementById('ipInput').value.trim();
-                if (!ip) return;
-                try {
-                    let r = await fetch(`https://ipapi.co/${ip}/json/`);
-                    let d = await r.json();
-                    document.getElementById('ipResult').innerHTML = `<p>${d.ip} - ${d.city}, ${d.country_name} (${d.org})</p>`;
-                } catch(e) { document.getElementById('ipResult').innerHTML = 'Failed.'; }
-            };
-            window.checkBreach = function() {
-                let email = document.getElementById('emailInput').value.trim();
-                if (!email) return;
-                document.getElementById('breachResult').innerHTML = `<p>No breaches found for ${email} (simulated).</p>`;
-            };
-            window.generatePDF = function() { alert('PDF report generated! (simulated)'); };
+            window.lookupIP=async function(){let ip=document.getElementById('ipInput').value.trim();if(!ip)return;try{let r=await fetch(`https://ipapi.co/${ip}/json/`);let d=await r.json();document.getElementById('ipResult').innerHTML=`<p>${d.ip} - ${d.city}, ${d.country_name} (${d.org})</p>`;}catch(e){}};
+            window.checkBreach=function(){document.getElementById('breachResult').innerHTML='<p>No breaches found (simulated).</p>';};
+            window.generatePDF=function(){alert('PDF generated!');};
 
             if(sessionStorage.getItem('loggedIn')==='true'){username=sessionStorage.getItem('username')||'User';isAdmin=sessionStorage.getItem('isAdmin')==='true';currentUserID=getUserID();showApp();}
             document.getElementById('loginBtn').addEventListener('click',()=>{
@@ -496,7 +407,7 @@
                 if(p!==PASS){document.getElementById('loginError').style.display='block';return;}
                 username=u;isAdmin=false;sessionStorage.setItem('loggedIn','true');sessionStorage.setItem('username',u);sessionStorage.setItem('isAdmin','false');currentUserID=getUserID();showApp();
             });
-            function showApp(){document.getElementById('loginScreen').style.display='none';document.getElementById('appMain').style.display='block';document.getElementById('displayName').textContent=username;document.getElementById('welcomeUser').textContent=username;loadProfilePicture();updatePlanUI();updateDashboard();if(isAdmin)updateAdminStats();trackUser();}
+            function showApp(){document.getElementById('loginScreen').style.display='none';document.getElementById('appMain').style.display='block';document.getElementById('displayName').textContent=username;document.getElementById('welcomeUser').textContent=username;loadProfilePicture();updatePlanUI();updateDashboard();if(isAdmin)updateAdminStats();}
             document.getElementById('logoutBtn').addEventListener('click',()=>{sessionStorage.clear();location.reload();});
 
             document.querySelectorAll('.nav-item').forEach(item=>{item.addEventListener('click',()=>{
@@ -511,54 +422,64 @@
             setInterval(()=>document.getElementById('liveClock').textContent=new Date().toLocaleTimeString(currentLang==='ar'?'ar-AE':'en-US'),1000);
 
             document.getElementById('scanBtn').addEventListener('click',async()=>{
-                const plan=getPlanData();if(!isAdmin&&plan.plan==='free'&&getDailyScanCount()>=3)return alert('Daily free limit reached.');
-                const url=document.getElementById('urlInput').value.trim();if(!url)return;if(!url.startsWith('http'))return alert('URL must start with http');
-                const area=document.getElementById('scanArea');area.innerHTML=`<div class="live-scan-container"><div class="checklist-panel" id="checklistPanel"></div><div class="terminal-panel"><div class="terminal-title">Live Terminal</div><div id="terminalContent"></div></div></div>`;
-                const cp=document.getElementById('checklistPanel');const tc=document.getElementById('terminalContent');document.getElementById('scanBtn').disabled=true;
-                function log(m,c='#b0bec5'){const l=document.createElement('div');l.className='terminal-line';l.style.color=c;l.textContent=`[${new Date().toLocaleTimeString()}] ${m}`;tc.appendChild(l);tc.scrollTop=tc.scrollHeight;}
-                function ci(label){const d=document.createElement('div');d.className='check-item';d.innerHTML=`<div class="check-spinner"></div><span>${label}</span><span style="margin-left:auto;"></span>`;cp.appendChild(d);return d;}
-                const steps=[{name:'URL',check:async()=>{log('Parsing...');await new Promise(r=>setTimeout(r,600));try{new URL(url);return{ok:true}}catch{return{ok:false}}}},{name:'HTTPS',check:async()=>{await new Promise(r=>setTimeout(r,800));return url.startsWith('https://')?{ok:true}:{ok:false}}},{name:'DNS',check:async()=>{try{const d=new URL(url).hostname;const r=await fetch(`https://dns.google/resolve?name=${d}&type=A`);const j=await r.json();await new Promise(r=>setTimeout(r,700));return j.Answer?{ok:true}:{ok:false}}catch{return{ok:false}}}},{name:'SSL',check:async()=>{if(!url.startsWith('https://'))return{ok:false};try{await fetch(url,{mode:'no-cors',signal:AbortSignal.timeout(5000)});await new Promise(r=>setTimeout(r,900));return{ok:true}}catch{return{ok:false}}}},{name:'Phishing',check:async()=>{await new Promise(r=>setTimeout(r,700));const d=new URL(url).hostname;return[/login|account|verify|secure|banking/i,/(.)\1{4,}/,/\.(tk|ml|ga|cf)$/].filter(p=>p.test(d)).length?{ok:false}:{ok:true}}},{name:'Threat Intel',check:async()=>{try{const r=await fetch(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${GOOGLE_SAFE_BROWSING_KEY}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({client:{clientId:"e___h12"},threatInfo:{threatTypes:["MALWARE","SOCIAL_ENGINEERING"],platformTypes:["ANY_PLATFORM"],threatEntryTypes:["URL"],threatEntries:[{url}]}})});const d=await r.json();await new Promise(r=>setTimeout(r,600));return d.matches?{ok:false,critical:true}:{ok:true}}catch{return{ok:false}}}}];
-                let risk=0;for(const s of steps){const item=ci(s.name);log(`Running ${s.name}...`);const r=await s.check();const sp=item.querySelector('.check-spinner');sp.className='check-icon';if(r.ok){sp.innerHTML='<i class="fa-solid fa-circle-check success-text"></i>';item.querySelector('span:last-child').innerHTML='<span class="success-text">✓</span>';}else{sp.innerHTML='<i class="fa-solid fa-circle-xmark danger-text"></i>';item.querySelector('span:last-child').innerHTML='<span class="danger-text">✗</span>';if(r.critical)risk=100;else risk+=20;}await new Promise(r=>setTimeout(r,400));}
-                risk=Math.min(risk,100);const level=risk>=75?'critical':risk>=60?'high':risk>=30?'medium':'safe';saveScan({url,risk,level,date:new Date().toLocaleString()});incrementScanCount();updatePlanUI();updateDashboard();
-                const box=document.createElement('div');box.className='result-box';box.innerHTML=`<div class="risk-display"><div class="risk-circle" style="border-color:${level==='critical'?'var(--danger)':level==='high'?'var(--danger)':level==='medium'?'var(--warning)':'var(--success)'};color:${level==='critical'?'#fff':'var(--text)'};">${risk}</div><div><h3>${url}</h3><span class="badge ${level}">${level}</span></div></div>`;area.appendChild(box);document.getElementById('scanBtn').disabled=false;
+                const plan=getPlanData();if(!isAdmin&&plan.plan==='free'&&getDailyScanCount()>=3)return alert('Daily limit reached.');
+                const url=document.getElementById('urlInput').value.trim();if(!url||!url.startsWith('http'))return;
+                document.getElementById('scanBtn').disabled=true;
+                let risk=0; const area=document.getElementById('scanArea'); area.innerHTML='<div class="terminal" id="terminalContent"></div>'; const term=document.getElementById('terminalContent');
+                function log(m,c='#b0bec5'){ term.innerHTML+=`<div style="color:${c};">[${new Date().toLocaleTimeString()}] ${m}</div>`; term.scrollTop=term.scrollHeight; }
+                log('Starting scan...');
+                if(!url.startsWith('https://')){risk+=25;log('No HTTPS','#f43f5e');}
+                try{let d=new URL(url).hostname;let r=await fetch(`https://dns.google/resolve?name=${d}&type=A`);let j=await r.json();if(j.Answer)log('DNS resolved','#10b981');else{risk+=20;log('DNS fail','#f43f5e');}}catch(e){risk+=20;}
+                if(url.startsWith('https://')){try{await fetch(url,{mode:'no-cors',signal:AbortSignal.timeout(5000)});log('SSL OK','#10b981');}catch(e){risk+=20;log('SSL fail','#f43f5e');}}
+                try{let r=await fetch(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${GOOGLE_SAFE_BROWSING_KEY}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({client:{clientId:"e___h12"},threatInfo:{threatTypes:["MALWARE","SOCIAL_ENGINEERING"],platformTypes:["ANY_PLATFORM"],threatEntryTypes:["URL"],threatEntries:[{url}]}})});let j=await r.json();if(j.matches){risk=100;log('Threat detected!','#f43f5e');}else log('Safe Browsing: Clean','#10b981');}catch(e){}
+                risk=Math.min(risk,100);let level=risk>=60?'high':'safe';saveScan({url,risk,level,date:new Date().toLocaleString()});incrementScanCount();updatePlanUI();updateDashboard();
+                area.innerHTML+=`<div class="card" style="margin-top:16px;"><h3>${url}</h3><p>Risk: ${risk}/100</p><span class="badge ${level}">${level}</span></div>`;
+                document.getElementById('scanBtn').disabled=false;
             });
 
             window.sendMessage=function(){const i=document.getElementById('chatInput');const m=i.value.trim();if(!m)return;const c=document.getElementById('chatContainer');c.innerHTML+=`<div class="chat-message user"><div class="chat-bubble">${m}</div></div>`;i.value='';c.scrollTop=c.scrollHeight;setTimeout(()=>{c.innerHTML+=`<div class="chat-message bot"><div class="chat-bubble">Thanks for your message!</div></div>`;c.scrollTop=c.scrollHeight;},800);};
 
-            window.copyUserID = function() { navigator.clipboard.writeText(currentUserID); alert('User ID copied!'); };
+            window.copyUserID = function() { navigator.clipboard.writeText(currentUserID); alert('Copied!'); };
+            window.shareMyData = function() {
+                const data = { username, id: currentUserID, plan: getPlanData().plan };
+                const encoded = btoa(JSON.stringify(data));
+                const link = `${window.location.origin}${window.location.pathname}?import=${encoded}`;
+                navigator.clipboard.writeText(link).then(() => alert('Shared link copied! Send it to admin.'));
+            };
+            window.importUserData = function() {
+                const link = document.getElementById('importLinkInput').value.trim();
+                try {
+                    const url = new URL(link);
+                    const encoded = url.searchParams.get('import');
+                    if (!encoded) throw new Error('No data');
+                    const data = JSON.parse(atob(encoded));
+                    document.getElementById('userSearchResult').innerHTML = `
+                        <div class="card">
+                            <h3>${data.username}</h3>
+                            <p>ID: ${data.id}</p>
+                            <p>Plan: ${data.plan || 'free'}</p>
+                            <button class="btn" onclick="upgradeUser('${data.id}','monthly')" style="margin:4px;">Activate Pro</button>
+                            <button class="btn" onclick="upgradeUser('${data.id}','vip')" style="margin:4px;background:var(--accent2);">Activate VIP</button>
+                        </div>`;
+                } catch(e) { alert('Invalid shared link.'); }
+            };
 
             function updateAdminStats() {
                 let users=JSON.parse(localStorage.getItem('allUsers')||'{}');
                 let visitors=JSON.parse(localStorage.getItem('visitorCount')||'0');
-                let totalScans=JSON.parse(localStorage.getItem('globalScans')||'0');
                 document.getElementById('adminStats').innerHTML=`
                     <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><div><div class="stat-value">${Object.keys(users).length}</div><div class="stat-label">Users</div></div></div>
-                    <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-eye"></i></div><div><div class="stat-value">${visitors}</div><div class="stat-label">Visitors</div></div></div>
-                    <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-magnifying-glass"></i></div><div><div class="stat-value">${totalScans}</div><div class="stat-label">Total Scans</div></div></div>`;
+                    <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-eye"></i></div><div><div class="stat-value">${visitors}</div><div class="stat-label">Visitors</div></div></div>`;
             }
-            window.searchUser = function() {
-                let id=document.getElementById('searchUserID').value.trim();
-                let users=JSON.parse(localStorage.getItem('allUsers')||'{}');
-                let res=document.getElementById('userSearchResult');
-                if(users[id]) {
-                    let u=users[id];
-                    res.innerHTML=`<div class="card"><h3>${u.username}</h3><p>ID: ${id}</p><p>Plan: ${u.plan||'free'}</p><button class="btn" onclick="upgradeUser('${id}','monthly')" style="margin:4px;">Activate Pro</button><button class="btn" onclick="upgradeUser('${id}','vip')" style="margin:4px;background:var(--accent2);">Activate VIP</button></div>`;
-                } else res.innerHTML='<p style="color:var(--danger);">User not found.</p>';
-            };
             window.upgradeUser = function(id,plan) {
                 let users=JSON.parse(localStorage.getItem('allUsers')||'{}');
                 if(users[id]) { users[id].plan=plan; localStorage.setItem('allUsers',JSON.stringify(users)); alert(`Upgraded ${id} to ${plan}`); }
             };
-            function trackUser() {
-                let users=JSON.parse(localStorage.getItem('allUsers')||'{}');
-                if(!users[currentUserID]) users[currentUserID]={username,plan:'free',joined:new Date().toISOString()};
-                else users[currentUserID].username=username;
-                localStorage.setItem('allUsers',JSON.stringify(users));
-                let v=JSON.parse(localStorage.getItem('visitorCount')||'0');
-                localStorage.setItem('visitorCount', v+1);
-            }
 
-            if(!isAdmin&&typeof paypal!=='undefined'){paypal.HostedButtons({hostedButtonId:"3L59GMWVL59B4"}).render("#paypal-container-3L59GMWVL59B4");paypal.HostedButtons({hostedButtonId:"F7MXVUZBRVBZS"}).render("#paypal-container-F7MXVUZBRVBZS");}
+            if(!isAdmin&&typeof paypal!=='undefined') {
+                paypal.HostedButtons({hostedButtonId:"3L59GMWVL59B4"}).render("#paypal-monthly");
+                paypal.HostedButtons({hostedButtonId:"F7MXVUZBRVBZS"}).render("#paypal-vip");
+            }
             document.getElementById('liveClock').textContent=new Date().toLocaleTimeString(currentLang==='ar'?'ar-AE':'en-US');
         })();
     </script>
