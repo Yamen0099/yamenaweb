@@ -443,7 +443,8 @@
             window.shareMyData = function() {
                 const data = { username, id: currentUserID, plan: getPlanData().plan };
                 try {
-                    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+                    const jsonStr = JSON.stringify(data);
+                    const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
                     const link = `${window.location.origin}${window.location.pathname}?import=${encoded}`;
                     navigator.clipboard.writeText(link).then(() => alert('Shared link copied! Send it to admin.'));
                 } catch (e) {
@@ -456,7 +457,8 @@
                     const url = new URL(link);
                     const encoded = url.searchParams.get('import');
                     if (!encoded) throw new Error('No data');
-                    const data = JSON.parse(decodeURIComponent(escape(atob(encoded))));
+                    const jsonStr = decodeURIComponent(escape(atob(encoded)));
+                    const data = JSON.parse(jsonStr);
                     document.getElementById('userSearchResult').innerHTML = `
                         <div class="card">
                             <h3>${data.username}</h3>
