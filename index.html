@@ -170,6 +170,7 @@
         .device-info-item { background: var(--surface2); padding: 12px; border-radius: 8px; }
         .device-info-item strong { display: block; color: var(--accent); margin-bottom: 4px; }
         .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .share-link-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-top: 12px; word-break: break-all; font-family: monospace; font-size: 12px; }
 
         @media (max-width: 1024px) {
             .sidebar { transform: translateX(-100%); box-shadow: 0 0 50px rgba(0,0,0,0.5); }
@@ -285,8 +286,11 @@
 
             <div id="supportPage" class="page"><h2>AI Support</h2><div class="chat-container" id="chatContainer"><div class="chat-message bot"><div class="chat-bubble" id="welcomeMessage">مرحباً بك في منصة e___h12، معك المطور يامن شادي. كيف يمكنني مساعدتك؟</div></div></div><div style="display:flex;gap:8px;"><input type="text" id="chatInput" class="scanner-input" placeholder="اكتب رسالتك..."><button class="scan-btn" onclick="sendMessage()" style="width:auto;padding:12px 20px;"><i class="fa-solid fa-paper-plane"></i></button></div></div>
             <div id="aboutPage" class="page"><h2>About e___h12</h2><div class="card"><p>منصة متطورة لتحليل الروابط والكشف عن التصيد والبرمجيات الخبيثة.</p></div></div>
-            <div id="settingsPage" class="page"><h2>Settings</h2><div class="card"><h3>Profile</h3><div class="profile-pic-section"><div class="profile-pic-large" id="settingsAvatar"><i class="fa-solid fa-user"></i></div><div style="display:flex;flex-direction:column;gap:8px;"><button class="upload-btn" onclick="document.getElementById('profilePicInput').click()">Change Picture</button><input type="file" id="profilePicInput" accept="image/*" onchange="handleProfilePic(event)"><button class="upload-btn" style="background:transparent;border-color:var(--danger);color:var(--danger);" onclick="removeProfilePic()">Remove</button></div></div><div class="user-id-box" style="margin-top:16px;"><span id="userIDDisplay"></span><button class="btn" style="width:auto;padding:8px 16px;" onclick="copyUserID()">Copy ID</button></div><button class="btn" style="margin-top:12px;" onclick="shareMyData()"><i class="fa-solid fa-share-nodes"></i> Share My Data</button><p style="margin-top:8px;color:var(--text2);">Send the shared link to admin after payment.</p></div></div>
-            <div id="adminPage" class="page admin-only-page"><h2>Admin Panel</h2><div class="stats-grid" id="adminStats"></div><div class="card"><h3>Import User Data from Shared Link</h3><input type="text" id="importLinkInput" class="scanner-input" placeholder="Paste shared link here"><button class="btn" style="width:auto;margin-top:8px;" onclick="importUserData()">Import</button></div></div>
+            <div id="settingsPage" class="page"><h2>Settings</h2><div class="card"><h3>Profile</h3><div class="profile-pic-section"><div class="profile-pic-large" id="settingsAvatar"><i class="fa-solid fa-user"></i></div><div style="display:flex;flex-direction:column;gap:8px;"><button class="upload-btn" onclick="document.getElementById('profilePicInput').click()">Change Picture</button><input type="file" id="profilePicInput" accept="image/*" onchange="handleProfilePic(event)"><button class="upload-btn" style="background:transparent;border-color:var(--danger);color:var(--danger);" onclick="removeProfilePic()">Remove</button></div></div><div class="user-id-box" style="margin-top:16px;"><span id="userIDDisplay"></span><button class="btn" style="width:auto;padding:8px 16px;" onclick="copyUserID()">Copy ID</button></div><button class="btn" style="margin-top:12px;" onclick="shareMyData()"><i class="fa-solid fa-share-nodes"></i> Share My Data</button><p style="margin-top:8px;color:var(--text2);">Send the shared link to admin after payment.</p>
+                <!-- رابط المشاركة سيظهر هنا -->
+                <div id="shareLinkContainer" style="margin-top:16px; display:none;"></div>
+            </div></div>
+            <div id="adminPage" class="page admin-only-page"><h2>Admin Panel</h2><div class="stats-grid" id="adminStats"></div><div class="card"><h3>Import User Data from Shared Link</h3><input type="text" id="importLinkInput" class="scanner-input" placeholder="Paste shared link here"><button class="btn" style="width:auto;margin-top:8px;" onclick="importUserData()">Import</button><div id="userSearchResult" style="margin-top:16px;"></div></div></div>
         </div>
     </div>
 
@@ -395,9 +399,9 @@
                 m.style.display='none';
                 c.innerHTML=`<div class="card"><h3>IP Lookup</h3><input type="text" id="ipInput" class="scanner-input" placeholder="8.8.8.8"><button class="btn" style="width:auto;margin-top:8px;" onclick="lookupIP()">Lookup</button><div id="ipResult" style="margin-top:8px;"></div></div><div class="card"><h3>Breach Check</h3><input type="text" id="emailInput" class="scanner-input" placeholder="user@example.com"><button class="btn" style="width:auto;margin-top:8px;" onclick="checkBreach()">Check</button><div id="breachResult" style="margin-top:8px;"></div></div><div class="card"><h3>PDF Report</h3><button class="btn" onclick="generatePDF()">Download Report</button></div>`;
             }
-            window.lookupIP=async function(){let ip=document.getElementById('ipInput').value.trim();if(!ip)return;try{let r=await fetch(`https://ipapi.co/${ip}/json/`);let d=await r.json();document.getElementById('ipResult').innerHTML=`<p>${d.ip} - ${d.city}, ${d.country_name} (${d.org})</p>`;}catch(e){}};
+            window.lookupIP=async function(){let ip=document.getElementById('ipInput').value.trim();if(!ip)return;try{let r=await fetch(`https://ipapi.co/${ip}/json/`);let d=await r.json();document.getElementById('ipResult').innerHTML=`<p>${d.ip} - ${d.city}, ${d.country_name} (${d.org})</p>`;}catch(e){document.getElementById('ipResult').innerHTML='<p class="danger-text">Error fetching IP data</p>';}};
             window.checkBreach=function(){document.getElementById('breachResult').innerHTML='<p>No breaches found (simulated).</p>';};
-            window.generatePDF=function(){alert('PDF generated!');};
+            window.generatePDF=function(){alert('PDF generated! (Demo)');};
 
             if(sessionStorage.getItem('loggedIn')==='true'){username=sessionStorage.getItem('username')||'User';isAdmin=sessionStorage.getItem('isAdmin')==='true';currentUserID=getUserID();showApp();}
             document.getElementById('loginBtn').addEventListener('click',()=>{
@@ -410,20 +414,26 @@
             function showApp(){document.getElementById('loginScreen').style.display='none';document.getElementById('appMain').style.display='block';document.getElementById('displayName').textContent=username;document.getElementById('welcomeUser').textContent=username;loadProfilePicture();updatePlanUI();updateDashboard();if(isAdmin)updateAdminStats();}
             document.getElementById('logoutBtn').addEventListener('click',()=>{sessionStorage.clear();location.reload();});
 
+            // إغلاق القائمة الجانبية على الجوال
+            function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); }
+            document.getElementById('hamburger').addEventListener('click',()=>{ document.getElementById('sidebar').classList.add('open'); document.getElementById('sidebarOverlay').classList.add('show'); });
+            document.getElementById('sidebarClose').addEventListener('click',closeSidebar);
+            document.getElementById('sidebarOverlay').addEventListener('click',closeSidebar);
+
             document.querySelectorAll('.nav-item').forEach(item=>{item.addEventListener('click',()=>{
                 document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));item.classList.add('active');
                 const page=item.dataset.page;document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
                 document.getElementById(page+'Page').classList.add('active');
                 if(page==='dashboard')updateDashboard();if(page==='history')loadHistory();if(page==='scanner'||page==='plans')updatePlanUI();
                 if(page==='device')loadDeviceScanner();if(page==='vip-tools')loadVipTools();if(page==='admin')updateAdminStats();
-                document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('show');
+                closeSidebar(); // إغلاق القائمة بعد النقر على عنصر
             });});
 
             setInterval(()=>document.getElementById('liveClock').textContent=new Date().toLocaleTimeString(currentLang==='ar'?'ar-AE':'en-US'),1000);
 
             document.getElementById('scanBtn').addEventListener('click',async()=>{
                 const plan=getPlanData();if(!isAdmin&&plan.plan==='free'&&getDailyScanCount()>=3)return alert('Daily limit reached.');
-                const url=document.getElementById('urlInput').value.trim();if(!url||!url.startsWith('http'))return;
+                const url=document.getElementById('urlInput').value.trim();if(!url||!url.startsWith('http')){ alert('Enter a valid URL starting with http:// or https://'); return; }
                 document.getElementById('scanBtn').disabled=true;
                 let risk=0; const area=document.getElementById('scanArea'); area.innerHTML='<div class="terminal" id="terminalContent"></div>'; const term=document.getElementById('terminalContent');
                 function log(m,c='#b0bec5'){ term.innerHTML+=`<div style="color:${c};">[${new Date().toLocaleTimeString()}] ${m}</div>`; term.scrollTop=term.scrollHeight; }
@@ -431,44 +441,59 @@
                 if(!url.startsWith('https://')){risk+=25;log('No HTTPS','#f43f5e');}
                 try{let d=new URL(url).hostname;let r=await fetch(`https://dns.google/resolve?name=${d}&type=A`);let j=await r.json();if(j.Answer)log('DNS resolved','#10b981');else{risk+=20;log('DNS fail','#f43f5e');}}catch(e){risk+=20;}
                 if(url.startsWith('https://')){try{await fetch(url,{mode:'no-cors',signal:AbortSignal.timeout(5000)});log('SSL OK','#10b981');}catch(e){risk+=20;log('SSL fail','#f43f5e');}}
-                try{let r=await fetch(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${GOOGLE_SAFE_BROWSING_KEY}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({client:{clientId:"e___h12"},threatInfo:{threatTypes:["MALWARE","SOCIAL_ENGINEERING"],platformTypes:["ANY_PLATFORM"],threatEntryTypes:["URL"],threatEntries:[{url}]}})});let j=await r.json();if(j.matches){risk=100;log('Threat detected!','#f43f5e');}else log('Safe Browsing: Clean','#10b981');}catch(e){}
+                try{let r=await fetch(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${GOOGLE_SAFE_BROWSING_KEY}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({client:{clientId:"e___h12"},threatInfo:{threatTypes:["MALWARE","SOCIAL_ENGINEERING"],platformTypes:["ANY_PLATFORM"],threatEntryTypes:["URL"],threatEntries:[{url}]}})});let j=await r.json();if(j.matches){risk=100;log('Threat detected!','#f43f5e');}else log('Safe Browsing: Clean','#10b981');}catch(e){log('Safe Browsing check failed','#f59e0b');}
                 risk=Math.min(risk,100);let level=risk>=60?'high':'safe';saveScan({url,risk,level,date:new Date().toLocaleString()});incrementScanCount();updatePlanUI();updateDashboard();
                 area.innerHTML+=`<div class="card" style="margin-top:16px;"><h3>${url}</h3><p>Risk: ${risk}/100</p><span class="badge ${level}">${level}</span></div>`;
                 document.getElementById('scanBtn').disabled=false;
             });
 
-            window.sendMessage=function(){const i=document.getElementById('chatInput');const m=i.value.trim();if(!m)return;const c=document.getElementById('chatContainer');c.innerHTML+=`<div class="chat-message user"><div class="chat-bubble">${m}</div></div>`;i.value='';c.scrollTop=c.scrollHeight;setTimeout(()=>{c.innerHTML+=`<div class="chat-message bot"><div class="chat-bubble">Thanks for your message!</div></div>`;c.scrollTop=c.scrollHeight;},800);};
+            window.sendMessage=function(){const i=document.getElementById('chatInput');const m=i.value.trim();if(!m)return;const c=document.getElementById('chatContainer');c.innerHTML+=`<div class="chat-message user"><div class="chat-bubble">${m.replace(/</g,'&lt;')}</div></div>`;i.value='';c.scrollTop=c.scrollHeight;setTimeout(()=>{c.innerHTML+=`<div class="chat-message bot"><div class="chat-bubble">شكراً لرسالتك، سأتأكد من مساعدتك.</div></div>`;c.scrollTop=c.scrollHeight;},800);};
 
-            window.copyUserID = function() { navigator.clipboard.writeText(currentUserID); alert('Copied!'); };
+            window.copyUserID = function() { navigator.clipboard.writeText(currentUserID); alert('تم نسخ معرف المستخدم!'); };
+            
+            // دالة مشاركة البيانات المُحسَّنة – تظهر الرابط للمستخدم
             window.shareMyData = function() {
-                const data = { username, id: currentUserID, plan: getPlanData().plan };
+                const plan = getPlanData().plan;
+                const data = { username, id: currentUserID, plan: plan };
                 try {
+                    // تحويل آمن للـ JSON إلى base64 (يدعم العربية)
                     const jsonStr = JSON.stringify(data);
-                    const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
-                    const link = `${window.location.origin}${window.location.pathname}?import=${encoded}`;
-                    navigator.clipboard.writeText(link).then(() => alert('Shared link copied! Send it to admin.'));
+                    const base64 = btoa(unescape(encodeURIComponent(jsonStr)));
+                    const link = `${window.location.origin}${window.location.pathname}?import=${base64}`;
+                    // عرض الرابط في واجهة المستخدم
+                    const container = document.getElementById('shareLinkContainer');
+                    container.style.display = 'block';
+                    container.innerHTML = `<div class="share-link-box"><strong>رابط المشاركة (انسخه وأرسله للمسؤول):</strong><br><span style="direction:ltr;display:block;word-break:break-all;">${link}</span><button class="btn" style="width:auto;margin-top:8px;padding:6px 12px;" onclick="navigator.clipboard.writeText('${link.replace(/'/g, "\\'")}'); alert('تم نسخ الرابط!');">نسخ الرابط</button></div>`;
+                    alert('تم إنشاء رابط المشاركة. ستجده أسفل زر "Share My Data"');
                 } catch (e) {
-                    alert('Could not generate link. Please copy your User ID manually.');
+                    console.error(e);
+                    alert('حدث خطأ أثناء إنشاء الرابط. يرجى المحاولة مرة أخرى.');
                 }
             };
+            
+            // دالة استيراد بيانات المستخدم من الرابط (مع إصلاح العنصر المفقود)
             window.importUserData = function() {
                 const link = document.getElementById('importLinkInput').value.trim();
+                const resultDiv = document.getElementById('userSearchResult');
+                if (!link) { resultDiv.innerHTML = '<p class="error">الرجاء لصق الرابط</p>'; return; }
                 try {
                     const url = new URL(link);
                     const encoded = url.searchParams.get('import');
-                    if (!encoded) throw new Error('No data');
+                    if (!encoded) throw new Error('No import data');
                     const jsonStr = decodeURIComponent(escape(atob(encoded)));
                     const data = JSON.parse(jsonStr);
-                    document.getElementById('userSearchResult').innerHTML = `
+                    resultDiv.innerHTML = `
                         <div class="card">
-                            <h3>${data.username}</h3>
-                            <p>ID: ${data.id}</p>
-                            <p>Plan: ${data.plan || 'free'}</p>
-                            <button class="btn" onclick="upgradeUser('${data.id}','monthly')" style="margin:4px;">Activate Pro</button>
-                            <button class="btn" onclick="upgradeUser('${data.id}','vip')" style="margin:4px;background:var(--accent2);">Activate VIP</button>
+                            <h3>${escapeHtml(data.username)}</h3>
+                            <p>ID: ${escapeHtml(data.id)}</p>
+                            <p>الخطة الحالية: ${data.plan || 'free'}</p>
+                            <button class="btn" onclick="upgradeUser('${data.id}','monthly')" style="margin:4px;">تفعيل Pro (شهر)</button>
+                            <button class="btn" onclick="upgradeUser('${data.id}','vip')" style="margin:4px;background:var(--accent2);">تفعيل VIP (6 شهور)</button>
                         </div>`;
-                } catch(e) { alert('Invalid shared link.'); }
+                } catch(e) { resultDiv.innerHTML = '<p class="error">رابط غير صالح</p>'; }
             };
+            
+            function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
 
             function updateAdminStats() {
                 let users=JSON.parse(localStorage.getItem('allUsers')||'{}');
@@ -479,14 +504,27 @@
             }
             window.upgradeUser = function(id,plan) {
                 let users=JSON.parse(localStorage.getItem('allUsers')||'{}');
-                if(users[id]) { users[id].plan=plan; localStorage.setItem('allUsers',JSON.stringify(users)); alert(`Upgraded ${id} to ${plan}`); }
+                if(users[id]) { users[id].plan=plan; localStorage.setItem('allUsers',JSON.stringify(users)); alert(`تم ترقية ${id} إلى ${plan}`); }
+                else { alert(`المستخدم غير موجود في قاعدة البيانات. ستحتاج إلى تفعيل الخطة يدوياً بواسطة كود التفعيل.`); }
             };
 
-            if(!isAdmin&&typeof paypal!=='undefined') {
-                paypal.HostedButtons({hostedButtonId:"3L59GMWVL59B4"}).render("#paypal-monthly");
-                paypal.HostedButtons({hostedButtonId:"F7MXVUZBRVBZS"}).render("#paypal-vip");
+            // محاولة تحميل PayPal بشكل آمن مع تفادي الأخطاء
+            if(!isAdmin && typeof paypal !== 'undefined') {
+                try {
+                    paypal.HostedButtons({hostedButtonId:"3L59GMWVL59B4"}).render("#paypal-monthly");
+                    paypal.HostedButtons({hostedButtonId:"F7MXVUZBRVBZS"}).render("#paypal-vip");
+                } catch(e) { console.warn("PayPal buttons error", e); }
+            } else if(!isAdmin) {
+                // إذا لم يتم تحميل PayPal نعرض رسالة بديلة
+                const monthlyContainer = document.getElementById('paypal-monthly');
+                const vipContainer = document.getElementById('paypal-vip');
+                if(monthlyContainer) monthlyContainer.innerHTML = '<p style="color:var(--warning);">رابط الدفع عبر PayPal: <a href="#" onclick="alert(\'تواصل مع الدعم عبر واتساب\')">اطلب الرابط</a></p>';
+                if(vipContainer) vipContainer.innerHTML = '<p style="color:var(--warning);">رابط الدفع عبر PayPal: <a href="#" onclick="alert(\'تواصل مع الدعم عبر واتساب\')">اطلب الرابط</a></p>';
             }
             document.getElementById('liveClock').textContent=new Date().toLocaleTimeString(currentLang==='ar'?'ar-AE':'en-US');
+            
+            // عرض userID في صفحة الإعدادات
+            document.getElementById('userIDDisplay').textContent = `معرف المستخدم: ${currentUserID}`;
         })();
     </script>
 </body>
