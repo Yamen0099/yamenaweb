@@ -129,20 +129,21 @@
         .scan-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
         .daily-counter { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: clamp(8px,1.5vw,12px) clamp(12px,2vw,18px); margin-bottom: clamp(12px,2vw,20px); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: clamp(12px,2vw,14px); }
         .live-scan-container { display: flex; gap: 16px; flex-wrap: wrap; }
-        .checklist-panel { flex: 1; min-width: 250px; }
-        .terminal-panel { flex: 1; min-width: 250px; background: #0a0f1c; border: 1px solid var(--border); border-radius: 16px; padding: clamp(12px,2vw,18px); font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #b0bec5; max-height: 350px; overflow-y: auto; }
+        .checklist-panel { flex: 1.2; min-width: 260px; }
+        .terminal-panel { flex: 0.8; min-width: 260px; background: #0a0f1c; border: 1px solid var(--border); border-radius: 16px; padding: clamp(12px,2vw,18px); font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #b0bec5; max-height: 400px; overflow-y: auto; }
         .terminal-title { color: var(--text2); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 12px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
         .terminal-line { margin: 4px 0; opacity: 0; animation: fadeLine 0.5s forwards; word-break: break-all; }
         @keyframes fadeLine { to { opacity: 1; } }
-        .check-item { display: flex; align-items: center; gap: 10px; padding: clamp(10px,1.5vw,14px) clamp(12px,2vw,18px); background: var(--surface2); border-radius: 12px; margin-bottom: 8px; border: 1px solid var(--border); transition: 0.3s; font-size: clamp(12px,2vw,14px); }
+        .check-item { display: flex; align-items: center; gap: 10px; padding: clamp(12px,1.8vw,16px) clamp(14px,2vw,20px); background: var(--surface2); border-radius: 14px; margin-bottom: 12px; border: 1px solid var(--border); transition: 0.3s; font-size: clamp(13px,2vw,15px); font-weight: 500; }
         .check-spinner { width: 28px; height: 28px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; flex-shrink: 0; }
-        .check-icon { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+        .check-icon { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
         @keyframes spin { to { transform: rotate(360deg); } }
         .success-text { color: var(--success); }
         .danger-text { color: var(--danger); }
-        .result-box { margin-top: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: clamp(16px,3vw,28px); box-shadow: var(--glow); animation: fade 0.4s; }
-        .risk-display { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-        .risk-circle { width: clamp(70px,15vw,100px); height: clamp(70px,15vw,100px); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: clamp(28px,6vw,40px); font-weight: 800; border: 4px solid; flex-shrink: 0; }
+        .waiting-text { color: var(--warning); }
+        .result-box { margin-top: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: clamp(16px,3vw,28px); box-shadow: var(--glow); animation: fade 0.4s; }
+        .risk-display { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .risk-circle { width: clamp(80px,15vw,110px); height: clamp(80px,15vw,110px); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: clamp(30px,6vw,44px); font-weight: 800; border: 4px solid; flex-shrink: 0; }
         .profile-pic-section { display: flex; align-items: center; gap: clamp(12px,3vw,24px); margin-top: 12px; flex-wrap: wrap; }
         .profile-pic-large { width: clamp(70px,15vw,100px); height: clamp(70px,15vw,100px); border-radius: 50%; background: var(--gradient); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; font-size: clamp(32px,7vw,48px); color: #fff; border: 3px solid var(--accent); box-shadow: 0 0 20px rgba(0,212,255,0.3); flex-shrink: 0; }
         .upload-btn { padding: clamp(8px,1.5vw,12px) clamp(16px,3vw,24px); background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; color: var(--text); cursor: pointer; transition: 0.2s; font-weight: 500; font-size: clamp(12px,2vw,14px); }
@@ -179,6 +180,10 @@
             .sidebar-overlay.show { display: block; }
             .main-area { margin-left: 0; }
             .hamburger { display: flex; }
+        }
+        @media (max-width: 768px) {
+            .live-scan-container { flex-direction: column; }
+            .terminal-panel { max-height: 300px; }
         }
         @media (max-width: 640px) {
             .topbar { padding: 0 10px; gap: 4px; }
@@ -247,7 +252,7 @@
             <div id="dashboardPage" class="page active">
                 <h2 data-trans="titleDashboard">Security Dashboard</h2>
                 <div class="stats-grid" id="statsContainer"></div>
-                <div class="card"><h3 data-trans="titleRecent">Recent Scans</h3><div class="table-responsive"><table id="recentTable"><thead><tr><th data-trans="colURL">URL</th><th data-trans="colRisk">Risk</th><th data-trans="colLevel">Level</th><th data-trans="colDate">Date</th></tr></thead><tbody></tbody></table></div></div>
+                <div class="card"><h3 data-trans="titleRecent">Recent Scans</h3><div class="table-responsive"><table id="recentTable"><thead>汽<th data-trans="colURL">URL</th><th data-trans="colRisk">Risk</th><th data-trans="colLevel">Level</th><th data-trans="colDate">Date</th></tr></thead><tbody></tbody>}</div></div>
             </div>
 
             <div id="scannerPage" class="page">
@@ -269,7 +274,7 @@
                 <div id="vipContent"></div>
             </div>
 
-            <div id="historyPage" class="page"><h2 data-trans="titleHistory">Scan History</h2><div class="table-responsive"><table id="historyTable"><thead><tr><th>#</th><th data-trans="colURL">URL</th><th data-trans="colRisk">Risk</th><th data-trans="colLevel">Level</th><th data-trans="colDate">Date</th></tr></thead><tbody></tbody></table></div></div>
+            <div id="historyPage" class="page"><h2 data-trans="titleHistory">Scan History</h2><div class="table-responsive"><table id="historyTable"><thead><tr><th>#</th><th data-trans="colURL">URL</th><th data-trans="colRisk">Risk</th><th data-trans="colLevel">Level</th><th data-trans="colDate">Date</th></tr></thead><tbody></tbody>}</div></div>
 
             <div id="plansPage" class="page">
                 <h2 data-trans="titlePlans">Subscription Plans</h2>
@@ -287,7 +292,6 @@
             <div id="supportPage" class="page"><h2>AI Support</h2><div class="chat-container" id="chatContainer"><div class="chat-message bot"><div class="chat-bubble" id="welcomeMessage">مرحباً بك في منصة e___h12، معك المطور يامن شادي. كيف يمكنني مساعدتك؟</div></div></div><div style="display:flex;gap:8px;"><input type="text" id="chatInput" class="scanner-input" placeholder="اكتب رسالتك..."><button class="scan-btn" onclick="sendMessage()" style="width:auto;padding:12px 20px;"><i class="fa-solid fa-paper-plane"></i></button></div></div>
             <div id="aboutPage" class="page"><h2>About e___h12</h2><div class="card"><p>منصة متطورة لتحليل الروابط والكشف عن التصيد والبرمجيات الخبيثة.</p></div></div>
             <div id="settingsPage" class="page"><h2>Settings</h2><div class="card"><h3>Profile</h3><div class="profile-pic-section"><div class="profile-pic-large" id="settingsAvatar"><i class="fa-solid fa-user"></i></div><div style="display:flex;flex-direction:column;gap:8px;"><button class="upload-btn" onclick="document.getElementById('profilePicInput').click()">Change Picture</button><input type="file" id="profilePicInput" accept="image/*" onchange="handleProfilePic(event)"><button class="upload-btn" style="background:transparent;border-color:var(--danger);color:var(--danger);" onclick="removeProfilePic()">Remove</button></div></div><div class="user-id-box" style="margin-top:16px;"><span id="userIDDisplay"></span><button class="btn" style="width:auto;padding:8px 16px;" onclick="copyUserID()">Copy ID</button></div><button class="btn" style="margin-top:12px;" onclick="shareMyData()"><i class="fa-solid fa-share-nodes"></i> Share My Data</button><p style="margin-top:8px;color:var(--text2);">Send the shared link to admin after payment.</p>
-                <!-- رابط المشاركة سيظهر هنا -->
                 <div id="shareLinkContainer" style="margin-top:16px; display:none;"></div>
             </div></div>
             <div id="adminPage" class="page admin-only-page"><h2>Admin Panel</h2><div class="stats-grid" id="adminStats"></div><div class="card"><h3>Import User Data from Shared Link</h3><input type="text" id="importLinkInput" class="scanner-input" placeholder="Paste shared link here"><button class="btn" style="width:auto;margin-top:8px;" onclick="importUserData()">Import</button><div id="userSearchResult" style="margin-top:16px;"></div></div></div>
@@ -338,9 +342,32 @@
                 if(d.expiry && Date.now()>d.expiry){localStorage.removeItem(storageKey('planData'));return{plan:'free',expiry:null};}
                 return d.plan?d:{plan:'free',expiry:null};
             }
-            function setPlan(plan,days) { if(isAdmin) return; const expiry=days?Date.now()+days*86400000:null; localStorage.setItem(storageKey('planData'),JSON.stringify({plan,expiry})); updatePlanUI(); }
+            function setPlan(plan,days) { 
+                if(isAdmin) return; 
+                const expiry=days?Date.now()+days*86400000:null; 
+                localStorage.setItem(storageKey('planData'),JSON.stringify({plan,expiry})); 
+                updatePlanUI(); 
+                // تحديث واجهة الخطط فوراً
+                if(document.getElementById('plansPage').classList.contains('active')) {
+                    updatePlansPageUI();
+                }
+            }
             function getDailyScanCount() { const today=new Date().toDateString(); const d=JSON.parse(localStorage.getItem(storageKey('dailyScans'))||'{}'); if(d.date!==today){localStorage.setItem(storageKey('dailyScans'),JSON.stringify({date:today,count:0}));return 0;} return d.count; }
             function incrementScanCount() { const today=new Date().toDateString(); const d=JSON.parse(localStorage.getItem(storageKey('dailyScans'))||'{}'); const n=(d.date===today?d.count:0)+1; localStorage.setItem(storageKey('dailyScans'),JSON.stringify({date:today,count:n})); return n; }
+            function updatePlansPageUI() {
+                const plan=getPlanData();
+                const subInfo=document.getElementById('subscriptionInfo'); 
+                const normalPlans=document.getElementById('normalPlans');
+                if(!isAdmin&&plan.plan!=='free'&&plan.expiry){ 
+                    subInfo.style.display='block'; 
+                    normalPlans.style.display='none'; 
+                    document.getElementById('currentPlanName').textContent=plan.plan==='monthly'?'Pro (شهري)':plan.plan==='vip'?'VIP (6 شهور)':plan.plan;
+                    document.getElementById('expiryDate').textContent=new Date(plan.expiry).toLocaleDateString(); 
+                } else { 
+                    subInfo.style.display='none'; 
+                    normalPlans.style.display='block'; 
+                }
+            }
             function updatePlanUI() {
                 const plan=getPlanData();
                 document.getElementById('topPlanBadge').textContent=plan.plan==='admin'?'Admin':plan.plan==='vip'?'VIP':plan.plan==='monthly'?'Pro':'Free';
@@ -348,23 +375,24 @@
                 const count=getDailyScanCount(); const max=(!isAdmin&&plan.plan==='free')?3:999;
                 document.getElementById('scanCount').textContent=`${count}/${max===999?'∞':max}`;
                 document.getElementById('scanBtn').disabled=(!isAdmin&&plan.plan==='free'&&count>=3);
-                const subInfo=document.getElementById('subscriptionInfo'); const normalPlans=document.getElementById('normalPlans');
-                if(!isAdmin&&plan.plan!=='free'&&plan.expiry){ subInfo.style.display='block'; normalPlans.style.display='none'; document.getElementById('currentPlanName').textContent=plan.plan; document.getElementById('expiryDate').textContent=new Date(plan.expiry).toLocaleDateString(); }
-                else { subInfo.style.display='none'; normalPlans.style.display='block'; }
                 document.querySelectorAll('.admin-only').forEach(el=>el.style.display=isAdmin?'flex':'none');
+                updatePlansPageUI();
             }
             function getValidCodes(){return JSON.parse(localStorage.getItem('validCodes')||'[]');}
             function saveValidCodes(c){localStorage.setItem('validCodes',JSON.stringify(c));}
             window.activatePlan = function() {
                 const input=document.getElementById('activationCodeInput').value.trim().toUpperCase();
                 const status=document.getElementById('activationStatus');
-                if(!input)return;
+                if(!input){status.innerHTML='<span style="color:var(--warning);">⚠️ الرجاء إدخال الكود</span>';return;}
                 const codes=getValidCodes(); const entry=codes.find(c=>c.code===input);
-                if(!entry){status.innerHTML='<span style="color:var(--danger);">❌ Invalid code</span>';return;}
-                if(entry.used){status.innerHTML='<span style="color:var(--danger);">❌ Already used</span>';return;}
+                if(!entry){status.innerHTML='<span style="color:var(--danger);">❌ كود غير صالح</span>';return;}
+                if(entry.used){status.innerHTML='<span style="color:var(--danger);">❌ هذا الكود مستخدم من قبل</span>';return;}
                 entry.used=true; saveValidCodes(codes);
-                setPlan(entry.type==='monthly'?'monthly':'vip',entry.type==='monthly'?30:180);
-                status.innerHTML='<span style="color:var(--success);">✅ Activated!</span>'; updatePlanUI();
+                const planType = entry.type==='monthly'?'monthly':'vip';
+                const days = entry.type==='monthly'?30:180;
+                setPlan(planType, days);
+                status.innerHTML='<span style="color:var(--success);">✅ تم التفعيل بنجاح! الخطة مفعلة الآن.</span>';
+                setTimeout(()=>{status.innerHTML='';}, 5000);
             };
 
             function getProfilePicKey(){return `profilePic_${username}`;}
@@ -414,7 +442,6 @@
             function showApp(){document.getElementById('loginScreen').style.display='none';document.getElementById('appMain').style.display='block';document.getElementById('displayName').textContent=username;document.getElementById('welcomeUser').textContent=username;loadProfilePicture();updatePlanUI();updateDashboard();if(isAdmin)updateAdminStats();}
             document.getElementById('logoutBtn').addEventListener('click',()=>{sessionStorage.clear();location.reload();});
 
-            // إغلاق القائمة الجانبية على الجوال
             function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); }
             document.getElementById('hamburger').addEventListener('click',()=>{ document.getElementById('sidebar').classList.add('open'); document.getElementById('sidebarOverlay').classList.add('show'); });
             document.getElementById('sidebarClose').addEventListener('click',closeSidebar);
@@ -424,43 +451,197 @@
                 document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));item.classList.add('active');
                 const page=item.dataset.page;document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
                 document.getElementById(page+'Page').classList.add('active');
-                if(page==='dashboard')updateDashboard();if(page==='history')loadHistory();if(page==='scanner'||page==='plans')updatePlanUI();
+                if(page==='dashboard')updateDashboard();if(page==='history')loadHistory();if(page==='scanner')updatePlanUI();
                 if(page==='device')loadDeviceScanner();if(page==='vip-tools')loadVipTools();if(page==='admin')updateAdminStats();
-                closeSidebar(); // إغلاق القائمة بعد النقر على عنصر
+                if(page==='plans')updatePlansPageUI();
+                closeSidebar();
             });});
 
             setInterval(()=>document.getElementById('liveClock').textContent=new Date().toLocaleTimeString(currentLang==='ar'?'ar-AE':'en-US'),1000);
 
+            // ========== URL SCANNER مع دوائر الفحص والتيرمنل ==========
             document.getElementById('scanBtn').addEventListener('click',async()=>{
-                const plan=getPlanData();if(!isAdmin&&plan.plan==='free'&&getDailyScanCount()>=3)return alert('Daily limit reached.');
-                const url=document.getElementById('urlInput').value.trim();if(!url||!url.startsWith('http')){ alert('Enter a valid URL starting with http:// or https://'); return; }
+                const plan=getPlanData();if(!isAdmin&&plan.plan==='free'&&getDailyScanCount()>=3){alert('لقد تجاوزت الحد اليومي للمستخدمين المجانيين (3 فحوصات)');return;}
+                const url=document.getElementById('urlInput').value.trim();if(!url||!url.startsWith('http')){alert('الرجاء إدخال رابط صحيح يبدأ بـ http:// أو https://');return;}
                 document.getElementById('scanBtn').disabled=true;
-                let risk=0; const area=document.getElementById('scanArea'); area.innerHTML='<div class="terminal" id="terminalContent"></div>'; const term=document.getElementById('terminalContent');
-                function log(m,c='#b0bec5'){ term.innerHTML+=`<div style="color:${c};">[${new Date().toLocaleTimeString()}] ${m}</div>`; term.scrollTop=term.scrollHeight; }
-                log('Starting scan...');
-                if(!url.startsWith('https://')){risk+=25;log('No HTTPS','#f43f5e');}
-                try{let d=new URL(url).hostname;let r=await fetch(`https://dns.google/resolve?name=${d}&type=A`);let j=await r.json();if(j.Answer)log('DNS resolved','#10b981');else{risk+=20;log('DNS fail','#f43f5e');}}catch(e){risk+=20;}
-                if(url.startsWith('https://')){try{await fetch(url,{mode:'no-cors',signal:AbortSignal.timeout(5000)});log('SSL OK','#10b981');}catch(e){risk+=20;log('SSL fail','#f43f5e');}}
-                try{let r=await fetch(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${GOOGLE_SAFE_BROWSING_KEY}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({client:{clientId:"e___h12"},threatInfo:{threatTypes:["MALWARE","SOCIAL_ENGINEERING"],platformTypes:["ANY_PLATFORM"],threatEntryTypes:["URL"],threatEntries:[{url}]}})});let j=await r.json();if(j.matches){risk=100;log('Threat detected!','#f43f5e');}else log('Safe Browsing: Clean','#10b981');}catch(e){log('Safe Browsing check failed','#f59e0b');}
-                risk=Math.min(risk,100);let level=risk>=60?'high':'safe';saveScan({url,risk,level,date:new Date().toLocaleString()});incrementScanCount();updatePlanUI();updateDashboard();
-                area.innerHTML+=`<div class="card" style="margin-top:16px;"><h3>${url}</h3><p>Risk: ${risk}/100</p><span class="badge ${level}">${level}</span></div>`;
-                document.getElementById('scanBtn').disabled=false;
+                const area=document.getElementById('scanArea');
+                
+                // إنشاء واجهة الفحص المزدوجة (قوائم الفحص + التيرمنل)
+                area.innerHTML=`
+                    <div class="live-scan-container">
+                        <div class="checklist-panel" id="checklistPanel"></div>
+                        <div class="terminal-panel" id="terminalPanel">
+                            <div class="terminal-title"><i class="fa-solid fa-terminal"></i> Live Scan Log</div>
+                            <div id="terminalLog" style="font-family: monospace; font-size: 12px;"></div>
+                        </div>
+                    </div>
+                    <div id="scanResultBox" style="margin-top:20px;"></div>
+                `;
+                const checklistDiv = document.getElementById('checklistPanel');
+                const terminalDiv = document.getElementById('terminalLog');
+                
+                // قائمة الفحوصات
+                const checks = [
+                    { id: 'https', name: '🔒 HTTPS Protocol', status: 'pending' },
+                    { id: 'dns', name: '🌐 DNS Resolution', status: 'pending' },
+                    { id: 'ssl', name: '🔑 SSL Certificate', status: 'pending' },
+                    { id: 'safebrowsing', name: '🛡️ Google Safe Browsing', status: 'pending' }
+                ];
+                
+                function renderChecklist() {
+                    checklistDiv.innerHTML = checks.map(c => `
+                        <div class="check-item" id="check-${c.id}">
+                            ${c.status === 'pending' ? '<div class="check-spinner"></div>' : 
+                              c.status === 'success' ? '<div class="check-icon"><i class="fa-solid fa-circle-check success-text"></i></div>' :
+                              '<div class="check-icon"><i class="fa-solid fa-circle-xmark danger-text"></i></div>'}
+                            <span>${c.name}</span>
+                        </div>
+                    `).join('');
+                }
+                
+                function updateCheckStatus(id, status) {
+                    const idx = checks.findIndex(c => c.id === id);
+                    if(idx !== -1) checks[idx].status = status;
+                    renderChecklist();
+                }
+                
+                function logToTerminal(message, type = 'info') {
+                    const colors = { info: '#b0bec5', success: '#10b981', error: '#f43f5e', warning: '#f59e0b' };
+                    const color = colors[type] || colors.info;
+                    const prefix = type === 'success' ? '✓ ' : type === 'error' ? '✗ ' : type === 'warning' ? '⚠ ' : '• ';
+                    terminalDiv.innerHTML += `<div style="color:${color}; margin-bottom:4px;">[${new Date().toLocaleTimeString()}] ${prefix}${message}</div>`;
+                    terminalDiv.scrollTop = terminalDiv.scrollHeight;
+                }
+                
+                renderChecklist();
+                logToTerminal('بدء فحص الرابط: ' + url, 'info');
+                
+                let risk = 0;
+                
+                // 1. فحص HTTPS
+                logToTerminal('جاري فحص بروتوكول HTTPS...', 'info');
+                await new Promise(r => setTimeout(r, 500));
+                if(!url.startsWith('https://')){
+                    risk += 25;
+                    updateCheckStatus('https', 'error');
+                    logToTerminal('الرابط لا يستخدم HTTPS (غير آمن)', 'error');
+                } else {
+                    updateCheckStatus('https', 'success');
+                    logToTerminal('الرابط يستخدم HTTPS (آمن)', 'success');
+                }
+                
+                // 2. فحص DNS
+                logToTerminal('جاري تحليل DNS...', 'info');
+                await new Promise(r => setTimeout(r, 600));
+                try {
+                    let d = new URL(url).hostname;
+                    let r = await fetch(`https://dns.google/resolve?name=${d}&type=A`);
+                    let j = await r.json();
+                    if(j.Answer) {
+                        updateCheckStatus('dns', 'success');
+                        logToTerminal(`DNS resolved بنجاح: ${d}`, 'success');
+                    } else {
+                        risk += 20;
+                        updateCheckStatus('dns', 'error');
+                        logToTerminal('فشل في تحليل DNS', 'error');
+                    }
+                } catch(e) {
+                    risk += 20;
+                    updateCheckStatus('dns', 'error');
+                    logToTerminal('خطأ في اتصال DNS', 'error');
+                }
+                
+                // 3. فحص SSL
+                logToTerminal('جاري فحص شهادة SSL...', 'info');
+                await new Promise(r => setTimeout(r, 500));
+                if(url.startsWith('https://')){
+                    try {
+                        await fetch(url, { mode: 'no-cors', signal: AbortSignal.timeout(5000) });
+                        updateCheckStatus('ssl', 'success');
+                        logToTerminal('شهادة SSL صالحة', 'success');
+                    } catch(e) {
+                        risk += 20;
+                        updateCheckStatus('ssl', 'error');
+                        logToTerminal('مشكلة في شهادة SSL', 'error');
+                    }
+                } else {
+                    updateCheckStatus('ssl', 'error');
+                    logToTerminal('لا توجد شهادة SSL (الرابط ليس HTTPS)', 'warning');
+                }
+                
+                // 4. فحص Google Safe Browsing
+                logToTerminal('جاري فحص قاعدة بيانات Google Safe Browsing...', 'info');
+                await new Promise(r => setTimeout(r, 800));
+                try {
+                    let response = await fetch(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${GOOGLE_SAFE_BROWSING_KEY}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            client: { clientId: "e___h12" },
+                            threatInfo: {
+                                threatTypes: ["MALWARE", "SOCIAL_ENGINEERING"],
+                                platformTypes: ["ANY_PLATFORM"],
+                                threatEntryTypes: ["URL"],
+                                threatEntries: [{ url }]
+                            }
+                        })
+                    });
+                    let data = await response.json();
+                    if(data.matches) {
+                        risk = Math.min(risk + 50, 100);
+                        updateCheckStatus('safebrowsing', 'error');
+                        logToTerminal('⚠️ تحذير: الرابط مدرج في قوائم التهديدات!', 'error');
+                    } else {
+                        updateCheckStatus('safebrowsing', 'success');
+                        logToTerminal('✓ الرابط آمن حسب Google Safe Browsing', 'success');
+                    }
+                } catch(e) {
+                    updateCheckStatus('safebrowsing', 'error');
+                    logToTerminal('فشل الاتصال بخدمة Safe Browsing', 'warning');
+                }
+                
+                risk = Math.min(risk, 100);
+                let level = risk >= 60 ? 'high' : (risk >= 30 ? 'medium' : 'safe');
+                let levelText = level === 'high' ? 'خطورة عالية' : (level === 'medium' ? 'خطورة متوسطة' : 'آمن');
+                let levelColor = level === 'high' ? 'var(--danger)' : (level === 'medium' ? 'var(--warning)' : 'var(--success)');
+                
+                logToTerminal(`اكتمل الفحص! نسبة الخطورة: ${risk}/100`, risk >= 60 ? 'error' : (risk >= 30 ? 'warning' : 'success'));
+                
+                // حفظ الفحص
+                saveScan({ url, risk, level, date: new Date().toLocaleString() });
+                incrementScanCount();
+                updatePlanUI();
+                updateDashboard();
+                
+                // عرض النتيجة النهائية
+                const resultBox = document.getElementById('scanResultBox');
+                resultBox.innerHTML = `
+                    <div class="result-box">
+                        <h3 style="margin-bottom:16px;">نتيجة فحص الرابط: ${url}</h3>
+                        <div class="risk-display">
+                            <div class="risk-circle" style="border-color:${levelColor}; color:${levelColor};">${risk}%</div>
+                            <div>
+                                <p style="font-size:18px; font-weight:bold;">مستوى الخطورة: <span style="color:${levelColor};">${levelText}</span></p>
+                                <p>تم حفظ الفحص في سجلك.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.getElementById('scanBtn').disabled = false;
             });
 
             window.sendMessage=function(){const i=document.getElementById('chatInput');const m=i.value.trim();if(!m)return;const c=document.getElementById('chatContainer');c.innerHTML+=`<div class="chat-message user"><div class="chat-bubble">${m.replace(/</g,'&lt;')}</div></div>`;i.value='';c.scrollTop=c.scrollHeight;setTimeout(()=>{c.innerHTML+=`<div class="chat-message bot"><div class="chat-bubble">شكراً لرسالتك، سأتأكد من مساعدتك.</div></div>`;c.scrollTop=c.scrollHeight;},800);};
 
             window.copyUserID = function() { navigator.clipboard.writeText(currentUserID); alert('تم نسخ معرف المستخدم!'); };
             
-            // دالة مشاركة البيانات المُحسَّنة – تظهر الرابط للمستخدم
             window.shareMyData = function() {
                 const plan = getPlanData().plan;
                 const data = { username, id: currentUserID, plan: plan };
                 try {
-                    // تحويل آمن للـ JSON إلى base64 (يدعم العربية)
                     const jsonStr = JSON.stringify(data);
                     const base64 = btoa(unescape(encodeURIComponent(jsonStr)));
                     const link = `${window.location.origin}${window.location.pathname}?import=${base64}`;
-                    // عرض الرابط في واجهة المستخدم
                     const container = document.getElementById('shareLinkContainer');
                     container.style.display = 'block';
                     container.innerHTML = `<div class="share-link-box"><strong>رابط المشاركة (انسخه وأرسله للمسؤول):</strong><br><span style="direction:ltr;display:block;word-break:break-all;">${link}</span><button class="btn" style="width:auto;margin-top:8px;padding:6px 12px;" onclick="navigator.clipboard.writeText('${link.replace(/'/g, "\\'")}'); alert('تم نسخ الرابط!');">نسخ الرابط</button></div>`;
@@ -471,7 +652,6 @@
                 }
             };
             
-            // دالة استيراد بيانات المستخدم من الرابط (مع إصلاح العنصر المفقود)
             window.importUserData = function() {
                 const link = document.getElementById('importLinkInput').value.trim();
                 const resultDiv = document.getElementById('userSearchResult');
@@ -505,25 +685,21 @@
             window.upgradeUser = function(id,plan) {
                 let users=JSON.parse(localStorage.getItem('allUsers')||'{}');
                 if(users[id]) { users[id].plan=plan; localStorage.setItem('allUsers',JSON.stringify(users)); alert(`تم ترقية ${id} إلى ${plan}`); }
-                else { alert(`المستخدم غير موجود في قاعدة البيانات. ستحتاج إلى تفعيل الخطة يدوياً بواسطة كود التفعيل.`); }
+                else { alert(`المستخدم غير موجود في قاعدة البيانات. الرجاء استخدام كود التفعيل المباشر للمستخدم.`); }
             };
 
-            // محاولة تحميل PayPal بشكل آمن مع تفادي الأخطاء
             if(!isAdmin && typeof paypal !== 'undefined') {
                 try {
                     paypal.HostedButtons({hostedButtonId:"3L59GMWVL59B4"}).render("#paypal-monthly");
                     paypal.HostedButtons({hostedButtonId:"F7MXVUZBRVBZS"}).render("#paypal-vip");
                 } catch(e) { console.warn("PayPal buttons error", e); }
             } else if(!isAdmin) {
-                // إذا لم يتم تحميل PayPal نعرض رسالة بديلة
                 const monthlyContainer = document.getElementById('paypal-monthly');
                 const vipContainer = document.getElementById('paypal-vip');
-                if(monthlyContainer) monthlyContainer.innerHTML = '<p style="color:var(--warning);">رابط الدفع عبر PayPal: <a href="#" onclick="alert(\'تواصل مع الدعم عبر واتساب\')">اطلب الرابط</a></p>';
-                if(vipContainer) vipContainer.innerHTML = '<p style="color:var(--warning);">رابط الدفع عبر PayPal: <a href="#" onclick="alert(\'تواصل مع الدعم عبر واتساب\')">اطلب الرابط</a></p>';
+                if(monthlyContainer) monthlyContainer.innerHTML = '<p style="color:var(--warning);">لتفعيل الاشتراك، تواصل مع الدعم عبر واتساب</p>';
+                if(vipContainer) vipContainer.innerHTML = '<p style="color:var(--warning);">لتفعيل الاشتراك، تواصل مع الدعم عبر واتساب</p>';
             }
             document.getElementById('liveClock').textContent=new Date().toLocaleTimeString(currentLang==='ar'?'ar-AE':'en-US');
-            
-            // عرض userID في صفحة الإعدادات
             document.getElementById('userIDDisplay').textContent = `معرف المستخدم: ${currentUserID}`;
         })();
     </script>
