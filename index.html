@@ -442,9 +442,13 @@
             window.copyUserID = function() { navigator.clipboard.writeText(currentUserID); alert('Copied!'); };
             window.shareMyData = function() {
                 const data = { username, id: currentUserID, plan: getPlanData().plan };
-                const encoded = btoa(JSON.stringify(data));
-                const link = `${window.location.origin}${window.location.pathname}?import=${encoded}`;
-                navigator.clipboard.writeText(link).then(() => alert('Shared link copied! Send it to admin.'));
+                try {
+                    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+                    const link = `${window.location.origin}${window.location.pathname}?import=${encoded}`;
+                    navigator.clipboard.writeText(link).then(() => alert('Shared link copied! Send it to admin.'));
+                } catch (e) {
+                    alert('Could not generate link. Please copy your User ID manually.');
+                }
             };
             window.importUserData = function() {
                 const link = document.getElementById('importLinkInput').value.trim();
@@ -452,7 +456,7 @@
                     const url = new URL(link);
                     const encoded = url.searchParams.get('import');
                     if (!encoded) throw new Error('No data');
-                    const data = JSON.parse(atob(encoded));
+                    const data = JSON.parse(decodeURIComponent(escape(atob(encoded))));
                     document.getElementById('userSearchResult').innerHTML = `
                         <div class="card">
                             <h3>${data.username}</h3>
